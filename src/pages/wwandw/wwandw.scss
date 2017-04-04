@@ -1,0 +1,27 @@
+page-wwandw {
+    .content{
+        background-color:  #f0f0f0  !important
+    }
+    .headerToolbar .toolbar-title, .headerToolbar .bar-button-default {
+        color: #f0f0f0;
+    }
+    .headerToolbar .toolbar-background {
+        background-color:  #D0050B  !important;
+    }
+
+    ion-item-group {
+        ion-item-divider {
+            height: 60px;
+            color:#ffffff; 
+            ion-thumbnail {
+                min-width:0px; 
+                min-height:5rem !important;
+            }
+        }
+    }
+
+   .footerToolbar .toolbar-background {
+         background: transparent;
+    }
+
+}

@@ -1,0 +1,45 @@
+<ion-header>
+   <ion-navbar class="headerToolbar">
+   <ion-title style="text-align: center;">
+      <span style="color:#ffffff;text-align:center;">{{settings.titleSetting}}</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="content">
+  <ion-card style="margin: 0 0 10px 0; width: 100%;">
+  <ion-list>
+    <ion-item>
+    <ion-label>{{settings.titleLang}}</ion-label> 
+    <ion-select [(ngModel)]="lang" (ionChange)="langChange()">
+      <ion-option *ngIf="lang=='en'" value="en" selected="true">English</ion-option> 
+      <ion-option *ngIf="lang=='en'" value="ru">Russian</ion-option>            
+      <ion-option *ngIf="lang=='ru'" value="en" selected="true">Английский</ion-option> 
+      <ion-option *ngIf="lang=='ru'" value="ru">Русский</ion-option>  
+    </ion-select>
+   </ion-item>
+
+   <!--<ion-item>
+      <ion-label>{{settings.titleNotify}}</ion-label>
+      <ion-toggle checked="false" color="success" [(ngModel)]="settings.notify" (ionChange)="notifyChange()"></ion-toggle>
+    </ion-item>-->
+     
+  </ion-list>
+  </ion-card>
+
+  <ion-card style="margin: 0; width: 100%;">
+    <ion-card-header style="background-color: #f1f1f1;">
+      <span *ngIf="lang=='en'" style="font-weight: bold;">Constants</span>
+      <span *ngIf="lang=='ru'" style="font-weight: bold;">Неизменяемые данные</span>
+    </ion-card-header>
+ 
+   <ion-list>
+    <ion-item *ngFor="let const of constantData | mathcesCategory:lang">
+      <ion-label>{{const[1]}}</ion-label>
+      <span ion-label item-right>{{const[2]}}{{const[3]}}</span>
+    </ion-item>
+  </ion-list>
+  </ion-card>
+
+</ion-content>
+

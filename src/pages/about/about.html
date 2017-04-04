@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar class="headerToolbar">
+    <ion-title style="text-align: center;">
+      <span style="color:#ffffff;text-align:center;">{{settings.titleAbout}}</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+<ion-card>
+  <ion-card-content *ngIf="lang=='ru'">
+    Программа предназначена для оценочного расчета инвестиционного проекта внедрения ЧРП «Данфосс» для управления электродвигателями вашего применения. 
+    Программа позволяет произвести расчет дисконтированного перида окупаемости, чистой приведенной стоимости, окупаемость инвестиций проекта. 
+    Расчеты основываются на методиках, разработанных специалистами «Данфосс».
+  </ion-card-content>
+  <ion-card-content *ngIf="lang=='en'">
+    Purpose of program is investment estimation of Danfoss VFD use for control of your application. 
+    The program calculates energy saving per year, discount payback period, net present value, and return of investments. 
+    Calculations are based on the special techniques developed by Danfoss engineers. 
+  </ion-card-content>
+  <ion-item>
+      <div *ngIf="lang=='ru'">&copy; ООО «Данфосс»</div>
+      <div *ngIf="lang=='en'">&copy; Danfoss</div>
+      <a href="http://www.danfoss.com">www.danfoss.com</a>
+  </ion-item>
+</ion-card>
+</ion-content>

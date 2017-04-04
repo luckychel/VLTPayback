@@ -1,0 +1,57 @@
+page-dutycycle {
+    
+    ion-row {
+        width:100%;
+        height:auto;
+    }
+
+    ion-col {
+        width:auto;
+        padding: 0px;
+    }
+
+    .grid-content{
+        border:1px solid #a7a7a7;
+        padding: 1px;
+        border-radius: 2px;
+    }
+
+    .header-grid-content ion-col {
+        padding:10px !important; 
+        background-color: #545454;
+        border: 1px solid #fff;
+        color: #fff;
+    }
+
+    .body-grid1 {
+        padding:15px !important; 
+        background-color: #d4d4d4;
+        border: 1px solid #fff;
+        color: #000;
+    }
+
+    .body-grid2 {
+        background-color: #d4d4d4;
+        border: 1px solid #fff;
+        color: #000;
+    }
+
+   .footerToolbar .toolbar-background {
+         background: transparent;
+    }
+    .footerToolbar .toolbar-content{
+        display: inline-flex;
+    }
+
+
+   /*
+    $popover-md-width: 90%;
+    $popover-ios-width: 90%;
+     .popover-md .popover-content {
+        width: 90% !important;
+    }*/
+}
+
+.alert-button-group {
+    align-self:center;
+}

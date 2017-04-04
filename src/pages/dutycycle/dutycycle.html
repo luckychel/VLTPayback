@@ -1,0 +1,95 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{settings.DutyCycleTitle}}
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!--<ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 100%;">-->
+    
+<ion-grid class="grid-content" [ngClass]="{ 'hide': initHide }">
+  <ion-row justify-content-center class="header-grid-content">
+    <ion-col width-14>
+      {{settings.Num}}
+    </ion-col>
+    <ion-col width-33>
+     {{settings.Time}}
+    </ion-col>
+    <ion-col width-33>
+     {{settings.Perf}}
+    </ion-col>
+    <ion-col width-20>
+     &nbsp;
+    </ion-col>
+  </ion-row>
+  <ion-row justify-content-center *ngFor="let duty of dutyCycleData">
+    <ion-col width-14 class="body-grid1">
+      <span>{{duty.num}}</span>
+    </ion-col>
+    <ion-col width-33 class="body-grid1">
+      <span>{{duty.time}}</span>
+    </ion-col>
+     <ion-col width-33 class="body-grid1">
+      <span>{{duty.perfomance}}</span>
+    </ion-col>
+     <ion-col width-20 class="body-grid2">
+      <button ion-button clear (click)='deleteRow(duty.id)' style="width:100%;margin-left:0px;">
+        <ion-icon name="ios-remove-circle" style="color:red;font-size: 24px;"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row justify-content-center class="insert-grid-content" *ngIf="isDutyAdding">
+    <ion-col width-50>
+      <ion-input type="number" placeholder="{{settings.Time}}" [(ngModel)]="time" style="background-color: lavender;width:calc(100% - 2px); margin-top: 28px;margin-left: 1px;"></ion-input>
+    </ion-col>
+    <ion-col width-50>
+        <ion-range min="10" max="100" step="10" pin="true" snaps="true" color="danger" [(ngModel)]="perfomance">
+         <ion-label range-left>10</ion-label>
+         <ion-label range-right>100</ion-label>
+        </ion-range>
+    </ion-col>
+  </ion-row>
+ 
+</ion-grid>
+<!--  </ion-scroll>-->
+
+</ion-content>
+
+<ion-footer no-border>
+  <ion-navbar class="footerToolbar">
+    <button ion-button block item-right icon-left  *ngIf="!isDutyAdding" (click)="addRow()">
+        <ion-icon name="ios-add-circle" style="color:white;font-size:26px;"></ion-icon>
+        <span *ngIf="lang=='en'" style="font-weight: bold;color:white">Add</span>
+        <span *ngIf="lang=='ru'" style="font-weight: bold;color:white">Добавить</span>
+    </button>
+
+    
+    <button ion-button block *ngIf="isDutyAdding" (click)="saveRow()" color="secondary" style="width:calc(50% - 2px);margin-right:5px;">
+      <span *ngIf="lang=='en'" style="font-weight: bold;color:white">Save</span>
+      <span *ngIf="lang=='ru'" style="font-weight: bold;color:white">Сохранить</span>
+    </button>
+    <button ion-button block *ngIf="isDutyAdding" (click)="cancelRow()" color="light" style="width:calc(50% - 2px);">
+      <span *ngIf="lang=='en'" style="font-weight: bold;color:black">Cancel</span>
+      <span *ngIf="lang=='ru'" style="font-weight: bold;color:black">Отменить</span>
+    </button>
+
+    <!--<ion-buttons end>
+      <button (click)="close()">
+          <span primary showWhen="ios">Cancel</span>
+          <ion-icon name='close' showWhen="android"></ion-icon>
+      </button>
+    </ion-buttons>-->
+
+    
+  
+  </ion-navbar>
+
+</ion-footer>

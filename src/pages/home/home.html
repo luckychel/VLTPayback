@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar class="headerToolbar">
+    <ion-title style="text-align: center;">
+      <!--<img src="assets/icon/Logo.jpg" height="40px"/>-->
+      <span style="color:#ffffff;position:relative;">{{settings.titleHome}}</span> <!--top:-12px;-->
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="content">
+<ion-grid class="grid-content" [ngClass]="{ 'hide': initHide }">
+  <ion-row justify-content-center >
+    <ion-col width-33>
+      <img src="assets/{{settings.www_img}}" (click)="clickItem(1);" (touchstart)="foo($event, 'www_img', 1);" (touchend)="foo($event, 'www_img', 2);" />
+    </ion-col>
+    <ion-col width-33>
+      <img src="assets/{{settings.air_img}}" (click)="clickItem(2);" (touchstart)="foo($event, 'air_img', 1);" (touchend)="foo($event,'air_img',  2);"/>
+    </ion-col>
+    <ion-col width-33>
+      <img src="assets/{{settings.tech_img}}" (click)="clickItem(3);" (touchstart)="foo($event, 'tech_img', 1);" (touchend)="foo($event,'tech_img', 2);"/>
+    </ion-col>
+  </ion-row>
+   <ion-row justify-content-center>
+    <ion-col width-33> 
+      <img src="assets/{{settings.force_img}}" (click)="clickItem(4);"  (touchstart)="foo($event, 'force_img', 1);" (touchend)="foo($event,'force_img', 2);"/>
+    </ion-col>
+    <ion-col width-33>
+      <img src="assets/{{settings.vav_img}}" (click)="clickItem(5);" (touchstart)="foo($event, 'vav_img', 1);" (touchend)="foo($event, 'vav_img', 2);" />
+    </ion-col>
+    <ion-col width-33>
+      <img src="assets/{{settings.park_img}}" (click)="clickItem(6);" (touchstart)="foo($event, 'park_img', 1);" (touchend)="foo($event,'park_img', 2);"  />
+    </ion-col>
+  </ion-row>
+   <ion-row justify-content-center>
+    <ion-col width-33>
+      <img src="assets/{{settings.screw_img}}" (click)="clickItem(7);" (touchstart)="foo($event, 'screw_img', 1);" (touchend)="foo($event, 'screw_img', 2);" />
+    </ion-col>
+    <ion-col width-33>&nbsp;</ion-col>
+    <ion-col width-33>&nbsp;</ion-col>
+  </ion-row>
+  </ion-grid>
+
+<!--<ion-item *ngIf="settings.length == 0">   
+       Empty
+     </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let sett of settings" > 
+       <ion-label>{{ sett.id }}</ion-label>
+       <ion-label>{{ sett.key }}</ion-label>
+       <ion-label>{{ sett.value }}</ion-label>
+       <ion-label>{{ sett.lang }}</ion-label>
+    </ion-item>
+  </ion-list>
+-->
+<!--  <button ion-button color="secondary" clear (click)="test()">Secondary Clear</button>
+  {{initHide}}-->
+</ion-content>
