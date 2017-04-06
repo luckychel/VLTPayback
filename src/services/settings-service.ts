@@ -17,7 +17,7 @@ export class SettingsService {
    }).then(() => {
 
         //закомментировать перед публикацией
-        return Promise.all([this.dropAllTables()]);
+        //return Promise.all([this.dropAllTables()]);
 
         /*this.deleteVLTSettingsData();
         this.deleteVLTConstantData();

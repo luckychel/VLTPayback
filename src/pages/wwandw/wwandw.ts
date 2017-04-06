@@ -287,11 +287,8 @@ export class WwandwPage {
     let txt = "";
     if (this.check())
     {
-      txt = "OK";
-    }
-    else
-    {
-      txt = "Cancel";
+
+      txt = "Расчёт выполнен!";
     }
 
     let alert = this.alertCtrl.create({
