@@ -151,7 +151,6 @@ export class SettingsService {
       return Promise.all([table]);
 
     }).then(() => {
-        
 
         return this.db.executeSql('SELECT * FROM VLTConstant', []);
     }

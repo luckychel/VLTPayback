@@ -15,12 +15,13 @@ export class WwandwPage {
   settings = {};
   lang = " ";
   form = "www";
+  constantData: any[] = [];
   dutyCycleData: any[] = [];
 
   Motor = {};
   Operation = {};
   Commertial = {};
-
+  
   constructor(public navCtrl: NavController, 
             public navParams: NavParams, 
             public settingService: SettingsService, 
@@ -68,6 +69,11 @@ export class WwandwPage {
           return Promise.all([this.settingService.getDutyCycleData(this.form).then(data => {
             this.dutyCycleData = data;
           })])
+        })
+       .then(()=>{
+          return Promise.all([this.settingService.getConstantData().then(data => {
+            this.constantData = data;
+           })])
         });
     }
 
@@ -75,6 +81,16 @@ export class WwandwPage {
     if (this.settings[key] !== undefined)
     {
       return this.settings[key][param];
+    }
+  }
+  getConstantParamValue(key, param){
+    
+    for(var i = 0; i < this.constantData.length; i++)
+    {
+        if (this.constantData[i][0] == key)
+        {
+            return this.constantData[i][2];
+        }
     }
   }
 
@@ -287,22 +303,63 @@ export class WwandwPage {
     let txt = "";
     if (this.check())
     {
+      let H1 = 0.0, Q1 = 0.0, H2 = 0.0, Q2 = 0.0, sf = 0.0, nf = 0.0, A = 0.0, B = 0.0, C = 0.0, H = 0.0;
+      let kpdN = 0.0, needP = 0.0, pBefore = 0.0, Qnom = 0.0;
+      let kpdDvig = 0.0;
+      let sum1 = 0.0, sum2 = 0.0;
+      let kpdPCH = parseFloat(this.getConstantParamValue("kpd","value"));
+      let kpnNasos = {}, pZadv = {}, pPCh = {};
+
+      H1 = parseFloat(this.Operation["MaxPress"]);
+      Q1 = parseFloat(this.Operation["MinFlow"]);
+      H2 = parseFloat(this.Operation["MinPress"]);
+      Q2 = parseFloat(this.Operation["MaxFlow"]);
+     
+      sf = (H1 - H2)/(Math.pow(Q2,2) - Math.pow(Q1,2));
+      nf = H1 + sf * Math.pow(Q1,2);
+      C = nf;
+      A = (H1 - H2*(Q1/Q2) + nf*(Q1/Q2)-nf)/(Math.pow(Q1,2) - Q1*Q2);
+      B = (H1 - nf - A*Math.pow(Q1,2))/Q1;
+
+      kpdDvig = parseFloat(this.Motor["Eff"]); //КПД двиг
+
+      kpdN = parseFloat(this.Operation["PumpEff"]);//КПД насоса
+      needP = parseFloat(this.Operation["NeedPress"]);//Требуемый напор
+      pBefore = parseFloat(this.Operation["PressBefore"]);//Напор на всасе
+      Qnom = parseFloat(this.Operation["NominalFlow"]);//Номинальное значение подачи
+
+      for(var i = 0; i < this.dutyCycleData.length; i++)
+      {
+        let time = parseFloat(this.dutyCycleData[i].time);
+        let perf = parseFloat(this.dutyCycleData[i].perfomance);
+
+        H = A*Math.pow(Qnom*(perf/100),2) + B*Math.pow(Qnom *(perf/100),2) + C;
+        kpnNasos[i] = kpdN/100.0 * (1.0 - Math.pow(1 - (perf/100), 2.3));
+        pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i];
+        kpnNasos[i] = kpdN/100.0 * 0.1 * (perf/100) + 0.9*kpdN/100.0;
+        pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i];
+        sum1 += time /100 * pZadv[i];
+        sum2 += time /100 * pPCh[i];
+      }
 
       txt = "Расчёт выполнен!";
     }
 
-    let alert = this.alertCtrl.create({
-        title: "Расчёт",
-        subTitle: txt,
-        buttons: [{
-          text: "OK",
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }]
-      });
-      alert.present();
+    if (txt != "")
+    {
+      let alert = this.alertCtrl.create({
+          title: "Расчёт",
+          subTitle: txt,
+          buttons: [{
+            text: "OK",
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }]
+        });
+        alert.present();
+    }
   }
 
 }
