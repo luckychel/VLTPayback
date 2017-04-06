@@ -19,19 +19,19 @@
         <ion-label style="padding-left: 16px;">{{getSettingParamValue('MotorTitle', 'txt')}}</ion-label>
         <ion-icon color="primary" item-right [name]="Motor.icon"></ion-icon>
       </ion-item>
-      <ion-item *ngIf="Motor.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Motor.showDetails=='1'" style="background-color: #e4e4e4;">
          <ion-label floating>{{getSettingParamValue('MotorEff', 'txt')}}</ion-label>
          <ion-input type="number" [(ngModel)]="Motor.Eff"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Motor.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Motor.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MotorPow', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Motor.Pow"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Motor.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Motor.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MotorAver', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Motor.Aver"></ion-input>
       </ion-item>
-       <ion-item  *ngIf="Motor.showDetails" style="background-color: #e4e4e4;">
+       <ion-item  *ngIf="Motor.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label>{{getSettingParamValue('DutyCycle', 'txt')}}</ion-label> 
         <button ion-button icon-only clear (click)="showDuty($event)" item-right style="margin-right:4px;">
           <ion-icon name="ios-cog" style="font-size:28px;"></ion-icon>
@@ -41,35 +41,35 @@
         <ion-label style="padding-left: 16px;">{{getSettingParamValue('OperationTitle', 'txt')}}</ion-label>
         <ion-icon color="primary" item-right [name]="Operation.icon"></ion-icon>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('PumpEff', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.PumpEff"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('NeedPress', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.NeedPress"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('PressBefore', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.PressBefore"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('NominalFlow', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.NominalFlow"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MaxPress', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MaxPress"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MinFlow', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MinFlow"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MinPress', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MinPress"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1'" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MaxFlow', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MaxFlow"></ion-input>
       </ion-item>
@@ -77,11 +77,11 @@
            <ion-label style="padding-left: 16px;">{{getSettingParamValue('CommertialTitle', 'txt')}}</ion-label>
           <ion-icon color="primary" item-right [name]="Commertial.icon"></ion-icon>
       </ion-item>
-      <ion-item *ngIf="Commertial.showDetails" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Commertial.showDetails=='1'" style="background-color: #e4e4e4;">
           <ion-label floating>{{getSettingParamValue('EnergPrice', 'txt')}}</ion-label>
           <ion-input type="number" [(ngModel)]="Commertial.EnergPrice"></ion-input>
        </ion-item>
-        <ion-item *ngIf="Commertial.showDetails && lang=='ru'" style="background-color: #e4e4e4;">
+        <ion-item *ngIf="Commertial.showDetails=='1' && lang=='ru'" style="background-color: #e4e4e4;">
           <ion-label floating>{{getSettingParamValue('CoursePrice', 'txt')}}</ion-label>
           <ion-input type="number" [(ngModel)]="Commertial.CoursePrice"></ion-input>
        </ion-item>

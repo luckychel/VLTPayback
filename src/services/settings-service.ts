@@ -17,7 +17,7 @@ export class SettingsService {
    }).then(() => {
 
         //закомментировать перед публикацией
-        return this.dropAllTables();
+        //return Promise.all([this.dropAllTables()]);
 
         /*this.deleteVLTSettingsData();
         this.deleteVLTConstantData();
@@ -133,8 +133,6 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['mainAbout', 'О программе', 'ru']);
             this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['mainAbout', 'About', 'en']);
 
-            
-
             return Promise.all([]); /*[tab1, tab11, tab2, tab21, tab3, tab31, 
                                     i0,i1,i2,i21,i3,i31,i4,i41,
                                     i5,i51,i512,i513,i514,i515,
@@ -229,7 +227,44 @@ export class SettingsService {
  
             return Promise.all([]);
         }
-  }).then(() => {
+    }).then(() => {
+
+      let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTWWWData(id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)", []);
+      return Promise.all([table]);
+
+    }).then(() => {
+
+        return this.db.executeSql('SELECT * FROM VLTWWWData', []);
+    }
+  ).then((res)=>{
+
+      if(res.rows.length == 0) {
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.Eff', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.Pow', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.Aver', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.icon', 'ios-arrow-down-outline']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.showDetails', '0']);
+
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.PumpEff', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.NeedPress', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.PressBefore', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.NominalFlow', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MaxPress', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MinFlow', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MinPress', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MaxFlow', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.icon', 'ios-arrow-down-outline']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.showDetails', '0']);
+
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.EnergPrice', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.CoursePrice', '68']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.icon', 'ios-arrow-down-outline']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.showDetails', '0']);
+   
+            return Promise.all([]);
+        }
+  })
+    .then(() => {
 
       let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTDutyCycleSettings(id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT, lang TEXT)", []);
       return Promise.all([table]);
@@ -390,7 +425,7 @@ getAll(){
       })
   }
 
-  getWWWData(lang){
+  getWWWSettingsData(lang){
 
     return this.db.executeSql('SELECT * FROM VLTWWWSettings WHERE lang=?', [lang])
       .then(response => {
@@ -402,6 +437,26 @@ getAll(){
 
           return Promise.resolve( setts );
       })
+  }
+
+  getWWWData(){
+
+    return this.db.executeSql('SELECT * FROM VLTWWWData', [])
+      .then(response => {
+          let setts = [];
+
+          for (let i = 0; i < response.rows.length; i++) {
+            setts.push({"key" : response.rows.item(i).key, "value" : response.rows.item(i).value});
+          }
+
+          return Promise.resolve( setts );
+      })
+  }
+
+  updateVLTWWWData(sett: any)
+  {
+      let sql = 'UPDATE VLTWWWData SET value=? WHERE key=?';
+      return this.db.executeSql(sql, [sett.value, sett.key]);
   }
 
   getDutyCycleSettingsData(lang){
@@ -479,17 +534,18 @@ getAll(){
   }
 
   dropAllTables(){
-    this.db.executeSql("DELETE FROM VLTSettings;", []);
-    this.db.executeSql("DROP TABLE IF EXISTS VLTSettings;", []); 
-    this.db.executeSql("DELETE FROM VLTConstant;", []);
-    this.db.executeSql("DROP TABLE IF EXISTS VLTConstant;", []); 
-    this.db.executeSql("DELETE FROM VLTWWWSettings;", []);
-    this.db.executeSql("DROP TABLE IF EXISTS VLTWWWSettings;", []); 
-    this.db.executeSql("DELETE FROM VLTDutyCycleSettings;", []);
-    this.db.executeSql("DROP TABLE IF EXISTS VLTDutyCycleSettings;", []); 
-    this.db.executeSql("DELETE FROM VLTDutyCycle;", []);
-    this.db.executeSql("DROP TABLE IF EXISTS VLTDutyCycle;", []); 
-    return true;
+    return this.db.executeSql("DROP TABLE IF EXISTS VLTSettings;", [])
+      .then(()=>{
+        this.db.executeSql("DROP TABLE IF EXISTS VLTConstant;", []); 
+      }).then(()=>{
+        this.db.executeSql("DROP TABLE IF EXISTS VLTWWWSettings;", []); 
+      }).then(()=>{
+        this.db.executeSql("DROP TABLE IF EXISTS VLTWWWData;", []); 
+      }).then(()=>{
+        this.db.executeSql("DROP TABLE IF EXISTS VLTDutyCycleSettings;", []); 
+      }).then(()=>{
+        this.db.executeSql("DROP TABLE IF EXISTS VLTDutyCycle;", []); 
+      });
   }
   
   // more code here
