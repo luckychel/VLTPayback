@@ -17,7 +17,7 @@ export class SettingsService {
    }).then(() => {
 
         //закомментировать перед публикацией
-        //return Promise.all([this.dropAllTables()]);
+        return Promise.all([this.dropAllTables()]);
 
         /*this.deleteVLTSettingsData();
         this.deleteVLTConstantData();
@@ -216,14 +216,14 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['PressBefore', 'Pressure before pump, m', '', '', 'en']);
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['NominalFlow', 'Номинальное значение подачи, м3/ч','', '', 'ru']);
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['NominalFlow', 'Nominal water flow, m3/h', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxPress', 'Макс. давление, м3/ч','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxPress', 'Max. pressure, m3/h', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinFlow', 'Мин. подача, м','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinFlow', 'Min. flow, m', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinPress', 'Мин. давление, м3/ч','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinPress', 'Min. pressure, m3/h', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxFlow', 'Макс. подача, м','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxFlow', 'Max. flow, m', '', '', 'en']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxPress', 'Макс. давление, м','', '', 'ru']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxPress', 'Max. pressure, m', '', '', 'en']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinFlow', 'Мин. подача, м3/ч','', '', 'ru']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinFlow', 'Min. flow, m3/h', '', '', 'en']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinPress', 'Мин. давление, м','', '', 'ru']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinPress', 'Min. pressure, m', '', '', 'en']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxFlow', 'Макс. подача, м3/ч','', '', 'ru']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxFlow', 'Max. flow, m3/h', '', '', 'en']);
  
             return Promise.all([]);
         }
