@@ -17,7 +17,7 @@ export class SettingsService {
    }).then(() => {
 
         //закомментировать перед публикацией
-        //return Promise.all([this.dropAllTables()]);
+      //return Promise.all([this.dropAllTables()]);
 
         /*this.deleteVLTSettingsData();
         this.deleteVLTConstantData();
@@ -205,6 +205,10 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['EnergPrice', 'Energy price with VAT', '', '', 'en']);
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['CoursePrice', 'Курс евро, руб.','', '', 'ru']);
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['CoursePrice', 'Rate from 1 euro', '', '', 'en']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Стоимость оборудования/аксессуаров','', '', 'ru']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Accessories/Equipment price', '', '', 'en']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['InstallPrice', 'Цена наладки и монтажа','', '', 'ru']);
+            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['InstallPrice', 'Installation price', '', '', 'en']);
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['DutyCycle', 'Профиль нагрузки','', '', 'ru']);
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['DutyCycle', 'Duty cycle', '', '', 'en']);
             this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['PumpEff', 'КПД насоса, %','', '', 'ru']);
@@ -256,7 +260,9 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.showDetails', '0']);
 
             this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.EnergPrice', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.CoursePrice', '68']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.CoursePrice', '60']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.AccessEquipPrice', '']);
+            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.InstallPrice', '']);
             this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.icon', 'ios-arrow-down-outline']);
             this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.showDetails', '0']);
    

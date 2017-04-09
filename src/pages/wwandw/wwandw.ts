@@ -244,9 +244,18 @@ export class WwandwPage {
     }
     else if (this.Operation["MaxFlow"] == "" || (this.Operation["MaxFlow"] != "" &&  parseFloat(this.Operation["MaxFlow"]) == 0)) {
         field = "\"" + this.getSettingParamValue('MaxFlow', 'txt') + "\"";
-    } 
+    }
     else if (this.Commertial["EnergPrice"] == "" || (this.Commertial["EnergPrice"] != "" &&  parseFloat(this.Commertial["EnergPrice"]) == 0)) {
         field = "\"" + this.getSettingParamValue('EnergPrice', 'txt') + "\"";
+    }
+    else if (this.lang === "ru" && (this.Commertial["CoursePrice"] == "" || (this.Commertial["CoursePrice"] != "" &&  parseFloat(this.Commertial["CoursePrice"]) == 0))) {
+        field = "\"" + this.getSettingParamValue('CoursePrice', 'txt') + "\"";
+    }
+    else if (this.Commertial["AccessEquipPrice"] == "" || (this.Commertial["AccessEquipPrice"] != "" &&  parseFloat(this.Commertial["AccessEquipPrice"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('AccessEquipPrice', 'txt') + "\"";
+    }
+    else if (this.Commertial["InstallPrice"] == "" || (this.Commertial["InstallPrice"] != "" &&  parseFloat(this.Commertial["InstallPrice"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('InstallPrice', 'txt') + "\"";
     }
 
     let titleText = "", subtitleText = "", okText = "";
@@ -293,62 +302,180 @@ export class WwandwPage {
                 this.settingService.updateVLTWWWData({'key': 'Operation.MinFlow', 'value': this.Operation["MinFlow"]}),
                 this.settingService.updateVLTWWWData({'key': 'Operation.MinPress', 'value': this.Operation["MinPress"]}),
                 this.settingService.updateVLTWWWData({'key': 'Operation.MaxFlow', 'value': this.Operation["MaxFlow"]}),
-                this.settingService.updateVLTWWWData({'key': 'Commertial.EnergPrice', 'value': this.Commertial["EnergPrice"]})]);
+                this.settingService.updateVLTWWWData({'key': 'Commertial.EnergPrice', 'value': this.Commertial["EnergPrice"]}),
+                this.settingService.updateVLTWWWData({'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"]}),
+                this.settingService.updateVLTWWWData({'key': 'Commertial.AccessEquipPrice', 'value': this.Commertial["AccessEquipPrice"]}),
+                this.settingService.updateVLTWWWData({'key': 'Commertial.InstallPrice', 'value': this.Commertial["InstallPrice"]})]);
           
       return resultOk;
   }
 
   calc()
   {
-    let txt = "";
+    let txt = "", isErr = false;
     if (this.check())
     {
-      let H1 = 0.0, Q1 = 0.0, H2 = 0.0, Q2 = 0.0, sf = 0.0, nf = 0.0, A = 0.0, B = 0.0, C = 0.0, H = 0.0;
-      let kpdN = 0.0, needP = 0.0, pBefore = 0.0, Qnom = 0.0;
-      let kpdDvig = 0.0;
-      let sum1 = 0.0, sum2 = 0.0;
-      let kpdPCH = parseFloat(this.getConstantParamValue("kpd","value"));
-      let kpnNasos = {}, pZadv = {}, pPCh = {};
+      try {
+        let Cpch = [549.299, 566.5, 607.6, 663.6084, 760.8404, 917.627, 1020.936, 1087.783, 1254.293, 1405.002, 1795.146, 2050.38, 2577.863, 3017.838, 3541.676, 4335.332, 5302.79, 6352.896, 7215.83, 8488.354, 9780.324, 11750.49, 14459.61, 17177.25, 21769.03, 25638.76, 30251.1, 34214.54, 42917.01, 54914.45, 61645.5, 70148.15, 81485.36, 92999.73, 115634.0];
+        let CpchPower = [0.37, 0.55, 0.75, 1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250, 315, 355, 400, 450, 500, 560, 630, 710, 800, 1000];
 
-      H1 = parseFloat(this.Operation["MaxPress"]);
-      Q1 = parseFloat(this.Operation["MinFlow"]);
-      H2 = parseFloat(this.Operation["MinPress"]);
-      Q2 = parseFloat(this.Operation["MaxFlow"]);
-     
-      sf = (H1 - H2)/(Math.pow(Q2,2) - Math.pow(Q1,2));
-      nf = H1 + sf * Math.pow(Q1,2);
-      C = nf;
-      A = (H1 - H2*(Q1/Q2) + nf*(Q1/Q2)-nf)/(Math.pow(Q1,2) - Q1*Q2);
-      B = (H1 - nf - A*Math.pow(Q1,2))/Q1;
+        let kpdPCH = 0.0, discount = 0.0, stoim = 0.0, lifetime = 0.0;
+        kpdPCH = parseFloat(this.getConstantParamValue("kpd","value"));
+        discount = parseFloat(this.getConstantParamValue("discount","value")) / 100.0;
+        stoim = parseFloat(this.getConstantParamValue("electricity","value")) / 100.0;
+        lifetime = parseFloat(this.getConstantParamValue("lifetime","value"));
 
-      kpdDvig = parseFloat(this.Motor["Eff"]); //КПД двиг
+        let H1 = 0.0, Q1 = 0.0, H2 = 0.0, Q2 = 0.0;
+        H1 = parseFloat(this.Operation["MaxPress"]);
+        Q1 = parseFloat(this.Operation["MinFlow"]);
+        H2 = parseFloat(this.Operation["MinPress"]);
+        Q2 = parseFloat(this.Operation["MaxFlow"]);
+      
+        let sf = 0.0, nf = 0.0, A = 0.0, B = 0.0, C = 0.0, H = 0.0;
+        sf = (H1 - H2)/(Math.pow(Q2,2) - Math.pow(Q1,2));
+        nf = H1 + sf * Math.pow(Q1,2);
+        C = nf;
+        A = (H1 - H2*(Q1/Q2) + nf*(Q1/Q2)-nf)/(Math.pow(Q1,2) - Q1*Q2);
+        B = (H1 - nf - A*Math.pow(Q1,2))/Q1;
 
-      kpdN = parseFloat(this.Operation["PumpEff"]);//КПД насоса
-      needP = parseFloat(this.Operation["NeedPress"]);//Требуемый напор
-      pBefore = parseFloat(this.Operation["PressBefore"]);//Напор на всасе
-      Qnom = parseFloat(this.Operation["NominalFlow"]);//Номинальное значение подачи
+        let kpdDvig = 0.0, moshDvig = 0.0, srDvig = 0.0;
+        kpdDvig = parseFloat(this.Motor["Eff"]); //КПД двигателя
+        moshDvig = parseFloat(this.Motor["Pow"]); //Мощность двигателя
+        srDvig = parseFloat(this.Motor["Aver"]); //Среднее кол-во часов работы
 
-      for(var i = 0; i < this.dutyCycleData.length; i++)
-      {
-        let time = parseFloat(this.dutyCycleData[i].time);
-        let perf = parseFloat(this.dutyCycleData[i].perfomance);
+        let kpdN = 0.0, needP = 0.0, pBefore = 0.0, Qnom = 0.0;
+        kpdN = parseFloat(this.Operation["PumpEff"]);//КПД насоса
+        needP = parseFloat(this.Operation["NeedPress"]);//Требуемый напор
+        pBefore = parseFloat(this.Operation["PressBefore"]);//Напор на всасе
+        Qnom = parseFloat(this.Operation["NominalFlow"]);//Номинальное значение подачи
 
-        H = A*Math.pow(Qnom*(perf/100),2) + B*Math.pow(Qnom *(perf/100),2) + C;
-        kpnNasos[i] = kpdN/100.0 * (1.0 - Math.pow(1 - (perf/100), 2.3));
-        pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i];
-        kpnNasos[i] = kpdN/100.0 * 0.1 * (perf/100) + 0.9*kpdN/100.0;
-        pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i];
-        sum1 += time /100 * pZadv[i];
-        sum2 += time /100 * pPCh[i];
+        let priceEquip = 0.0, priceInstall = 0.0, priceV = 0.0, euroPr = 0.0;
+        priceEquip = parseFloat(this.Commertial["AccessEquipPrice"]);//Стоимость оборудования
+        priceInstall = parseFloat(this.Commertial["InstallPrice"]);//Стоимость монтажа
+        priceV = parseFloat(this.Commertial["EnergPrice"]);//Цена э/э
+        euroPr = parseFloat(this.Commertial["CoursePrice"]);//Стоимость 1 евро в рублях
+        
+         let kpnNasos = [], pZadv = [], pPCh = [];
+        let sum1 = 0.0, sum2 = 0.0;
+        for(var i = 0; i < this.dutyCycleData.length; i++)
+        {
+          let time = parseFloat(this.dutyCycleData[i].time);
+          let perf = parseFloat(this.dutyCycleData[i].perfomance);
+
+          H = A*Math.pow(Qnom*(perf/100),2) + B*Math.pow(Qnom *(perf/100),2) + C;
+          kpnNasos[i] = kpdN/100.0 * (1.0 - Math.pow(1 - (perf/100), 2.3));
+          pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i];
+          kpnNasos[i] = kpdN/100.0 * 0.1 * (perf/100) + 0.9*kpdN/100.0;
+          pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i];
+          sum1 += time /100 * pZadv[i];
+          sum2 += time /100 * pPCh[i];
+        }
+
+        let e = 0.0, epch = 0.0, econ = 0.0, econev = 0.0, econpr = 0.0, invest = 0.0;
+        e = srDvig * sum1;
+        epch = srDvig * sum2;
+        econ = e-epch;
+        
+        if (this.lang === "en") {
+          econev = priceV/100 * econ;
+          //econev = C/100 * econ;
+        }
+        else {
+          econev = priceV * econ;
+          //econev = C * econ;
+        }
+        econpr = (1-epch/e)*100;
+
+        let cpch = 0;
+        for(var i = 0;i<CpchPower.length;i++){
+            if(moshDvig <= CpchPower[i])
+            { 
+              cpch = Cpch[i];
+              break;
+            }
+        }
+
+       if (this.lang === "en") {
+          //invest = cpch * (100 + priceEquip) * (100 + priceInstall) / 10000;
+          invest = cpch *  priceEquip * priceInstall / 10000;
+        }
+        else {
+          //invest = cpch * (100 + priceEquip) * (100 + priceInstall) * euroPr / 10000;
+          invest = cpch * priceEquip * priceInstall * euroPr / 10000;
+        }
+
+        let NPV = {};
+        NPV[0] = -invest;
+
+        let kd = [(1.0 + discount), Math.pow(1 + discount, 2), Math.pow(1 + discount, 3), Math.pow(1 + discount, 4), Math.pow(1 + discount, 5), Math.pow(1 + discount, 6), Math.pow(1 + discount, 7), Math.pow(1 + discount, 8), Math.pow(1 + discount, 9), Math.pow(1 + discount, 10)];
+        let sd = [1, (1.0 + stoim), Math.pow(1 + stoim, 2), Math.pow(1 + stoim, 3), Math.pow(1 + stoim, 4), Math.pow(1 + stoim, 5), Math.pow(1 + stoim, 6), Math.pow(1 + stoim, 7), Math.pow(1 + stoim, 8), Math.pow(1 + stoim, 9)];
+        let kstand = [0.5, 0.55, 0.6, 0.65, 0.73, 0.8, 0.85, 0.92, 0.97, 1]; 
+        let kspch = [0.27, 0.32, 0.4, 0.47, 0.55, 0.62, 0.72, 0.82, 0.92, 1.02];
+        
+        let econEffect = 0.0, amort = 0.0, dopPrib1 = 0.0, dopPribNalog1 =0.0, moneyStream = 0.0, diskontMoneyStream = 0.0;
+        let srok = -1.0, srokOkup = 0;
+        let prev, next = -invest;
+
+        for(var i = 0;i<lifetime;i++){
+          prev = next;
+          econEffect = sd[i] * econev;
+
+          amort = invest/10;
+          dopPrib1 = econEffect - amort;
+          //dopPribNalog1 = dopPrib1 * nalog;
+          moneyStream = dopPribNalog1 + amort;
+          
+          diskontMoneyStream = moneyStream/kd[i];
+          next = NPV[i] + diskontMoneyStream;
+          NPV[i + 1] = next;
+          if(next > 0 && srok < 0.0){
+            if(prev > 0)
+                srok = i;
+            srok = i - prev/(next - prev);
+            srokOkup = srok;
+          }
+          if(i==lifetime-1 && srok < 0)
+          {
+              srok = lifetime;
+              srokOkup = srok;
+          }
+        }
+
+        if (NPV[lifetime] <= 0 || isNaN(NPV[lifetime]))
+        {
+            NPV[lifetime] = NaN;
+            srok = NaN;
+
+            isErr = true;
+            if (this.lang === "en")
+              txt = "Incorrect data!";
+            else
+              txt = "Некорректные данные!";
+        }
+        
+        if (!isErr)
+        {
+          let ROI = NPV[lifetime]/invest * 100;
+        }
+
+        if (!isErr) 
+        {
+          if (this.lang === "en")
+            txt = "The calculation completed successfully!";
+          else
+            txt = "Расчёт завершен успешно!";
+        }
+      } 
+      catch (ex){
+          isErr = true;
+          txt = ex.message;
       }
-
-      txt = "Расчёт выполнен!";
     }
 
-    if (txt != "")
+    if (txt != "" || isErr)
     {
       let alert = this.alertCtrl.create({
-          title: "Расчёт",
+          title: !isErr ? (this.lang === "en" ? "Information" : "Информация") : (this.lang === "en" ? "Error" : "Ошибка"),
           subTitle: txt,
           buttons: [{
             text: "OK",
@@ -361,5 +488,6 @@ export class WwandwPage {
         alert.present();
     }
   }
+
 
 }
