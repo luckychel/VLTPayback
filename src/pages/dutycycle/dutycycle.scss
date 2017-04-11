@@ -1,5 +1,12 @@
 page-dutycycle {
     
+    .headerToolbar .toolbar-title, .headerToolbar .bar-button-default {
+        color: #f0f0f0;
+    }
+    .headerToolbar .toolbar-background {
+        background-color:  #D0050B  !important;
+    }
+
     ion-row {
         width:100%;
         height:auto;
@@ -42,7 +49,6 @@ page-dutycycle {
     .footerToolbar .toolbar-content{
         display: inline-flex;
     }
-
 
    /*
     $popover-md-width: 90%;

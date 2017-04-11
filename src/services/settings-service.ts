@@ -16,8 +16,8 @@ export class SettingsService {
       location: 'default' // the location field is required
    }).then(() => {
 
-        //закомментировать перед публикацией
-      //return Promise.all([this.dropAllTables()]);
+        //comment before publication
+        //return Promise.all([this.dropAllTables()]);
 
         /*this.deleteVLTSettingsData();
         this.deleteVLTConstantData();

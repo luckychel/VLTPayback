@@ -1,0 +1,19 @@
+page-result {
+    .headerToolbar .toolbar-title, .headerToolbar .bar-button-default {
+        color: #f0f0f0;
+    }
+    .headerToolbar .toolbar-background {
+        background-color:  #D0050B  !important;
+    }
+    .myItem {
+        padding-left:0px;
+        font-size: 12px;
+        ion-label {
+            margin: 0px;
+        }
+        ul li {
+            padding-bottom: 3px;
+        }
+    }
+    
+}   

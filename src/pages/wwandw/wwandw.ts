@@ -3,6 +3,7 @@ import { NavController, NavParams, /*PopoverController,*/ ModalController, Alert
 import { SettingsService } from '../../services/settings-service';
 
 import { DutycyclePage } from '../dutycycle/dutycycle';
+import { ResultPage } from '../result/result';
 
 @Component({
   selector: 'page-wwandw',
@@ -251,12 +252,12 @@ export class WwandwPage {
     else if (this.lang === "ru" && (this.Commertial["CoursePrice"] == "" || (this.Commertial["CoursePrice"] != "" &&  parseFloat(this.Commertial["CoursePrice"]) == 0))) {
         field = "\"" + this.getSettingParamValue('CoursePrice', 'txt') + "\"";
     }
-    else if (this.Commertial["AccessEquipPrice"] == "" || (this.Commertial["AccessEquipPrice"] != "" &&  parseFloat(this.Commertial["AccessEquipPrice"]) == 0)) {
+/*    else if (this.Commertial["AccessEquipPrice"] == "" || (this.Commertial["AccessEquipPrice"] != "" &&  parseFloat(this.Commertial["AccessEquipPrice"]) == 0)) {
         field = "\"" + this.getSettingParamValue('AccessEquipPrice', 'txt') + "\"";
     }
     else if (this.Commertial["InstallPrice"] == "" || (this.Commertial["InstallPrice"] != "" &&  parseFloat(this.Commertial["InstallPrice"]) == 0)) {
         field = "\"" + this.getSettingParamValue('InstallPrice', 'txt') + "\"";
-    }
+    }*/
 
     let titleText = "", subtitleText = "", okText = "";
     if (field != "")
@@ -303,9 +304,9 @@ export class WwandwPage {
                 this.settingService.updateVLTWWWData({'key': 'Operation.MinPress', 'value': this.Operation["MinPress"]}),
                 this.settingService.updateVLTWWWData({'key': 'Operation.MaxFlow', 'value': this.Operation["MaxFlow"]}),
                 this.settingService.updateVLTWWWData({'key': 'Commertial.EnergPrice', 'value': this.Commertial["EnergPrice"]}),
-                this.settingService.updateVLTWWWData({'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"]}),
-                this.settingService.updateVLTWWWData({'key': 'Commertial.AccessEquipPrice', 'value': this.Commertial["AccessEquipPrice"]}),
-                this.settingService.updateVLTWWWData({'key': 'Commertial.InstallPrice', 'value': this.Commertial["InstallPrice"]})]);
+                this.settingService.updateVLTWWWData({'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"]})
+              /*this.settingService.updateVLTWWWData({'key': 'Commertial.AccessEquipPrice', 'value': this.Commertial["AccessEquipPrice"]}),
+                this.settingService.updateVLTWWWData({'key': 'Commertial.InstallPrice', 'value': this.Commertial["InstallPrice"]})*/ ]);
           
       return resultOk;
   }
@@ -316,11 +317,16 @@ export class WwandwPage {
     if (this.check())
     {
       try {
-        let Cpch = [549.299, 566.5, 607.6, 663.6084, 760.8404, 917.627, 1020.936, 1087.783, 1254.293, 1405.002, 1795.146, 2050.38, 2577.863, 3017.838, 3541.676, 4335.332, 5302.79, 6352.896, 7215.83, 8488.354, 9780.324, 11750.49, 14459.61, 17177.25, 21769.03, 25638.76, 30251.1, 34214.54, 42917.01, 54914.45, 61645.5, 70148.15, 81485.36, 92999.73, 115634.0];
-        let CpchPower = [0.37, 0.55, 0.75, 1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250, 315, 355, 400, 450, 500, 560, 630, 710, 800, 1000];
+        //данные из VLTPayback
+        //let Cpch = [549.299, 566.5, 607.6, 663.6084, 760.8404, 917.627, 1020.936, 1087.783, 1254.293, 1405.002, 1795.146, 2050.38, 2577.863, 3017.838, 3541.676, 4335.332, 5302.79, 6352.896, 7215.83, 8488.354, 9780.324, 11750.49, 14459.61, 17177.25, 21769.03, 25638.76, 30251.1, 34214.54, 42917.01, 54914.45, 61645.5, 70148.15, 81485.36, 92999.73, 115634.0];
+        //let CpchPower = [0.37, 0.55, 0.75, 1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250, 315, 355, 400, 450, 500, 560, 630, 710, 800, 1000];
+        
+        let CpchPower = [1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250]; 
+        let Cpch = [519, 608, 754, 849, 912, 1065, 1204, 1566, 1802, 2291, 2699, 3153, 3881, 4768, 5832.74, 6521.86, 7688.88, 8006.3, 9667.74, 11802.36, 14091, 18062];
 
-        let kpdPCH = 0.0, discount = 0.0, stoim = 0.0, lifetime = 0.0;
+        let kpdPCH = 0.0, nalog = 0.0, discount = 0.0, stoim = 0.0, lifetime = 0.0;
         kpdPCH = parseFloat(this.getConstantParamValue("kpd","value"));
+        nalog =  parseFloat(this.getConstantParamValue("tax","value")) / 100.0;
         discount = parseFloat(this.getConstantParamValue("discount","value")) / 100.0;
         stoim = parseFloat(this.getConstantParamValue("electricity","value")) / 100.0;
         lifetime = parseFloat(this.getConstantParamValue("lifetime","value"));
@@ -349,9 +355,9 @@ export class WwandwPage {
         pBefore = parseFloat(this.Operation["PressBefore"]);//Напор на всасе
         Qnom = parseFloat(this.Operation["NominalFlow"]);//Номинальное значение подачи
 
-        let priceEquip = 0.0, priceInstall = 0.0, priceV = 0.0, euroPr = 0.0;
-        priceEquip = parseFloat(this.Commertial["AccessEquipPrice"]);//Стоимость оборудования
-        priceInstall = parseFloat(this.Commertial["InstallPrice"]);//Стоимость монтажа
+        let /*priceEquip = 0.0, priceInstall = 0.0,*/ priceV = 0.0, euroPr = 0.0;
+/*        priceEquip = parseFloat(this.Commertial["AccessEquipPrice"]);//Стоимость оборудования
+        priceInstall = parseFloat(this.Commertial["InstallPrice"]);//Стоимость монтажа*/
         priceV = parseFloat(this.Commertial["EnergPrice"]);//Цена э/э
         euroPr = parseFloat(this.Commertial["CoursePrice"]);//Стоимость 1 евро в рублях
         
@@ -377,14 +383,15 @@ export class WwandwPage {
         econ = e-epch;
         
         if (this.lang === "en") {
-          econev = priceV/100 * econ;
-          //econev = C/100 * econ;
+          //econev = priceV/100 * econ;
+          econev = C * econ;
+          econpr = (1-epch/e)*100;
         }
         else {
-          econev = priceV * econ;
-          //econev = C * econ;
+          //econev = priceV * econ;
+          econev = (C * econ) * euroPr;
+          econpr = (1-epch/e)*100 * euroPr;
         }
-        econpr = (1-epch/e)*100;
 
         let cpch = 0;
         for(var i = 0;i<CpchPower.length;i++){
@@ -397,11 +404,11 @@ export class WwandwPage {
 
        if (this.lang === "en") {
           //invest = cpch * (100 + priceEquip) * (100 + priceInstall) / 10000;
-          invest = cpch *  priceEquip * priceInstall / 10000;
+          invest = (cpch + (cpch * 0.20));
         }
         else {
           //invest = cpch * (100 + priceEquip) * (100 + priceInstall) * euroPr / 10000;
-          invest = cpch * priceEquip * priceInstall * euroPr / 10000;
+          invest = (cpch + (cpch * 0.20)) * euroPr;
         }
 
         let NPV = {};
@@ -414,7 +421,7 @@ export class WwandwPage {
         
         let econEffect = 0.0, amort = 0.0, dopPrib1 = 0.0, dopPribNalog1 =0.0, moneyStream = 0.0, diskontMoneyStream = 0.0;
         let srok = -1.0, srokOkup = 0;
-        let prev, next = -invest;
+        let prev = 0, next = -invest;
 
         for(var i = 0;i<lifetime;i++){
           prev = next;
@@ -422,7 +429,7 @@ export class WwandwPage {
 
           amort = invest/10;
           dopPrib1 = econEffect - amort;
-          //dopPribNalog1 = dopPrib1 * nalog;
+          dopPribNalog1 = dopPrib1 * nalog;
           moneyStream = dopPribNalog1 + amort;
           
           diskontMoneyStream = moneyStream/kd[i];
@@ -441,6 +448,7 @@ export class WwandwPage {
           }
         }
 
+
         if (NPV[lifetime] <= 0 || isNaN(NPV[lifetime]))
         {
             NPV[lifetime] = NaN;
@@ -448,22 +456,41 @@ export class WwandwPage {
 
             isErr = true;
             if (this.lang === "en")
-              txt = "Incorrect data!";
+              txt = "Incorrect data! Please try again!";
             else
-              txt = "Некорректные данные!";
+              txt = "Введены некорректные данные! Пожалуйста, попробуйте ещё раз!";
         }
         
+        let ROI = 0.0;
         if (!isErr)
         {
-          let ROI = NPV[lifetime]/invest * 100;
+           ROI = NPV[lifetime]/invest * 100;
         }
 
         if (!isErr) 
         {
-          if (this.lang === "en")
+         /* if (this.lang === "en")
             txt = "The calculation completed successfully!";
           else
+          {
             txt = "Расчёт завершен успешно!";
+          }*/
+
+          let profileModal = this.modalCtrl.create(ResultPage, 
+          {
+            lang: this.lang, 
+            form: this.form,
+            results: {
+              econom: econpr,
+              npv: NPV[lifetime],
+              roi: ROI,
+              paybackPeriod: srokOkup,
+              dutycycle: this.dutyCycleData,
+              invest: invest
+            }
+          });
+          profileModal.present();
+          return;
         }
       } 
       catch (ex){

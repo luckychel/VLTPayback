@@ -8,6 +8,8 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { DutycyclePage } from '../pages/dutycycle/dutycycle';
+import { LicensePage } from '../pages/license/license';
+import { ResultPage } from '../pages/result/result';
 
 import { WwandwPage } from '../pages/wwandw/wwandw';
 import { AirPage } from '../pages/air/air';
@@ -29,6 +31,8 @@ import { MathcesCategoryPipe } from '../pipes/mathces-category-pipe';
     TabsPage,
 
     DutycyclePage,
+    LicensePage,
+    ResultPage,
 
     WwandwPage,
     AirPage,
@@ -52,6 +56,8 @@ import { MathcesCategoryPipe } from '../pipes/mathces-category-pipe';
     TabsPage,
     
     DutycyclePage,
+    LicensePage,
+    ResultPage,
 
     WwandwPage,
     AirPage,

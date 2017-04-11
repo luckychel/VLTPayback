@@ -1,0 +1,98 @@
+<ion-header>
+<ion-navbar class="headerToolbar">
+    <ion-title>
+      <span style="text-align: center;color:#ffffff">
+        {{lang == 'en' ? 'Results': 'Результаты'}}
+      </span> 
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="content">
+<ion-card style="margin: 0 0 10px 0; width: 100%;">
+  <ion-card-content *ngIf="lang=='ru'">
+   При внедрении частотно-регулируемого привода «Данфосс» будут достигнуты следующие результаты в вашем применении:
+  </ion-card-content>
+  <ion-card-content *ngIf="lang=='en'">
+    When applying variable frequency drive Danfoss you’ll achieve following results in your application:
+  </ion-card-content>
+
+  <ion-item class="myItem">
+    <ul style="margin-top:0px;">
+      <li *ngIf="lang=='ru'">Экономия электроэнергии в год {{results.econom.toFixed(2).replace(".", ",")}} %</li>
+      <li *ngIf="lang=='en'">Energy saving per year {{results.econom.toFixed(2).replace(".", ",")}} %</li>
+      
+      <li *ngIf="lang=='ru'">Чистая приведенная стоимость {{results.npv.toFixed(2).replace(".", ",")}} руб.</li>
+      <li *ngIf="lang=='en'">Net present value, NPV {{results.npv.toFixed(2).replace(".", ",")}} euro</li>  
+
+      <li *ngIf="lang=='ru'">Окупаемость {{results.roi.toFixed(2).replace(".", ",")}} %</li>
+      <li *ngIf="lang=='en'">Return of investments, ROI {{results.roi.toFixed(2).replace(".", ",")}} %</li>
+
+      <li *ngIf="lang=='ru'">Дисконтированный срок окупаемости {{results.paybackPeriod.toFixed(2).replace(".", ",")}} лет</li>
+      <li *ngIf="lang=='en'">Discount payback period {{results.paybackPeriod.toFixed(2).replace(".", ",")}} years</li>  
+    </ul>
+  </ion-item>
+
+  <ion-card-content *ngIf="lang=='ru'">
+    Расчет был сделан при следующих допущениях:
+    <span *ngIf="form=='www' || form=='tech'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является дросселирование.</span>
+    <span *ngIf="form=='force'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является выходные шиберы.</span>
+    <span *ngIf="form=='air' || form=='vav' || form=='park'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является включение/выключение электродвигателей.</span>
+    <span *ngIf="form=='screw'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является золотник.</span>
+  </ion-card-content>
+  <ion-card-content *ngIf="lang=='en'">
+    Calculation was done under following assumptions:
+    <span *ngIf="form=='www' || form=='tech'">energy consumption comparison is carried out with assumption that current motor control is throttling.</span>
+    <span *ngIf="form=='force'">energy consumption comparison is carried out with assumption that current motor control is gate.</span>
+    <span *ngIf="form=='air' || form=='vav' || form=='park'">energy consumption comparison is carried out with assumption that current motor control is motor switch on/switch of.</span>
+    <span *ngIf="form=='screw'">energy consumption comparison is carried out with assumption that current motor control is valve.</span>
+  </ion-card-content>
+
+<ion-card-content *ngIf="lang=='ru'">
+   При расчетах был использован следующий профиль нагрузки:
+   <table border=1 cellpadding=3 style="width:100%">
+    <tr><th style="background-color:#d4d4d4;">Время, %</th><th style="background-color:#d4d4d4;">Нагрузка, %</th><tr>
+    <tr *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
+  </table>
+  </ion-card-content>
+  <ion-card-content *ngIf="lang=='en'">
+    In calculations was used following duty cycle:
+    <table border=1 cellpadding=3 style="width:100%">
+    <tr><th style="background-color:#d4d4d4;">Time, %</th><th style="background-color:#d4d4d4;">Perfomance, %</th><tr>
+    <tr *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
+  </table>
+  </ion-card-content>
+
+<ion-card-content *ngIf="lang=='ru'">
+   Общие инвестиции в оборудование «Данфосс» составили: {{results.invest.toFixed(2).replace(".", ",") руб.}}
+</ion-card-content>
+<ion-card-content *ngIf="lang=='en'">
+  Total investments in Danfoss equipment are equal to: {{results.invest.toFixed(2).replace(".", ",") euro}}
+</ion-card-content>
+
+ <ion-item class="myItem">
+    <ul style="margin-top:0px;">
+      <li *ngIf="lang=='ru'">Стоимость дополнительного оборудования для ПЧ = 10% от цены ПЧ</li>
+      <li *ngIf="lang=='en'">Accessories price is equal to 10% of VFD price</li>
+      
+      <li *ngIf="lang=='ru'">Стоимость монтажных работ равна 10% от цены преобразователя частоты</li>
+      <li *ngIf="lang=='en'">Installation price is equal to 10% of VFD price</li>  
+    </ul>
+  </ion-item>
+
+<ion-card-content *ngIf="lang=='ru'">
+   Расчет сделан, необходимы более уточненные данные по режиму работы и оборудования. Обратитесь в компанию «Данфосс» для более подробного расчета.
+</ion-card-content>
+<ion-card-content *ngIf="lang=='en'">
+  Calculation is done. For detailed calculation please contact Danfoss engineers.
+</ion-card-content>
+
+</ion-card>
+</ion-content>

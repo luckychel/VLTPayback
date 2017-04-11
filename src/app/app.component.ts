@@ -21,7 +21,6 @@ export class MyApp {
       Splashscreen.hide();
 
       settingsService.openDatabase()
-        /*.then(() => settingsService.createTable())*/
         .then(()=>{
           this.rootPage = TabsPage;
         })
