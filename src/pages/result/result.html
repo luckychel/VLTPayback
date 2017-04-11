@@ -79,6 +79,9 @@
 
  <ion-item class="myItem">
     <ul style="margin-top:0px;">
+      <li *ngIf="lang=='ru'">Цена ПЧ = {{results.pchPrice.toFixed(2).replace(".", ",")}} руб.</li>
+      <li *ngIf="lang=='ru'">VFD price = {{results.pchPrice.toFixed(2).replace(".", ",")}} euro</li>
+
       <li *ngIf="lang=='ru'">Доп. оборудование = 10% от цены ПЧ</li>
       <li *ngIf="lang=='en'">Accessories price = 10% of VFD price</li>
       

@@ -361,7 +361,7 @@ export class WwandwPage {
         priceV = parseFloat(this.Commertial["EnergPrice"]);//Цена э/э
         euroPr = parseFloat(this.Commertial["CoursePrice"]);//Стоимость 1 евро в рублях
         
-         let kpnNasos = [], pZadv = [], pPCh = [];
+        let kpnNasos = [], pZadv = [], pPCh = [];
         let sum1 = 0.0, sum2 = 0.0;
         for(var i = 0; i < this.dutyCycleData.length; i++)
         {
@@ -377,7 +377,7 @@ export class WwandwPage {
           sum2 += time /100 * pPCh[i];
         }
 
-        let e = 0.0, epch = 0.0, econ = 0.0, econev = 0.0, econpr = 0.0, invest = 0.0;
+        let e = 0.0, epch = 0.0, econ = 0.0, econev = 0.0, econpr = 0.0, invest = 0.0, cpchPrice = 0.0;
         e = srDvig * sum1;
         epch = srDvig * sum2;
         econ = e-epch;
@@ -405,10 +405,12 @@ export class WwandwPage {
        if (this.lang === "en") {
           //invest = cpch * (100 + priceEquip) * (100 + priceInstall) / 10000;
           invest = (cpch + (cpch * 0.20));
+          cpchPrice = cpch;
         }
         else {
           //invest = cpch * (100 + priceEquip) * (100 + priceInstall) * euroPr / 10000;
           invest = (cpch + (cpch * 0.20)) * euroPr;
+          cpchPrice = cpch * euroPr;
         }
 
         let NPV = {};
@@ -486,7 +488,8 @@ export class WwandwPage {
               roi: ROI,
               paybackPeriod: srokOkup,
               dutycycle: this.dutyCycleData,
-              invest: invest
+              invest: invest,
+              pchPrice: cpchPrice
             }
           });
           profileModal.present();
