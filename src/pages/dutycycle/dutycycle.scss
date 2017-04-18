@@ -7,14 +7,11 @@ page-dutycycle {
         background-color:  #D0050B  !important;
     }
 
-    ion-row {
-        width:100%;
-        height:auto;
+   .footerToolbar .toolbar-background {
+         background: transparent;
     }
-
-    ion-col {
-        width:auto;
-        padding: 0px;
+    .footerToolbar .toolbar-content{
+        display: inline-flex;
     }
 
     .grid-content{
@@ -24,30 +21,15 @@ page-dutycycle {
     }
 
     .header-grid-content ion-col {
-        padding:10px !important; 
         background-color: #545454;
         border: 1px solid #fff;
         color: #fff;
-    }
 
-    .body-grid1 {
-        padding:15px !important; 
+    }
+    .body-grid-content ion-col {
         background-color: #d4d4d4;
-        border: 1px solid #fff;
-        color: #000;
-    }
-
-    .body-grid2 {
-        background-color: #d4d4d4;
-        border: 1px solid #fff;
-        color: #000;
-    }
-
-   .footerToolbar .toolbar-background {
-         background: transparent;
-    }
-    .footerToolbar .toolbar-content{
-        display: inline-flex;
+            border: 1px solid #fff;
+            color: #000;
     }
 
    /*

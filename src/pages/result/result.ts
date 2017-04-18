@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 /*
   Generated class for the Result page.
@@ -17,7 +18,7 @@ export class ResultPage {
   form = "";
   results: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public emailComposer: EmailComposer) {
 
      this.lang = this.navParams.get("lang");
      this.form = this.navParams.get("form");
@@ -25,6 +26,24 @@ export class ResultPage {
 
   }
   
+  sendEmail(){
+    let email = {
+      to: 'mc@danfoss.ru',
+      cc: 'fedotov@danfoss.com',
+   /*   bcc: ['john@doe.com', 'jane@doe.com'],*/
+    /*  attachments: [
+        'file://img/logo.png',
+        'res://icon.png',
+        'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
+        'file://README.pdf'
+      ],*/
+      subject: 'ТЭО калькулятор',
+      body: '',
+      isHtml: true
+    };
+    this.emailComposer.open(email);
+  }
+
   close() {
    this.viewCtrl.dismiss();
   }

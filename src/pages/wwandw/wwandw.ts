@@ -30,7 +30,6 @@ export class WwandwPage {
             public modalCtrl: ModalController,
              public alertCtrl: AlertController
             ) {
-
   }
 /*  ionViewDidLoad() {
     console.log('ionViewDidLoad WwandwPage');
@@ -43,28 +42,34 @@ export class WwandwPage {
           this.lang = lang;
           return lang;
         }).then((lang) => {
-          return Promise.all([this.settingService.getWWWSettingsData(lang)
-            .then(settings => {
-              this.settings = settings;
-            })])
+          return Promise.all([
+            this.settingService.getWWWSettingsData(lang)
+              .then(settings => {
+                this.settings = settings;
+              })
+            ])
         })
         .then(()=>{
-          return Promise.all([this.settingService.getWWWData()
-          .then((res)=>{
-            for(var i = 0; i < res.length; i++)
-            {
-              if (res[i].key.startsWith("Motor"))
-              {
-                this.Motor[res[i].key.replace("Motor.", "")] = res[i].value;
-              } else if (res[i].key.startsWith("Operation"))
-              {
-                this.Operation[res[i].key.replace("Operation.", "")] = res[i].value;
-              } else if (res[i].key.startsWith("Commertial"))
-              {
-                this.Commertial[res[i].key.replace("Commertial.", "")] = res[i].value;
-              }
-            }
-          })]);
+          return Promise.all([
+            this.settingService.getWWWData()
+              .then((res)=>{
+                for(var i = 0; i < res.length; i++)
+                {
+                  if (res[i].key.startsWith("Motor"))
+                  {
+                    this.Motor[res[i].key.replace("Motor.", "")] = res[i].value;
+                  } 
+                  else if (res[i].key.startsWith("Operation"))
+                  {
+                    this.Operation[res[i].key.replace("Operation.", "")] = res[i].value;
+                  } 
+                  else if (res[i].key.startsWith("Commertial"))
+                  {
+                    this.Commertial[res[i].key.replace("Commertial.", "")] = res[i].value;
+                  }
+                }
+              })
+          ]);
         })
         .then(()=>{
           return Promise.all([this.settingService.getDutyCycleData(this.form).then(data => {
@@ -84,8 +89,8 @@ export class WwandwPage {
       return this.settings[key][param];
     }
   }
+
   getConstantParamValue(key, param){
-    
     for(var i = 0; i < this.constantData.length; i++)
     {
         if (this.constantData[i][0] == key)
@@ -228,7 +233,7 @@ export class WwandwPage {
     else if (this.Operation["NeedPress"] == "" || (this.Operation["NeedPress"] != "" &&  parseFloat(this.Operation["NeedPress"]) == 0)) {
         field = "\"" + this.getSettingParamValue('NeedPress', 'txt') + "\"";
     }
-    else if (this.Operation["PressBefore"] == "" || (this.Operation["PressBefore"] != "" &&  parseFloat(this.Operation["ressBefore"]) == 0)) {
+    else if (this.Operation["PressBefore"] == "" || (this.Operation["PressBefore"] != "" &&  parseFloat(this.Operation["PressBefore"]) == 0)) {
         field = "\"" + this.getSettingParamValue('PressBefore', 'txt') + "\"";
     }
     else if (this.Operation["NominalFlow"] == "" || (this.Operation["NominalFlow"] != "" &&  parseFloat(this.Operation["NominalFlow"]) == 0)) {

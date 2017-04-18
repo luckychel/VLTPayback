@@ -11,9 +11,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding class="content">
 <ion-card style="margin: 0 0 10px 0; width: 100%;">
@@ -47,6 +45,7 @@
     <span *ngIf="form=='air' || form=='vav' || form=='park'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является включение/выключение электродвигателей.</span>
     <span *ngIf="form=='screw'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является золотник.</span>
   </ion-card-content>
+
   <ion-card-content *ngIf="lang=='en'">
     Calculation was done under following assumptions:
     <span *ngIf="form=='www' || form=='tech'">energy consumption comparison is carried out with assumption that current motor control is throttling.</span>
@@ -55,25 +54,25 @@
     <span *ngIf="form=='screw'">energy consumption comparison is carried out with assumption that current motor control is valve.</span>
   </ion-card-content>
 
-<ion-card-content *ngIf="lang=='ru'">
+<ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
    При расчетах был использован следующий профиль нагрузки:
    <table border=1 cellpadding=3 style="width:100%">
-    <tr><th style="background-color:#d4d4d4;">Время, %</th><th style="background-color:#d4d4d4;">Нагрузка, %</th><tr>
-    <tr *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
+    <tr style="text-align:center;"><th style="background-color:#d4d4d4;">Время, %</th><th style="background-color:#d4d4d4;">Нагрузка, %</th><tr>
+    <tr style="text-align:center;" *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
   </table>
   </ion-card-content>
-  <ion-card-content *ngIf="lang=='en'">
+  <ion-card-content *ngIf="lang=='en'" style="padding-top:0px;">
     In calculations was used following duty cycle:
     <table border=1 cellpadding=3 style="width:100%">
-    <tr><th style="background-color:#d4d4d4;">Time, %</th><th style="background-color:#d4d4d4;">Perfomance, %</th><tr>
-    <tr *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
+    <tr style="text-align:center;"><th style="background-color:#d4d4d4;">Time, %</th><th style="background-color:#d4d4d4;">Perfomance, %</th><tr>
+    <tr style="text-align:center;" *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
   </table>
   </ion-card-content>
 
-<ion-card-content *ngIf="lang=='ru'">
+<ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
    Общие инвестиции в оборудование «Данфосс» составили: {{results.invest.toFixed(2).replace(".", ",")}} руб.
 </ion-card-content>
-<ion-card-content *ngIf="lang=='en'">
+<ion-card-content *ngIf="lang=='en'" style="padding-top:0px;">
   Total investments in Danfoss equipment are equal to: {{results.invest.toFixed(2).replace(".", ",")}} euro
 </ion-card-content>
 
@@ -92,9 +91,32 @@
 
 <ion-card-content *ngIf="lang=='ru'">
    Расчет сделан, необходимы более уточненные данные по режиму работы и оборудования. Обратитесь в компанию «Данфосс» для более подробного расчета.
+  <br />
+  <div style="width:100%">
+    <a ion-button icon-left item-right href="tel:+7(495)792-57-57" target="_blank" style="width:46%">
+       <ion-icon name="call"></ion-icon>
+       Позвонить
+    </a>
+    <button ion-button icon-left item-left style="width:46%" (click)="sendEmail()">
+      <ion-icon name="mail"></ion-icon>
+      Отправить
+    </button>
+  </div>
 </ion-card-content>
+
 <ion-card-content *ngIf="lang=='en'">
   Calculation is done. For detailed calculation please contact Danfoss engineers.
+  <br />
+  <div style="width:100%">
+    <a ion-button icon-left item-right href="tel:+7(495)792-57-57" target="_blank" style="width:46%">
+       <ion-icon name="call"></ion-icon>
+      Phone
+    </a>
+    <button ion-button icon-left item-left style="width:46%" (click)="sendEmail()">
+     <ion-icon name="mail"></ion-icon>
+      Email
+    </button>
+  </div>
 </ion-card-content>
 
 </ion-card>

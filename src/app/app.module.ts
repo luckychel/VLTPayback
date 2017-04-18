@@ -1,4 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
@@ -21,6 +22,10 @@ import { ScrewPage } from '../pages/screw/screw';
 
 import { SettingsService } from '../services/settings-service';
 import { MathcesCategoryPipe } from '../pipes/mathces-category-pipe';
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @NgModule({
   declarations: [
@@ -45,6 +50,7 @@ import { MathcesCategoryPipe } from '../pipes/mathces-category-pipe';
     MathcesCategoryPipe
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -67,6 +73,9 @@ import { MathcesCategoryPipe } from '../pipes/mathces-category-pipe';
     ParkPage,
     ScrewPage
   ],
-  providers: [ {provide: ErrorHandler, useClass: IonicErrorHandler}, SettingsService]
+  providers: [ 
+    StatusBar,
+    SplashScreen,
+    EmailComposer, {provide: ErrorHandler, useClass: IonicErrorHandler}, SettingsService]
 })
 export class AppModule {}

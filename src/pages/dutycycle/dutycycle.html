@@ -13,44 +13,42 @@
 </ion-header>
 
 <ion-content padding>
-  <!--<ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 100%;">-->
-    
-<ion-grid class="grid-content" [ngClass]="{ 'hide': initHide }">
-  <ion-row justify-content-center class="header-grid-content">
-    <ion-col width-14>
+ <ion-grid class="grid-content" [ngClass]="{ 'hide': initHide }">
+  <ion-row class="header-grid-content" justify-content-center>
+    <ion-col col-2>
       {{settings.Num}}
     </ion-col>
-    <ion-col width-33>
+    <ion-col col-4>
      {{settings.Time}}
     </ion-col>
-    <ion-col width-33>
+    <ion-col col-4>
      {{settings.Perf}}
     </ion-col>
-    <ion-col width-20>
+    <ion-col col-2>
      &nbsp;
     </ion-col>
   </ion-row>
-  <ion-row justify-content-center *ngFor="let duty of dutyCycleData">
-    <ion-col width-14 class="body-grid1">
+  <ion-row class="body-grid-content" justify-content-center *ngFor="let duty of dutyCycleData">
+    <ion-col col-2>
       <span>{{duty.num}}</span>
     </ion-col>
-    <ion-col width-33 class="body-grid1">
+    <ion-col col-4>
       <span>{{duty.time}}</span>
     </ion-col>
-     <ion-col width-33 class="body-grid1">
+     <ion-col col-4>
       <span>{{duty.perfomance}}</span>
     </ion-col>
-     <ion-col width-20 class="body-grid2">
+     <ion-col col-2>
       <button ion-button clear (click)='deleteRow(duty.id)' style="width:100%;margin-left:0px;">
         <ion-icon name="ios-remove-circle" style="color:red;font-size: 24px;"></ion-icon>
       </button>
     </ion-col>
   </ion-row>
-  <ion-row justify-content-center class="insert-grid-content" *ngIf="isDutyAdding">
-    <ion-col width-50>
+  <ion-row class="insert-grid-content" justify-content-center *ngIf="isDutyAdding">
+    <ion-col col-6>
       <ion-input type="number" placeholder="{{settings.Time}}" [(ngModel)]="time" style="background-color: lavender;width:calc(100% - 2px); margin-top: 28px;margin-left: 1px;"></ion-input>
     </ion-col>
-    <ion-col width-50>
+    <ion-col col-6>
         <ion-range min="10" max="100" step="10" pin="true" snaps="true" color="danger" [(ngModel)]="perfomance">
          <ion-label range-left>10</ion-label>
          <ion-label range-right>100</ion-label>
@@ -59,8 +57,6 @@
   </ion-row>
  
 </ion-grid>
-<!--  </ion-scroll>-->
-
 </ion-content>
 
 <ion-footer no-border>
@@ -70,8 +66,7 @@
         <span *ngIf="lang=='en'" style="font-weight: bold;color:white">Add</span>
         <span *ngIf="lang=='ru'" style="font-weight: bold;color:white">Добавить</span>
     </button>
-
-    
+   
     <button ion-button block *ngIf="isDutyAdding" (click)="saveRow()" color="secondary" style="width:calc(50% - 2px);margin-right:5px;">
       <span *ngIf="lang=='en'" style="font-weight: bold;color:white">Save</span>
       <span *ngIf="lang=='ru'" style="font-weight: bold;color:white">Сохранить</span>
@@ -87,8 +82,6 @@
           <ion-icon name='close' showWhen="android"></ion-icon>
       </button>
     </ion-buttons>-->
-
-    
   
   </ion-navbar>
 
