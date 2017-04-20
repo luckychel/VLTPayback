@@ -12,13 +12,8 @@ import { DutycyclePage } from '../pages/dutycycle/dutycycle';
 import { LicensePage } from '../pages/license/license';
 import { ResultPage } from '../pages/result/result';
 
-import { WwandwPage } from '../pages/wwandw/wwandw';
-import { AirPage } from '../pages/air/air';
-import { TechPage } from '../pages/tech/tech';
-import { ForcePage } from '../pages/force/force';
-import { VavPage } from '../pages/vav/vav';
-import { ParkPage } from '../pages/park/park';
-import { ScrewPage } from '../pages/screw/screw';
+import { CalculatePage } from '../pages/calculate/calculate';
+
 
 import { SettingsService } from '../services/settings-service';
 import { MathcesCategoryPipe } from '../pipes/mathces-category-pipe';
@@ -39,13 +34,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     LicensePage,
     ResultPage,
 
-    WwandwPage,
-    AirPage,
-    TechPage,
-    ForcePage,
-    VavPage,
-    ParkPage,
-    ScrewPage,
+    CalculatePage,
 
     MathcesCategoryPipe
   ],
@@ -65,13 +54,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     LicensePage,
     ResultPage,
 
-    WwandwPage,
-    AirPage,
-    TechPage,
-    ForcePage,
-    VavPage,
-    ParkPage,
-    ScrewPage
+    CalculatePage
   ],
   providers: [ 
     StatusBar,

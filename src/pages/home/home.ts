@@ -3,13 +3,8 @@ import { NavController, Platform, AlertController,LoadingController } from 'ioni
 
 import { SettingsService } from '../../services/settings-service';
 
-import { WwandwPage } from '../../pages/wwandw/wwandw';
-import { AirPage } from '../../pages/air/air';
-import { TechPage } from '../../pages/tech/tech';
-import { ForcePage } from '../../pages/force/force';
-import { VavPage } from '../../pages/vav/vav';
-import { ParkPage } from '../../pages/park/park';
-import { ScrewPage } from '../../pages/screw/screw';
+import { CalculatePage } from '../../pages/calculate/calculate';
+
 
 
 @Component({
@@ -67,39 +62,39 @@ export class HomePage {
       switch (v)
       {
         case 1: {
-         this.navCtrl.push(WwandwPage);
+         this.navCtrl.push(CalculatePage, {form: "www"});
          break;
         }
         case 2: {
         
-         this.navCtrl.push(AirPage);
+         this.navCtrl.push(CalculatePage, {form: "air"});
            break;
         }
 
         case 3: {
-         this.navCtrl.push(TechPage);
+          this.navCtrl.push(CalculatePage, {form: "tech"});
 
           break;
         }
 
         case 4: {
-         this.navCtrl.push(ForcePage);
+         this.navCtrl.push(CalculatePage, {form: "force"});
           
           break;
         }
 
         case 5: {
-         this.navCtrl.push(VavPage);
+         this.navCtrl.push(CalculatePage, {form: "vav"});
           break;
         }
         
         case 6: {
-         this.navCtrl.push(ParkPage);
+         this.navCtrl.push(CalculatePage, {form: "park"});
          break;
         }
 
         case 7: {
-         this.navCtrl.push(ScrewPage);
+         this.navCtrl.push(CalculatePage, {form: "screw"});
           
           break;
         }

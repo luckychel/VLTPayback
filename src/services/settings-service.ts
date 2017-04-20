@@ -21,7 +21,7 @@ export class SettingsService {
 
         /*this.deleteVLTSettingsData();
         this.deleteVLTConstantData();
-        this.deleteVLTWWWSettingsData();
+        this.deleteVLTCalculateSettingsData();
         this.deleteVLTDutyCycleSettingsData();
         this.deleteVLTDutyCycleData();*/
       
@@ -174,97 +174,120 @@ export class SettingsService {
         }
   }).then(() => {
 
-      let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTWWWSettings(id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT,  txt TEXT, value TEXT, unit TEXT, lang TEXT)", []);
+      let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTCalculateSettings(id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT,  txt TEXT, value TEXT, unit TEXT, lang TEXT, form text)", []);
       return Promise.all([table]);
 
     }).then(() => {
 
-        return this.db.executeSql('SELECT * FROM VLTWWWSettings', []);
+        return this.db.executeSql('SELECT * FROM VLTCalculateSettings', []);
     }
   ).then((res)=>{
       if(res.rows.length == 0) {
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['titleWWW', 'Водоканал','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['titleWWW', 'WW&W', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['headerWWWInput', 'Параметры настройки','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['headerWWWInput', 'Parameter settings', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['headerWWWResult', 'Результаты','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['headerWWWResult', 'Results', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorTitle', 'Двигатель / Характеристики','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorTitle', 'Motor / Drive Data', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['OperationTitle', 'Оперативные данные','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['OperationTitle', 'Operation', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['CommertialTitle', 'Коммерческие данные','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['CommertialTitle', 'Commertial', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorEff', 'КПД двигателя','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorEff', 'Motor efficiency', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorPow', 'Мощность двигателя','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorPow', 'Motor power', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorAver', 'Среднее кол-во часов работы','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MotorAver', 'Average work time', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['EnergPrice', 'Цена электроэнерги за кВтч с НДС, руб.','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['EnergPrice', 'Energy price with VAT', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['CoursePrice', 'Курс евро, руб.','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['CoursePrice', 'Rate from 1 euro', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Стоимость оборудования/аксессуаров','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Accessories/Equipment price', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['InstallPrice', 'Цена наладки и монтажа','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['InstallPrice', 'Installation price', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['DutyCycle', 'Профиль нагрузки','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['DutyCycle', 'Duty cycle', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['PumpEff', 'КПД насоса, %','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['PumpEff', 'Pump efficiency', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['NeedPress', 'Требуемый напор, м','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['NeedPress', 'Needed pressure, m', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['PressBefore', 'Напор на всасе насоса, м','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['PressBefore', 'Pressure before pump, m', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['NominalFlow', 'Номинальное значение подачи, м3/ч','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['NominalFlow', 'Nominal water flow, m3/h', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxPress', 'Макс. давление, м','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxPress', 'Max. pressure, m', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinFlow', 'Мин. подача, м3/ч','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinFlow', 'Min. flow, m3/h', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinPress', 'Мин. давление, м','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MinPress', 'Min. pressure, m', '', '', 'en']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxFlow', 'Макс. подача, м3/ч','', '', 'ru']);
-            this.db.executeSql("INSERT INTO VLTWWWSettings (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['MaxFlow', 'Max. flow, m3/h', '', '', 'en']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Водоканал','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'WW&W', '', '', 'en', 'www']);
+            
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'ABO','', '', 'ru', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Air-cooling fans', '', '', 'en', 'air']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Технологический насос','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Technology pump', '', '', 'en', 'tech']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Тягодутьевые механизмы','', '', 'ru', 'force']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Force-draft machinery', '', '', 'en', 'force']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Переменный расход воздуха','', '', 'ru', 'vav']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'VAV ventilation', '', '', 'en', 'vav']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Вентиляция парковки','', '', 'ru', 'park']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Parking ventilation', '', '', 'en', 'park']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Винтовой компрессор','', '', 'ru', 'screw']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Screw compressor', '', '', 'en', 'screw']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateInput', 'Параметры настройки','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateInput', 'Parameter settings', '', '', 'en', '']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateResult', 'Результаты','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateResult', 'Results', '', '', 'en', '']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorTitle', 'Двигатель / Характеристики','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorTitle', 'Motor / Drive Data', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['OperationTitle', 'Оперативные данные','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['OperationTitle', 'Operation', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['CommertialTitle', 'Коммерческие данные','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['CommertialTitle', 'Commertial', '', '', 'en', '']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorEff', 'КПД двигателя','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorEff', 'Motor efficiency', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorPow', 'Мощность двигателя','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorPow', 'Motor power', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorAver', 'Среднее кол-во часов работы','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MotorAver', 'Average work time', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['EnergPrice', 'Цена электроэнерги за кВтч с НДС, руб.','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['EnergPrice', 'Energy price with VAT', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['CoursePrice', 'Курс евро, руб.','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['CoursePrice', 'Rate from 1 euro', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Стоимость оборудования/аксессуаров','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Accessories/Equipment price', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['InstallPrice', 'Цена наладки и монтажа','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['InstallPrice', 'Installation price', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['DutyCycle', 'Профиль нагрузки','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['DutyCycle', 'Duty cycle', '', '', 'en', '']);
+
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PumpEff', 'КПД насоса, %','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PumpEff', 'Pump efficiency', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NeedPress', 'Требуемый напор, м','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NeedPress', 'Needed pressure, m', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PressBefore', 'Напор на всасе насоса, м','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PressBefore', 'Pressure before pump, m', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NominalFlow', 'Номинальное значение подачи, м3/ч','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NominalFlow', 'Nominal water flow, m3/h', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxPress', 'Макс. давление, м','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxPress', 'Max. pressure, m', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinFlow', 'Мин. подача, м3/ч','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinFlow', 'Min. flow, m3/h', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinPress', 'Мин. давление, м','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinPress', 'Min. pressure, m', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxFlow', 'Макс. подача, м3/ч','', '', 'ru', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxFlow', 'Max. flow, m3/h', '', '', 'en', 'www']);
  
             return Promise.all([]);
         }
     }).then(() => {
 
-      let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTWWWData(id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)", []);
+      let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTCalculateData(id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT, form TEXT)", []);
       return Promise.all([table]);
 
     }).then(() => {
 
-        return this.db.executeSql('SELECT * FROM VLTWWWData', []);
+        return this.db.executeSql('SELECT * FROM VLTCalculateData', []);
     }
   ).then((res)=>{
 
       if(res.rows.length == 0) {
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.Eff', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.Pow', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.Aver', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.icon', 'ios-arrow-down-outline']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Motor.showDetails', '0']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'www']);
 
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.PumpEff', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.NeedPress', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.PressBefore', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.NominalFlow', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MaxPress', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MinFlow', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MinPress', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.MaxFlow', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.icon', 'ios-arrow-down-outline']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Operation.showDetails', '0']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PumpEff', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NeedPress', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PressBefore', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NominalFlow', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxPress', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinFlow', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinPress', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxFlow', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.icon', 'ios-arrow-down-outline', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.showDetails', '0', 'www']);
 
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.EnergPrice', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.CoursePrice', '60']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.AccessEquipPrice', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.InstallPrice', '']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.icon', 'ios-arrow-down-outline']);
-            this.db.executeSql("INSERT INTO VLTWWWData (key, value) VALUES (?, ?)", ['Commertial.showDetails', '0']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.EnergPrice', '', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.CoursePrice', '60', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.AccessEquipPrice', '', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.InstallPrice', '', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.icon', 'ios-arrow-down-outline', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', '']);
    
             return Promise.all([]);
         }
@@ -430,9 +453,9 @@ getAll(){
       })
   }
 
-  getWWWSettingsData(lang){
+  getCalculateSettingsData(lang, form){
 
-    return this.db.executeSql('SELECT * FROM VLTWWWSettings WHERE lang=?', [lang])
+    return this.db.executeSql('SELECT * FROM VLTCalculateSettings WHERE lang=? and (form="" or form=?)', [lang, form])
       .then(response => {
           let setts = {};
 
@@ -444,9 +467,9 @@ getAll(){
       })
   }
 
-  getWWWData(){
+  getCalculateData(form){
 
-    return this.db.executeSql('SELECT * FROM VLTWWWData', [])
+    return this.db.executeSql('SELECT * FROM VLTCalculateData WHERE (form="" or form=?)', [form])
       .then(response => {
           let setts = [];
 
@@ -458,10 +481,10 @@ getAll(){
       })
   }
 
-  updateVLTWWWData(sett: any)
+  updateCalculateData(sett: any)
   {
-      let sql = 'UPDATE VLTWWWData SET value=? WHERE key=?';
-      return this.db.executeSql(sql, [sett.value, sett.key]);
+      let sql = 'UPDATE VLTCalculateData SET value=? WHERE key=? and form=?';
+      return this.db.executeSql(sql, [sett.value, sett.key, sett.form]);
   }
 
   getDutyCycleSettingsData(lang){
@@ -518,8 +541,8 @@ getAll(){
     return this.db.executeSql(sql, []);
   }
 
-  deleteVLTWWWSettingsData(){
-    let sql = 'DELETE FROM VLTWWWSettings';
+  deleteVLTCalculateSettingsData(){
+    let sql = 'DELETE FROM VLTCalculateSettings';
     return this.db.executeSql(sql, []);
   }
 
@@ -543,9 +566,9 @@ getAll(){
       .then(()=>{
         this.db.executeSql("DROP TABLE IF EXISTS VLTConstant;", []); 
       }).then(()=>{
-        this.db.executeSql("DROP TABLE IF EXISTS VLTWWWSettings;", []); 
+        this.db.executeSql("DROP TABLE IF EXISTS VLTCalculateSettings;", []); 
       }).then(()=>{
-        this.db.executeSql("DROP TABLE IF EXISTS VLTWWWData;", []); 
+        this.db.executeSql("DROP TABLE IF EXISTS VLTCalculateData;", []); 
       }).then(()=>{
         this.db.executeSql("DROP TABLE IF EXISTS VLTDutyCycleSettings;", []); 
       }).then(()=>{

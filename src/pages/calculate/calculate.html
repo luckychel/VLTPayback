@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar class="headerToolbar">
     <ion-title>
-      <span style="text-align: center;color:#ffffff">{{getSettingParamValue('titleWWW', 'txt')}}</span> 
+      <span style="text-align: center;color:#ffffff">{{getSettingParamValue('titleCalculate', 'txt')}}</span> 
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,9 +10,15 @@
     <ion-item-group>
       <ion-item-divider style="font-size: 18px; font-weight:bold; color:#fff; background-color: #c4d3fb;">
         <ion-thumbnail item-left>
-          <img src="assets/www.png" style="width:auto;height:50px;" />
+          <img *ngIf="form=='www'" src="assets/www.png" style="width:auto;height:50px;" />
+          <img *ngIf="form=='air'" src="assets/air.png" style="width:auto;height:50px;" />
+          <img *ngIf="form=='tech'" src="assets/tech.png" style="width:auto;height:50px;" />
+          <img *ngIf="form=='force'" src="assets/force.png" style="width:auto;height:50px;" />
+          <img *ngIf="form=='vav'" src="assets/vav.png" style="width:auto;height:50px;" />
+          <img *ngIf="form=='park'" src="assets/park.png" style="width:auto;height:50px;" />
+          <img *ngIf="form=='screw'" src="assets/screw.png" style="width:auto;height:50px;" />
         </ion-thumbnail>
-        <ion-label>{{getSettingParamValue('headerWWWInput', 'txt')}}</ion-label>
+        <ion-label>{{getSettingParamValue('headerCalculateInput', 'txt')}}</ion-label>
       </ion-item-divider>
       <ion-item (click)="toggleDetails(Motor, 'Motor')" style="padding-left: 0px;">
         <ion-label style="padding-left: 16px;">{{getSettingParamValue('MotorTitle', 'txt')}}</ion-label>

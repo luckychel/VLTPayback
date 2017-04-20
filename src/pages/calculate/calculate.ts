@@ -6,44 +6,59 @@ import { DutycyclePage } from '../dutycycle/dutycycle';
 import { ResultPage } from '../result/result';
 
 @Component({
-  selector: 'page-wwandw',
-  templateUrl: 'wwandw.html'
+  selector: 'page-calculate',
+  templateUrl: 'calculate.html'
 })
 
-export class WwandwPage {
+export class CalculatePage {
 
   //data: Array<{title: string, icon: string, showDetails: boolean}> = [];
-  settings = {};
-  lang = " ";
-  form = "www";
+  settings: {} = {};
+  lang: string = " ";
+  form: string = "";
+  
   constantData: any[] = [];
   dutyCycleData: any[] = [];
 
-  Motor = {};
-  Operation = {};
-  Commertial = {};
+  Motor: {} = {};
+  Operation: {} = {};
+  Commertial: {} = {};
   
-  constructor(public navCtrl: NavController, 
-            public navParams: NavParams, 
-            public settingService: SettingsService, 
-         /*   public popoverCtrl: PopoverController,*/
-            public modalCtrl: ModalController,
-             public alertCtrl: AlertController
-            ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public settingService: SettingsService, 
+         /*   public popoverCtrl: PopoverController,*/ public modalCtrl: ModalController, public alertCtrl: AlertController)
+         {
+          this.form = navParams.get("form");
+
+/*           let dt = new Date();
+           console.log('form constructor ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '.' + dt.getMilliseconds());
+           console.log('form: ' +  this.form)*/
   }
+
 /*  ionViewDidLoad() {
-    console.log('ionViewDidLoad WwandwPage');
+    let dt = new Date();
+    console.log('ionViewDidLoad ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '.' + dt.getMilliseconds());
+    console.log('form: ' +  this.form)
+  }
+
+ ionViewWillEnter() {
+    let dt = new Date();
+    console.log('ionViewWillEnter ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '.' + dt.getMilliseconds());
+    console.log('form: ' +  this.form)
   }
 */
 
-  ionViewWillEnter() { 
+  ionViewDidEnter() { 
+     /* let dt = new Date();
+     console.log('ionViewDidEnter ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '.' + dt.getMilliseconds());
+     console.log('form: ' +  this.form)*/
+
       return this.settingService.getLang()
         .then(lang => {
           this.lang = lang;
           return lang;
         }).then((lang) => {
           return Promise.all([
-            this.settingService.getWWWSettingsData(lang)
+            this.settingService.getCalculateSettingsData(lang, this.form)
               .then(settings => {
                 this.settings = settings;
               })
@@ -51,7 +66,7 @@ export class WwandwPage {
         })
         .then(()=>{
           return Promise.all([
-            this.settingService.getWWWData()
+            this.settingService.getCalculateData(this.form)
               .then((res)=>{
                 for(var i = 0; i < res.length; i++)
                 {
@@ -101,6 +116,11 @@ export class WwandwPage {
   }
 
  toggleDetails(data, propName) {
+
+    let form = ""
+    if (propName === "Motor" || propName === "Operation")
+      form = this.form;
+
     if (data.showDetails == "1") {
         
         data.showDetails = "0";
@@ -115,10 +135,10 @@ export class WwandwPage {
           this.Commertial["showDetails"] = "0";
           this.Commertial["icon"] = 'ios-arrow-down-outline';
 
-          this.settingService.updateVLTWWWData({"key":"Operation.showDetails", "value": this.Operation["showDetails"]});
-          this.settingService.updateVLTWWWData({"key":"Operation.icon", "value": this.Operation["icon"]});
-          this.settingService.updateVLTWWWData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"]});
-          this.settingService.updateVLTWWWData({"key":"Commertial.icon", "value": this.Commertial["icon"]});
+          this.settingService.updateCalculateData({"key":"Operation.showDetails", "value": this.Operation["showDetails"], "form": form});
+          this.settingService.updateCalculateData({"key":"Operation.icon", "value": this.Operation["icon"], "form": form});
+          this.settingService.updateCalculateData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"], "form": form});
+          this.settingService.updateCalculateData({"key":"Commertial.icon", "value": this.Commertial["icon"], "form": form});
            
         }
         if (propName === "Operation") 
@@ -128,10 +148,10 @@ export class WwandwPage {
            this.Commertial["showDetails"] = "0";
            this.Commertial["icon"] = 'ios-arrow-down-outline';
 
-          this.settingService.updateVLTWWWData({"key":"Motor.showDetails", "value": this.Motor["showDetails"]});
-          this.settingService.updateVLTWWWData({"key":"Motor.icon", "value": this.Motor["icon"]});
-          this.settingService.updateVLTWWWData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"]});
-          this.settingService.updateVLTWWWData({"key":"Commertial.icon", "value": this.Commertial["icon"]});
+          this.settingService.updateCalculateData({"key":"Motor.showDetails", "value": this.Motor["showDetails"], "form": form});
+          this.settingService.updateCalculateData({"key":"Motor.icon", "value": this.Motor["icon"], "form": form});
+          this.settingService.updateCalculateData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"], "form": form});
+          this.settingService.updateCalculateData({"key":"Commertial.icon", "value": this.Commertial["icon"], "form": form});
 
         }
         if (propName === "Commertial") 
@@ -141,18 +161,18 @@ export class WwandwPage {
            this.Operation["showDetails"] = "0";
            this.Operation["icon"] = 'ios-arrow-down-outline';
 
-          this.settingService.updateVLTWWWData({"key":"Motor.showDetails", "value": this.Motor["showDetails"]});
-          this.settingService.updateVLTWWWData({"key":"Motor.icon", "value": this.Motor["icon"]});
-          this.settingService.updateVLTWWWData({"key":"Operation.showDetails", "value": this.Operation["showDetails"]});
-          this.settingService.updateVLTWWWData({"key":"Operation.icon", "value": this.Operation["icon"]});
+          this.settingService.updateCalculateData({"key":"Motor.showDetails", "value": this.Motor["showDetails"], "form": form});
+          this.settingService.updateCalculateData({"key":"Motor.icon", "value": this.Motor["icon"], "form": form});
+          this.settingService.updateCalculateData({"key":"Operation.showDetails", "value": this.Operation["showDetails"], "form": form});
+          this.settingService.updateCalculateData({"key":"Operation.icon", "value": this.Operation["icon"], "form": form});
         }
 
         data.showDetails = "1";
         data.icon = 'ios-arrow-up-outline';
     }
 
-    this.settingService.updateVLTWWWData({"key":propName + ".showDetails", "value": data.showDetails});
-    this.settingService.updateVLTWWWData({"key":propName + ".icon", "value": data.icon});
+    this.settingService.updateCalculateData({"key":propName + ".showDetails", "value": data.showDetails, "form": form});
+    this.settingService.updateCalculateData({"key":propName + ".icon", "value": data.icon, "form": form});
     
   }
   
@@ -297,21 +317,21 @@ export class WwandwPage {
       alert.present();
     }
 
-      Promise.all([this.settingService.updateVLTWWWData({'key': 'Motor.Eff', 'value': this.Motor["Eff"]}),
-                this.settingService.updateVLTWWWData({'key': 'Motor.Pow', 'value': this.Motor["Pow"]}),
-                this.settingService.updateVLTWWWData({'key': 'Motor.Aver', 'value': this.Motor["Aver"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.PumpEff', 'value': this.Operation["PumpEff"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.NeedPress', 'value': this.Operation["NeedPress"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.PressBefore', 'value': this.Operation["PressBefore"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.NominalFlow', 'value': this.Operation["NominalFlow"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.MaxPress', 'value': this.Operation["MaxPress"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.MinFlow', 'value': this.Operation["MinFlow"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.MinPress', 'value': this.Operation["MinPress"]}),
-                this.settingService.updateVLTWWWData({'key': 'Operation.MaxFlow', 'value': this.Operation["MaxFlow"]}),
-                this.settingService.updateVLTWWWData({'key': 'Commertial.EnergPrice', 'value': this.Commertial["EnergPrice"]}),
-                this.settingService.updateVLTWWWData({'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"]})
-              /*this.settingService.updateVLTWWWData({'key': 'Commertial.AccessEquipPrice', 'value': this.Commertial["AccessEquipPrice"]}),
-                this.settingService.updateVLTWWWData({'key': 'Commertial.InstallPrice', 'value': this.Commertial["InstallPrice"]})*/ ]);
+      Promise.all([this.settingService.updateCalculateData({'key': 'Motor.Eff', 'value': this.Motor["Eff"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Motor.Pow', 'value': this.Motor["Pow"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Motor.Aver', 'value': this.Motor["Aver"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.PumpEff', 'value': this.Operation["PumpEff"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.NeedPress', 'value': this.Operation["NeedPress"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.PressBefore', 'value': this.Operation["PressBefore"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.NominalFlow', 'value': this.Operation["NominalFlow"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.MaxPress', 'value': this.Operation["MaxPress"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.MinFlow', 'value': this.Operation["MinFlow"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.MinPress', 'value': this.Operation["MinPress"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Operation.MaxFlow', 'value': this.Operation["MaxFlow"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Commertial.EnergPrice', 'value': this.Commertial["EnergPrice"], form: ""}),
+                this.settingService.updateCalculateData({'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"], form: ""})
+              /*this.settingService.updateCalculateData({'key': 'Commertial.AccessEquipPrice', 'value': this.Commertial["AccessEquipPrice"], form: this.form}),
+                this.settingService.updateCalculateData({'key': 'Commertial.InstallPrice', 'value': this.Commertial["InstallPrice"], form: this.form})*/ ]);
           
       return resultOk;
   }
