@@ -117,10 +117,6 @@ export class CalculatePage {
 
  toggleDetails(data, propName) {
 
-    let form = ""
-    if (propName === "Motor" || propName === "Operation")
-      form = this.form;
-
     if (data.showDetails == "1") {
         
         data.showDetails = "0";
@@ -135,10 +131,10 @@ export class CalculatePage {
           this.Commertial["showDetails"] = "0";
           this.Commertial["icon"] = 'ios-arrow-down-outline';
 
-          this.settingService.updateCalculateData({"key":"Operation.showDetails", "value": this.Operation["showDetails"], "form": form});
-          this.settingService.updateCalculateData({"key":"Operation.icon", "value": this.Operation["icon"], "form": form});
-          this.settingService.updateCalculateData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"], "form": form});
-          this.settingService.updateCalculateData({"key":"Commertial.icon", "value": this.Commertial["icon"], "form": form});
+          this.settingService.updateCalculateData({"key":"Operation.showDetails", "value": this.Operation["showDetails"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Operation.icon", "value": this.Operation["icon"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Commertial.icon", "value": this.Commertial["icon"], "form": this.form});
            
         }
         if (propName === "Operation") 
@@ -148,10 +144,10 @@ export class CalculatePage {
            this.Commertial["showDetails"] = "0";
            this.Commertial["icon"] = 'ios-arrow-down-outline';
 
-          this.settingService.updateCalculateData({"key":"Motor.showDetails", "value": this.Motor["showDetails"], "form": form});
-          this.settingService.updateCalculateData({"key":"Motor.icon", "value": this.Motor["icon"], "form": form});
-          this.settingService.updateCalculateData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"], "form": form});
-          this.settingService.updateCalculateData({"key":"Commertial.icon", "value": this.Commertial["icon"], "form": form});
+          this.settingService.updateCalculateData({"key":"Motor.showDetails", "value": this.Motor["showDetails"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Motor.icon", "value": this.Motor["icon"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Commertial.showDetails", "value": this.Commertial["showDetails"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Commertial.icon", "value": this.Commertial["icon"], "form": this.form});
 
         }
         if (propName === "Commertial") 
@@ -161,18 +157,18 @@ export class CalculatePage {
            this.Operation["showDetails"] = "0";
            this.Operation["icon"] = 'ios-arrow-down-outline';
 
-          this.settingService.updateCalculateData({"key":"Motor.showDetails", "value": this.Motor["showDetails"], "form": form});
-          this.settingService.updateCalculateData({"key":"Motor.icon", "value": this.Motor["icon"], "form": form});
-          this.settingService.updateCalculateData({"key":"Operation.showDetails", "value": this.Operation["showDetails"], "form": form});
-          this.settingService.updateCalculateData({"key":"Operation.icon", "value": this.Operation["icon"], "form": form});
+          this.settingService.updateCalculateData({"key":"Motor.showDetails", "value": this.Motor["showDetails"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Motor.icon", "value": this.Motor["icon"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Operation.showDetails", "value": this.Operation["showDetails"], "form": this.form});
+          this.settingService.updateCalculateData({"key":"Operation.icon", "value": this.Operation["icon"], "form": this.form});
         }
 
         data.showDetails = "1";
         data.icon = 'ios-arrow-up-outline';
     }
 
-    this.settingService.updateCalculateData({"key":propName + ".showDetails", "value": data.showDetails, "form": form});
-    this.settingService.updateCalculateData({"key":propName + ".icon", "value": data.icon, "form": form});
+    this.settingService.updateCalculateData({"key":propName + ".showDetails", "value": data.showDetails, "form": this.form});
+    this.settingService.updateCalculateData({"key":propName + ".icon", "value": data.icon, "form": this.form});
     
   }
   
