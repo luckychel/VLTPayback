@@ -109,39 +109,47 @@ export class DutycyclePage {
 
   saveRow(){
 
-    let titleText = "", subtitleText = "", okText = "";//, cancelText = "";
-    if (this.lang == "en")
-    {
-      titleText = "Error"; subtitleText = "Fill required field \"Time\""; okText = "OK";
-    }
-    else {
-      titleText = "Ошибка"; subtitleText = "Заполните обязательное поле \"Время\""; okText = "OK";
-    }
-
-    var tmpTime = 0;
-    for(var i = 0; i < this.dutyCycleData.length; i++) {
-      tmpTime += parseFloat(this.dutyCycleData[i].time);
-    }
-
+    let tmpTime = 0, titleText = "", subtitleText = "", okText = "", isErr = false;//, cancelText = "";
+    
     if (this.time != "") 
       tmpTime += parseFloat(this.time.toString());
-    
-    if (this.time != "" && tmpTime > 100)
+    else
     {
+      isErr = true;
       if (this.lang == "en")
       {
-        titleText = "Error"; subtitleText = "The sum of column \"Time\" should be no more than 100. Current sum is " + tmpTime.toString() + "."; okText = "OK";
+        titleText = "Error"; subtitleText = "Fill required field \"Time\""; okText = "OK";
       }
       else {
-        titleText = "Ошибка"; subtitleText = "Сумма по колонке \"Время\" должно быть не больше 100. Текущая сумма равна " + tmpTime.toString() + "."; okText = "OK";
+        titleText = "Ошибка"; subtitleText = "Заполните обязательное поле \"Время\""; okText = "OK";
       }
     }
 
-    if (this.time != "" && tmpTime == 100 && this.form === "air")
+    if (!isErr)
+    {
+      for(var i = 0; i < this.dutyCycleData.length; i++) {
+        tmpTime += parseFloat(this.dutyCycleData[i].time);
+      }
+
+      if (tmpTime > 100)
+      {
+        isErr = true;
+        if (this.lang == "en")
+        {
+          titleText = "Error"; subtitleText = "The sum of column \"Time\" should be no more than 100. Current sum is " + tmpTime.toString() + "."; okText = "OK";
+        }
+        else {
+          titleText = "Ошибка"; subtitleText = "Сумма по колонке \"Время\" должно быть не больше 100. Текущая сумма равна " + tmpTime.toString() + "."; okText = "OK";
+        }
+      }
+    }
+
+    if (!isErr && this.form === "air")
     {
       for(var i = 0; i < this.dutyCycleData.length; i++) {
         if (this.season == parseFloat(this.dutyCycleData[i].perfomance))
         {
+            isErr = true;
             if (this.lang == "en")
             {
               titleText = "Error"; subtitleText = "Current season already added to table."; okText = "OK";
@@ -149,11 +157,12 @@ export class DutycyclePage {
             else {
               titleText = "Ошибка"; subtitleText = "Выбранный сезон уже добавлен в таблицу."; okText = "OK";
             }
+            break;
         }
       }
     }
 
-    if (this.time == "" || tmpTime > 100)
+    if (isErr)
     {
       let alert = this.alertCtrl.create({
         title: titleText,
@@ -167,24 +176,25 @@ export class DutycyclePage {
         }]
       });
       alert.present();
-      return;
     }
-
-    this.settingService.insertDutyCycleData({'num' : 1, 'time': this.time, 'perfomance': this.form === "air" ? this.season : this.perfomance, 'day': this.day, 'night': this.night, 'form': this.form  })
-       .then(settings => {
-            this.settingService.updateDutyNum(this.form)
-            .then(()=>{
-                this.reloadDuty();
-                this.isDutyAdding = !this.isDutyAdding;
-                if (this.form == "air") 
-                  this.time = "25"; 
-                else 
-                  this.time = "";
-                this.perfomance = 10;
-                this.day = 10;
-                this.night = 10;
-            });
-        })
+    else
+    {
+      this.settingService.insertDutyCycleData({'num' : 1, 'time': this.time, 'perfomance': this.form === "air" ? this.season : this.perfomance, 'day': this.day, 'night': this.night, 'form': this.form  })
+        .then(settings => {
+              this.settingService.updateDutyNum(this.form)
+              .then(()=>{
+                  this.reloadDuty();
+                  this.isDutyAdding = !this.isDutyAdding;
+                  if (this.form == "air") 
+                    this.time = "25"; 
+                  else 
+                    this.time = "";
+                  this.perfomance = 10;
+                  this.day = 10;
+                  this.night = 10;
+              });
+          })
+    }
   }
 
   close() {
