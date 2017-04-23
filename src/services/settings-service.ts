@@ -412,7 +412,7 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['DutyCycleTitle', 'Профиль нагрузки', 'ru']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['DutyCycleTitle', 'Duty cycle', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Num', '№', 'ru']);
-            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Num', 'No.', 'en']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Num', '#', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Time', 'Время (%)', 'ru']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Time', 'Time (%)', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Perf', 'Нагрузка (%)', 'ru']);

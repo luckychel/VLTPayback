@@ -25,22 +25,21 @@ export class DutycyclePage {
      
      this.lang = this.navParams.get("lang");
      this.form = this.navParams.get("form");
-     
-     this.reloadDuty();
-    
-  }
 
-  reloadDuty(){
-    this.initHide = true;
-    
-    if (this.form === "air")
+    if (this.form === "air" && this.seasons.length == 0)
     {
-      this.seasons = [];
       this.seasons.push({"id" : 0, "text": this.lang === "en" ? "Winter" : "Зима"});
       this.seasons.push({"id" : 1, "text": this.lang === "en" ? "Spring" : "Весна"});
       this.seasons.push({"id" : 2, "text": this.lang === "en" ? "Summer" : "Лето"});
       this.seasons.push({"id" : 3, "text": this.lang === "en" ? "Autumn" : "Осень"});
     } 
+
+     this.reloadDuty();
+
+  }
+
+  reloadDuty(){
+    this.initHide = true;
 
     this.settingService.getDutyCycleSettingsData(this.lang)
     .then(settings => {
@@ -127,7 +126,7 @@ export class DutycyclePage {
     if (this.time != "") 
       tmpTime += parseFloat(this.time.toString());
     
-    if (tmpTime > 100)
+    if (this.time != "" && tmpTime > 100)
     {
       if (this.lang == "en")
       {
@@ -135,6 +134,22 @@ export class DutycyclePage {
       }
       else {
         titleText = "Ошибка"; subtitleText = "Сумма по колонке \"Время\" должно быть не больше 100. Текущая сумма равна " + tmpTime.toString() + "."; okText = "OK";
+      }
+    }
+
+    if (this.time != "" && tmpTime == 100 && this.form === "air")
+    {
+      for(var i = 0; i < this.dutyCycleData.length; i++) {
+        if (this.season == parseFloat(this.dutyCycleData[i].perfomance))
+        {
+            if (this.lang == "en")
+            {
+              titleText = "Error"; subtitleText = "Current season already added to table."; okText = "OK";
+            }
+            else {
+              titleText = "Ошибка"; subtitleText = "Выбранный сезон уже добавлен в таблицу."; okText = "OK";
+            }
+        }
       }
     }
 
@@ -155,7 +170,7 @@ export class DutycyclePage {
       return;
     }
 
-    this.settingService.insertDutyCycleData({'num' : 1, 'time': this.time, 'perfomance': this.perfomance, 'day': this.day, 'night': this.night, 'form': this.form  })
+    this.settingService.insertDutyCycleData({'num' : 1, 'time': this.time, 'perfomance': this.form === "air" ? this.season : this.perfomance, 'day': this.day, 'night': this.night, 'form': this.form  })
        .then(settings => {
             this.settingService.updateDutyNum(this.form)
             .then(()=>{
