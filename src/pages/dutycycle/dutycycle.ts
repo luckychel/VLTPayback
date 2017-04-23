@@ -33,7 +33,14 @@ export class DutycyclePage {
   reloadDuty(){
     this.initHide = true;
     
-    if (this.form === "air") this.seasons = [];
+    if (this.form === "air")
+    {
+      this.seasons = [];
+      this.seasons.push({"id" : 0, "text": this.lang === "en" ? "Winter" : "Зима"});
+      this.seasons.push({"id" : 1, "text": this.lang === "en" ? "Spring" : "Весна"});
+      this.seasons.push({"id" : 2, "text": this.lang === "en" ? "Summer" : "Лето"});
+      this.seasons.push({"id" : 3, "text": this.lang === "en" ? "Autumn" : "Осень"});
+    } 
 
     this.settingService.getDutyCycleSettingsData(this.lang)
     .then(settings => {
@@ -41,16 +48,10 @@ export class DutycyclePage {
       })
     .then(()=>{
       this.settingService.getDutyCycleData(this.form).then(data => {
+               
         this.dutyCycleData = data;
         this.initHide = false;
-
-        if (this.form === "air")
-        {
-          this.seasons.push({"id" : 0, "text": this.lang === "en" ? "Winter" : "Зима"});
-          this.seasons.push({"id" : 1, "text": this.lang === "en" ? "Spring" : "Весна"});
-          this.seasons.push({"id" : 2, "text": this.lang === "en" ? "Summer" : "Лето"});
-          this.seasons.push({"id" : 3, "text": this.lang === "en" ? "Autumn" : "Осень"});
-        }
+       
       })
     });
   }
