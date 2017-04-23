@@ -414,15 +414,19 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Num', '№', 'ru']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Num', 'No.', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Time', 'Время (%)', 'ru']);
-            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Time', 'Time(%)', 'en']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Time', 'Time (%)', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Perf', 'Нагрузка (%)', 'ru']);
-            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Perf', 'Perf(%)', 'en']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Perf', 'Perf (%)', 'en']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Day', 'День (%)', 'ru']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Day', 'Day (%)', 'en']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Night', 'Ночь (%)', 'ru']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Night', 'Night (%)', 'en']);
 
             return Promise.all([]);
         }
   }).then(() => {
 
-      let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTDutyCycle(id INTEGER PRIMARY KEY AUTOINCREMENT, num TEXT, time TEXT, perfomance TEXT, form TEXT)", []);
+      let table = this.db.executeSql("CREATE TABLE IF NOT EXISTS VLTDutyCycle(id INTEGER PRIMARY KEY AUTOINCREMENT, num TEXT, time TEXT, perfomance TEXT, day TEXT, night TEXT, form TEXT)", []);
       return Promise.all([table]);
 
     }).then(() => {
@@ -431,36 +435,43 @@ export class SettingsService {
     }
     ).then((res)=>{
       if(res.rows.length == 0) {
+            //www
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'www']); 
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'www']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'www']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'www']);
+            
+            //air //в поле "perfomance" храним время года
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, day, night, form) VALUES (?, ?, ?, ?, ?, ?)", ['1', '25', '0', '60', '50', 'air']); //зима 
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, day, night, form) VALUES (?, ?, ?, ?, ?, ?)", ['2', '25', '1', '70', '65', 'air']); //весна
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, day, night, form) VALUES (?, ?, ?, ?, ?, ?)", ['3', '25', '2', '90', '85', 'air']); //лето
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, day, night, form) VALUES (?, ?, ?, ?, ?, ?)", ['4', '25', '3', '70', '65', 'air']); //осень
 
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'air']); 
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'air']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'air']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'air']);
-
+            //tech
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'tech']); 
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'tech']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'tech']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'tech']);
-
+            
+            //force
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'force']); 
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'force']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'force']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'force']);
-
+            
+            //vav
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'vav']); 
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'vav']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'vav']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'vav']);
-
+            
+            //park
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'park']); 
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'park']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'park']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'park']);
-
+            
+            //screw
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'screw']); 
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'screw']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'screw']);
@@ -607,7 +618,7 @@ getAll(){
           let setts = [];
 
           for (let i = 0; i < response.rows.length; i++) {
-            setts.push({"id": response.rows.item(i).id, "num": response.rows.item(i).num, "time": response.rows.item(i).time, "perfomance": response.rows.item(i).perfomance, "form": response.rows.item(i).form});
+            setts.push({"id": response.rows.item(i).id, "num": response.rows.item(i).num, "time": response.rows.item(i).time, "perfomance": response.rows.item(i).perfomance, "day": response.rows.item(i).day, "night": response.rows.item(i).night, "form": response.rows.item(i).form});
           }
 
           return Promise.resolve( setts );
@@ -615,8 +626,8 @@ getAll(){
   }
 
   insertDutyCycleData(sett: any){
-    let sql = 'INSERT INTO VLTDutyCycle(num, time, perfomance, form) VALUES(?,?,?,?)';
-    return this.db.executeSql(sql, [sett.num, sett.time, sett.perfomance, sett.form]);
+    let sql = 'INSERT INTO VLTDutyCycle(num, time, perfomance, day, night, form) VALUES(?,?,?,?,?,?)';
+    return this.db.executeSql(sql, [sett.num, sett.time, sett.perfomance, sett.day, sett.night, sett.form]);
   }
 
   deleteDutyCycleData(sett: any){

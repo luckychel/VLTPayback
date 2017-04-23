@@ -13,8 +13,12 @@ export class DutycyclePage {
   settings: any = {};
   dutyCycleData: any[] = [];
   initHide = true;
-  time = 0;
+  time = "";
   perfomance = 10;
+  day = 10;
+  night = 10;
+  season = 0;
+  seasons: any[] = [];
   isDutyAdding = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public settingService: SettingsService, public alertCtrl: AlertController) {
@@ -36,6 +40,14 @@ export class DutycyclePage {
       this.settingService.getDutyCycleData(this.form).then(data => {
         this.dutyCycleData = data;
         this.initHide = false;
+
+        if (this.form === "air")
+        {
+          this.seasons.push({"id" : 0, "text": this.lang === "en" ? "Winter" : "Зима"});
+          this.seasons.push({"id" : 1, "text": this.lang === "en" ? "Spring" : "Весна"});
+          this.seasons.push({"id" : 2, "text": this.lang === "en" ? "Summer" : "Лето"});
+          this.seasons.push({"id" : 3, "text": this.lang === "en" ? "Autumn" : "Осень"});
+        }
       })
     });
   }
@@ -79,9 +91,13 @@ export class DutycyclePage {
   }
 
   addRow(){
-
     this.isDutyAdding = !this.isDutyAdding;
 
+    if (this.form == "air") {
+      this.time = "25";
+      this.season = 0;
+    } 
+   
   }
   cancelRow(){
 
@@ -100,12 +116,12 @@ export class DutycyclePage {
     }
 
     var tmpTime = 0;
-    for(var i = 0; i < this.dutyCycleData.length; i++)
-    {
+    for(var i = 0; i < this.dutyCycleData.length; i++) {
       tmpTime += parseFloat(this.dutyCycleData[i].time);
     }
-    if (this.time === undefined) this.time = 0;
-    tmpTime += parseFloat(this.time.toString());
+
+    if (this.time != "") 
+      tmpTime += parseFloat(this.time.toString());
     
     if (tmpTime > 100)
     {
@@ -118,7 +134,7 @@ export class DutycyclePage {
       }
     }
 
-    if (this.time == 0 || tmpTime > 100)
+    if (this.time == "" || tmpTime > 100)
     {
       let alert = this.alertCtrl.create({
         title: titleText,
@@ -135,14 +151,19 @@ export class DutycyclePage {
       return;
     }
 
-    this.settingService.insertDutyCycleData({'num' : 1, 'time': this.time, 'perfomance': this.perfomance, 'form': this.form  })
+    this.settingService.insertDutyCycleData({'num' : 1, 'time': this.time, 'perfomance': this.perfomance, 'day': this.day, 'night': this.night, 'form': this.form  })
        .then(settings => {
             this.settingService.updateDutyNum(this.form)
             .then(()=>{
                 this.reloadDuty();
                 this.isDutyAdding = !this.isDutyAdding;
-                this.time = 0;
+                if (this.form == "air") 
+                  this.time = "25"; 
+                else 
+                  this.time = "";
                 this.perfomance = 10;
+                this.day = 10;
+                this.night = 10;
             });
         })
   }
@@ -154,4 +175,12 @@ export class DutycyclePage {
 
   }
 
+  getSeason(duty){
+    return this.seasons[duty.perfomance].text;
+  }
+
+/*  getSeasSelected(seas){
+    debugger
+    return seas.id == 0;
+  }*/
 }

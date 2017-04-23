@@ -212,6 +212,7 @@ export class CalculatePage {
       tmpTime += parseFloat(this.dutyCycleData[i].time);
     }
 
+    //********************Двигатель/Характеристики********************
     if (this.Motor["Eff"] == "" || (this.Motor["Eff"] != "" &&  parseFloat(this.Motor["Eff"]) == 0)) {
         field = "\"" + this.getSettingParamValue('MotorEff', 'txt') + "\"";
     }
@@ -243,37 +244,64 @@ export class CalculatePage {
           field = "\"Профиль нагрузки\". Сумма по полю \"Время\" должна быть равна 100";
         }
     }
-    else if (this.Operation["PumpEff"] == "" || (this.Operation["PumpEff"] != "" &&  parseFloat(this.Operation["PumpEff"]) == 0)) {
+
+    //********************Оперативные данные**************************
+    //www
+    else if (this.form == "www" && this.Operation["PumpEff"] == "" || (this.Operation["PumpEff"] != "" &&  parseFloat(this.Operation["PumpEff"]) == 0)) {
         field = "\"" + this.getSettingParamValue('PumpEff', 'txt') + "\"";
     }
-    else if (this.Operation["NeedPress"] == "" || (this.Operation["NeedPress"] != "" &&  parseFloat(this.Operation["NeedPress"]) == 0)) {
+    else if (this.form == "www" && this.Operation["NeedPress"] == "" || (this.Operation["NeedPress"] != "" &&  parseFloat(this.Operation["NeedPress"]) == 0)) {
         field = "\"" + this.getSettingParamValue('NeedPress', 'txt') + "\"";
     }
-    else if (this.Operation["PressBefore"] == "" || (this.Operation["PressBefore"] != "" &&  parseFloat(this.Operation["PressBefore"]) == 0)) {
+    else if (this.form == "www" && this.Operation["PressBefore"] == "" || (this.Operation["PressBefore"] != "" &&  parseFloat(this.Operation["PressBefore"]) == 0)) {
         field = "\"" + this.getSettingParamValue('PressBefore', 'txt') + "\"";
     }
-    else if (this.Operation["NominalFlow"] == "" || (this.Operation["NominalFlow"] != "" &&  parseFloat(this.Operation["NominalFlow"]) == 0)) {
+    else if (this.form == "www" && this.Operation["NominalFlow"] == "" || (this.Operation["NominalFlow"] != "" &&  parseFloat(this.Operation["NominalFlow"]) == 0)) {
         field = "\"" + this.getSettingParamValue('NominalFlow', 'txt') + "\"";
     }
-    else if (this.Operation["MaxPress"] == "" || (this.Operation["MaxPress"] != "" &&  parseFloat(this.Operation["MaxPress"]) == 0)) {
+    else if (this.form == "www" && this.Operation["MaxPress"] == "" || (this.Operation["MaxPress"] != "" &&  parseFloat(this.Operation["MaxPress"]) == 0)) {
         field = "\"" + this.getSettingParamValue('MaxPress', 'txt') + "\"";
     }
-    else if (this.Operation["MinFlow"] == "" || (this.Operation["MinFlow"] != "" &&  parseFloat(this.Operation["MinFlow"]) == 0)) {
+    else if (this.form == "www" && this.Operation["MinFlow"] == "" || (this.Operation["MinFlow"] != "" &&  parseFloat(this.Operation["MinFlow"]) == 0)) {
         field = "\"" + this.getSettingParamValue('MinFlow', 'txt') + "\"";
     }
-    else if (this.Operation["MinPress"] == "" || (this.Operation["MinPress"] != "" &&  parseFloat(this.Operation["MinPress"]) == 0)) {
+    else if (this.form == "www" && this.Operation["MinPress"] == "" || (this.Operation["MinPress"] != "" &&  parseFloat(this.Operation["MinPress"]) == 0)) {
         field = "\"" + this.getSettingParamValue('MinPress', 'txt') + "\"";
     }
-    else if (this.Operation["MaxFlow"] == "" || (this.Operation["MaxFlow"] != "" &&  parseFloat(this.Operation["MaxFlow"]) == 0)) {
+    else if (this.form == "www" && this.Operation["MaxFlow"] == "" || (this.Operation["MaxFlow"] != "" &&  parseFloat(this.Operation["MaxFlow"]) == 0)) {
         field = "\"" + this.getSettingParamValue('MaxFlow', 'txt') + "\"";
     }
+    //air
+    else if (this.form == "air" && this.Operation["NumOfMotors"] == "" || (this.Operation["NumOfMotors"] != "" &&  parseFloat(this.Operation["NumOfMotors"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('NumOfMotors', 'txt') + "\"";
+    }
+    else if (this.form == "air" && this.Operation["NumOfMotorsWinterDay"] == "" || (this.Operation["NumOfMotorsWinterDay"] != "" &&  parseFloat(this.Operation["NumOfMotorsWinterDay"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('NumOfMotorsWinterDay', 'txt') + "\"";
+    }
+    else if (this.form == "air" && this.Operation["NumOfMotorsWinterNight"] == "" || (this.Operation["NumOfMotorsWinterNight"] != "" &&  parseFloat(this.Operation["NumOfMotorsWinterNight"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('NumOfMotorsWinterNight', 'txt') + "\"";
+    }
+    else if (this.form == "air" && this.Operation["NumOfMotorsSummerDay"] == "" || (this.Operation["NumOfMotorsSummerDay"] != "" &&  parseFloat(this.Operation["NumOfMotorsSummerDay"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('NumOfMotorsSummerDay', 'txt') + "\"";
+    }
+    else if (this.form == "air" && this.Operation["NumOfMotorsSummerNight"] == "" || (this.Operation["NumOfMotorsSummerNight"] != "" &&  parseFloat(this.Operation["NumOfMotorsSummerNight"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('NumOfMotorsSummerNight', 'txt') + "\"";
+    }
+    else if (this.form == "air" && this.Operation["NumOfMotorsSpringAutumnDay"] == "" || (this.Operation["NumOfMotorsSpringAutumnDay"] != "" &&  parseFloat(this.Operation["NumOfMotorsSpringAutumnDay"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('NumOfMotorsSpringAutumnDay', 'txt') + "\"";
+    }
+    else if (this.form == "air" && this.Operation["NumOfMotorsSpringAutumnNight"] == "" || (this.Operation["NumOfMotorsSpringAutumnNight"] != "" &&  parseFloat(this.Operation["NumOfMotorsSpringAutumnNight"]) == 0)) {
+        field = "\"" + this.getSettingParamValue('NumOfMotorsSpringAutumnNight', 'txt') + "\"";
+    }
+
+    //*********************Коммерческие данные***********************
     else if (this.Commertial["EnergPrice"] == "" || (this.Commertial["EnergPrice"] != "" &&  parseFloat(this.Commertial["EnergPrice"]) == 0)) {
         field = "\"" + this.getSettingParamValue('EnergPrice', 'txt') + "\"";
     }
     else if (this.lang === "ru" && (this.Commertial["CoursePrice"] == "" || (this.Commertial["CoursePrice"] != "" &&  parseFloat(this.Commertial["CoursePrice"]) == 0))) {
         field = "\"" + this.getSettingParamValue('CoursePrice', 'txt') + "\"";
     }
-/*    else if (this.Commertial["AccessEquipPrice"] == "" || (this.Commertial["AccessEquipPrice"] != "" &&  parseFloat(this.Commertial["AccessEquipPrice"]) == 0)) {
+    /*else if (this.Commertial["AccessEquipPrice"] == "" || (this.Commertial["AccessEquipPrice"] != "" &&  parseFloat(this.Commertial["AccessEquipPrice"]) == 0)) {
         field = "\"" + this.getSettingParamValue('AccessEquipPrice', 'txt') + "\"";
     }
     else if (this.Commertial["InstallPrice"] == "" || (this.Commertial["InstallPrice"] != "" &&  parseFloat(this.Commertial["InstallPrice"]) == 0)) {
@@ -316,14 +344,27 @@ export class CalculatePage {
       Promise.all([this.settingService.updateCalculateData({'key': 'Motor.Eff', 'value': this.Motor["Eff"], form: this.form}),
                 this.settingService.updateCalculateData({'key': 'Motor.Pow', 'value': this.Motor["Pow"], form: this.form}),
                 this.settingService.updateCalculateData({'key': 'Motor.Aver', 'value': this.Motor["Aver"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.PumpEff', 'value': this.Operation["PumpEff"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.NeedPress', 'value': this.Operation["NeedPress"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.PressBefore', 'value': this.Operation["PressBefore"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.NominalFlow', 'value': this.Operation["NominalFlow"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.MaxPress', 'value': this.Operation["MaxPress"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.MinFlow', 'value': this.Operation["MinFlow"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.MinPress', 'value': this.Operation["MinPress"], form: this.form}),
-                this.settingService.updateCalculateData({'key': 'Operation.MaxFlow', 'value': this.Operation["MaxFlow"], form: this.form}),
+
+                //www
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.PumpEff', 'value': this.Operation["PumpEff"], form: this.form}) : [],
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.NeedPress', 'value': this.Operation["NeedPress"], form: this.form}) : [],
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.PressBefore', 'value': this.Operation["PressBefore"], form: this.form}) : [],
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.NominalFlow', 'value': this.Operation["NominalFlow"], form: this.form}) : [],
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.MaxPress', 'value': this.Operation["MaxPress"], form: this.form}) : [],
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.MinFlow', 'value': this.Operation["MinFlow"], form: this.form}) : [],
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.MinPress', 'value': this.Operation["MinPress"], form: this.form}) : [],
+                this.form == "www" ? this.settingService.updateCalculateData({'key': 'Operation.MaxFlow', 'value': this.Operation["MaxFlow"], form: this.form}) : [],
+
+                //air
+                this.form == "air" ? this.settingService.updateCalculateData({'key': 'Operation.NumOfMotors', 'value': this.Operation["NumOfMotors"], form: this.form}) : [],
+                this.form == "air" ? this.settingService.updateCalculateData({'key': 'Operation.NumOfMotorsWinterDay', 'value': this.Operation["NumOfMotorsWinterDay"], form: this.form}) : [],
+                this.form == "air" ? this.settingService.updateCalculateData({'key': 'Operation.NumOfMotorsWinterNight', 'value': this.Operation["NumOfMotorsWinterNight"], form: this.form}) : [],
+                this.form == "air" ? this.settingService.updateCalculateData({'key': 'Operation.NumOfMotorsSummerDay', 'value': this.Operation["NumOfMotorsSummerDay"], form: this.form}) : [],
+                this.form == "air" ? this.settingService.updateCalculateData({'key': 'Operation.NumOfMotorsSummerNight', 'value': this.Operation["NumOfMotorsSummerNight"], form: this.form}) : [],
+                this.form == "air" ? this.settingService.updateCalculateData({'key': 'Operation.NumOfMotorsSpringAutumnDay', 'value': this.Operation["NumOfMotorsSpringAutumnDay"], form: this.form}) : [],
+                this.form == "air" ? this.settingService.updateCalculateData({'key': 'Operation.NumOfMotorsSpringAutumnNight', 'value': this.Operation["NumOfMotorsSpringAutumnNight"], form: this.form}) : [],
+
+
                 this.settingService.updateCalculateData({'key': 'Commertial.EnergPrice', 'value': this.Commertial["EnergPrice"], form: ""}),
                 this.settingService.updateCalculateData({'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"], form: ""})
               /*this.settingService.updateCalculateData({'key': 'Commertial.AccessEquipPrice', 'value': this.Commertial["AccessEquipPrice"], form: this.form}),
@@ -345,6 +386,7 @@ export class CalculatePage {
         let CpchPower = [1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250]; 
         let Cpch = [519, 608, 754, 849, 912, 1065, 1204, 1566, 1802, 2291, 2699, 3153, 3881, 4768, 5832.74, 6521.86, 7688.88, 8006.3, 9667.74, 11802.36, 14091, 18062];
 
+        //********************Константы//*********************************
         let kpdPCH = 0.0, nalog = 0.0, discount = 0.0, stoim = 0.0, lifetime = 0.0;
         kpdPCH = parseFloat(this.getConstantParamValue("kpd","value"));
         nalog =  parseFloat(this.getConstantParamValue("tax","value")) / 100.0;
@@ -352,51 +394,87 @@ export class CalculatePage {
         stoim = parseFloat(this.getConstantParamValue("electricity","value")) / 100.0;
         lifetime = parseFloat(this.getConstantParamValue("lifetime","value"));
 
-        let H1 = 0.0, Q1 = 0.0, H2 = 0.0, Q2 = 0.0;
-        H1 = parseFloat(this.Operation["MaxPress"]);
-        Q1 = parseFloat(this.Operation["MinFlow"]);
-        H2 = parseFloat(this.Operation["MinPress"]);
-        Q2 = parseFloat(this.Operation["MaxFlow"]);
-      
-        let sf = 0.0, nf = 0.0, A = 0.0, B = 0.0, C = 0.0, H = 0.0;
-        sf = (H1 - H2)/(Math.pow(Q2,2) - Math.pow(Q1,2));
-        nf = H1 + sf * Math.pow(Q1,2);
-        C = nf;
-        A = (H1 - H2*(Q1/Q2) + nf*(Q1/Q2)-nf)/(Math.pow(Q1,2) - Q1*Q2);
-        B = (H1 - nf - A*Math.pow(Q1,2))/Q1;
-
+        //********************Двигатель/Характеристики********************
         let kpdDvig = 0.0, moshDvig = 0.0, srDvig = 0.0;
         kpdDvig = parseFloat(this.Motor["Eff"]); //КПД двигателя
         moshDvig = parseFloat(this.Motor["Pow"]); //Мощность двигателя
         srDvig = parseFloat(this.Motor["Aver"]); //Среднее кол-во часов работы
 
+        //********************Оперативные данные**************************
+        //www
+        let H1 = 0.0, Q1 = 0.0, H2 = 0.0, Q2 = 0.0;
+        let sf = 0.0, nf = 0.0, A = 0.0, B = 0.0, C = 0.0, H = 0.0;
         let kpdN = 0.0, needP = 0.0, pBefore = 0.0, Qnom = 0.0;
-        kpdN = parseFloat(this.Operation["PumpEff"]);//КПД насоса
-        needP = parseFloat(this.Operation["NeedPress"]);//Требуемый напор
-        pBefore = parseFloat(this.Operation["PressBefore"]);//Напор на всасе
-        Qnom = parseFloat(this.Operation["NominalFlow"]);//Номинальное значение подачи
+        if (this.form == "www")
+        {
+          H1 = parseFloat(this.Operation["MaxPress"]); 
+          Q1 = parseFloat(this.Operation["MinFlow"]);
+          H2 = parseFloat(this.Operation["MinPress"]);
+          Q2 = parseFloat(this.Operation["MaxFlow"]);
 
+          sf = (H1 - H2)/(Math.pow(Q2,2) - Math.pow(Q1,2));
+          nf = H1 + sf * Math.pow(Q1,2);
+          C = nf;
+          A = (H1 - H2*(Q1/Q2) + nf*(Q1/Q2)-nf)/(Math.pow(Q1,2) - Q1*Q2);
+          B = (H1 - nf - A*Math.pow(Q1,2))/Q1;
+          
+          kpdN = parseFloat(this.Operation["PumpEff"]);//КПД насоса
+          needP = parseFloat(this.Operation["NeedPress"]);//Требуемый напор
+          pBefore = parseFloat(this.Operation["PressBefore"]);//Напор на всасе
+          Qnom = parseFloat(this.Operation["NominalFlow"]);//Номинальное значение подачи
+        }
+
+        //air
+        let numMot = 0.0, numMotWinDay = 0.0, numMotWinNig = 0.0, numMotSumDay = 0.0, numMotSumNig = 0.0, numMotSprAutDay = 0.0, numMotSprAutNig = 0.0;
+        if (this.form == "air")
+        {
+          numMot = parseFloat(this.Operation["NumOfMotors"]);
+          numMotWinDay = parseFloat(this.Operation["NumOfMotorsWinterDay"]);
+          numMotWinNig = parseFloat(this.Operation["NumOfMotorsWinterNight"]);
+          numMotSumDay = parseFloat(this.Operation["NumOfMotorsSummerDay"]);
+          numMotSumNig = parseFloat(this.Operation["NumOfMotorsSummerNight"]);
+          numMotSprAutDay = parseFloat(this.Operation["NumOfMotorsSpringAutumnDay"]);
+          numMotSprAutNig = parseFloat(this.Operation["NumOfMotorsSpringAutumnNight"]);
+        }
+
+        //*********************Коммерческие данные***********************
         let /*priceEquip = 0.0, priceInstall = 0.0,*/ priceV = 0.0, euroPr = 0.0;
-/*        priceEquip = parseFloat(this.Commertial["AccessEquipPrice"]);//Стоимость оборудования
+        /*priceEquip = parseFloat(this.Commertial["AccessEquipPrice"]);//Стоимость оборудования
         priceInstall = parseFloat(this.Commertial["InstallPrice"]);//Стоимость монтажа*/
         priceV = parseFloat(this.Commertial["EnergPrice"]);//Цена э/э
         euroPr = parseFloat(this.Commertial["CoursePrice"]);//Стоимость 1 евро в рублях
         
-        let kpnNasos = [], pZadv = [], pPCh = [];
-        let sum1 = 0.0, sum2 = 0.0;
-        for(var i = 0; i < this.dutyCycleData.length; i++)
-        {
-          let time = parseFloat(this.dutyCycleData[i].time);
-          let perf = parseFloat(this.dutyCycleData[i].perfomance);
 
-          H = A*Math.pow(Qnom*(perf/100),2) + B*Math.pow(Qnom *(perf/100),2) + C;
-          kpnNasos[i] = kpdN/100.0 * (1.0 - Math.pow(1 - (perf/100), 2.3));
-          pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i];
-          kpnNasos[i] = kpdN/100.0 * 0.1 * (perf/100) + 0.9*kpdN/100.0;
-          pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i];
-          sum1 += time /100 * pZadv[i];
-          sum2 += time /100 * pPCh[i];
+        //**************************Расчёт********************************
+        let sum1 = 0.0, sum2 = 0.0;
+        let kpnNasos = [], pZadv = [], pPCh = [];
+
+        //www
+        if (this.form == "www")
+        {
+          for(var i = 0; i < this.dutyCycleData.length; i++)
+          {
+            let time = parseFloat(this.dutyCycleData[i].time);
+            let perf = parseFloat(this.dutyCycleData[i].perfomance);
+
+            H = A*Math.pow(Qnom*(perf/100),2) + B*Math.pow(Qnom *(perf/100),2) + C;
+            kpnNasos[i] = kpdN/100.0 * (1.0 - Math.pow(1 - (perf/100), 2.3));
+            pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i];
+            kpnNasos[i] = kpdN/100.0 * 0.1 * (perf/100) + 0.9*kpdN/100.0;
+            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i];
+            sum1 += time /100 * pZadv[i];
+            sum2 += time /100 * pPCh[i];
+          }
         }
+
+        //air
+        if (this.form == "air")
+        {
+          //sum1 += numMot * (0.1739 * powf([(NSString *) [weightValues objectAtIndex:(NSUInteger) i] floatValue]/100.f, 3.f) - 0.7773 * powf([(NSString *) [weightValues objectAtIndex:(NSUInteger) i] floatValue]/100.f, 2.f) + 1.2306*[(NSString *)[weightValues objectAtIndex:(NSUInteger)i] floatValue]/100.f +0.3725)/[(NSNumber *)[params objectAtIndex:0] floatValue]*100.f * [(NSNumber *)[params objectAtIndex:(NSUInteger)(7 + i)] floatValue])]];
+        }
+
+        
+
 
         let e = 0.0, epch = 0.0, econ = 0.0, econev = 0.0, econpr = 0.0, invest = 0.0, cpchPrice = 0.0;
         e = srDvig * sum1;
@@ -470,7 +548,6 @@ export class CalculatePage {
               srokOkup = srok;
           }
         }
-
 
         if (NPV[lifetime] <= 0 || isNaN(NPV[lifetime]))
         {

@@ -28,8 +28,13 @@ page-dutycycle {
     }
     .body-grid-content ion-col {
         background-color: #d4d4d4;
-            border: 1px solid #fff;
-            color: #000;
+        border: 1px solid #fff;
+        color: #000;
+    }
+
+    .body-grid-content ion-col.span_center {
+        text-align: center;
+        padding-top: 6%;
     }
 
    /*

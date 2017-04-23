@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsService } from '../services/settings-service';
 
+declare var cordova: any;
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -18,6 +20,11 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
+      if (cordova.platformId == 'android') {
+          statusBar.backgroundColorByHexString("#9c0303");
+      } else {
+          statusBar.backgroundColorByName("red");
+      }
       splashScreen.hide();
 
       settingsService.openDatabase()
