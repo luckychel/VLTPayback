@@ -32,6 +32,9 @@ export class DutycyclePage {
 
   reloadDuty(){
     this.initHide = true;
+    
+    if (this.form === "air") this.seasons = [];
+
     this.settingService.getDutyCycleSettingsData(this.lang)
     .then(settings => {
         this.settings = settings;
