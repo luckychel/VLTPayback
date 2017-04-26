@@ -461,20 +461,60 @@ export class CalculatePage {
             kpnNasos[i] = kpdN/100.0 * (1.0 - Math.pow(1 - (perf/100), 2.3));
             pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i];
             kpnNasos[i] = kpdN/100.0 * 0.1 * (perf/100) + 0.9*kpdN/100.0;
-            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i];
+            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i] / kpdPCH;
             sum1 += time /100 * pZadv[i];
             sum2 += time /100 * pPCh[i];
           }
         }
 
         //air
-        if (this.form == "air")
+        if (this.form == "air" && this.dutyCycleData.length == 4)
         {
-          //sum1 += numMot * (0.1739 * powf([(NSString *) [weightValues objectAtIndex:(NSUInteger) i] floatValue]/100.f, 3.f) - 0.7773 * powf([(NSString *) [weightValues objectAtIndex:(NSUInteger) i] floatValue]/100.f, 2.f) + 1.2306*[(NSString *)[weightValues objectAtIndex:(NSUInteger)i] floatValue]/100.f +0.3725)/[(NSNumber *)[params objectAtIndex:0] floatValue]*100.f * [(NSNumber *)[params objectAtIndex:(NSUInteger)(7 + i)] floatValue])]];
+          for(var i = 0; i < this.dutyCycleData.length; i++)
+          {
+            let nDay = 0.0, nNight = 0.0;
+            let day = parseFloat(this.dutyCycleData[i].day);
+            let night = parseFloat(this.dutyCycleData[i].night);
+            
+            //зима
+            if (this.dutyCycleData[i].perfomance === "0") {
+                nDay = numMotWinDay;
+                nNight = numMotWinNig;
+            }
+            //весна/осень
+            if (this.dutyCycleData[i].perfomance === "1" || this.dutyCycleData[i].perfomance === "3") {
+                nDay = numMotSprAutDay;
+                nNight = numMotSprAutNig;
+            }
+            //лето
+            if (this.dutyCycleData[i].perfomance === "2") {
+                nDay = numMotSumDay;
+                nNight = numMotSumNig;
+            }
+
+            sum1 += numMot * (0.1739 * Math.pow(day/100.0,3) - 0.7773 * Math.pow(day/100.0,2) + 1.2306*day/100.0 + 0.3725)/kpdDvig * nDay;
+            sum1 += numMot * (0.1739 * Math.pow(night/100.0,3) - 0.7773 * Math.pow(night/100.0,2) + 1.2306*night/100.0 + 0.3725)/kpdDvig * nNight;
+            
+            let kPoterDay = 0.0, kPoterNight = 0.0;
+            let numTmpDay = day/100.0;
+            if(numTmpDay < 0.85)
+                kPoterDay = 0.95 *(1.0 - Math.pow((1-numTmpDay),2.3));
+            else
+                kPoterDay = 1;
+
+            let numTmpNight = night/100.0;
+            if(numTmpNight < 0.85)
+                kPoterNight = 0.95 *(1.0 - Math.pow((1-numTmpNight),2.3));
+            else
+                kPoterNight = 1;
+
+            sum2 += Math.pow(numTmpDay,3) * numMot/kpdPCH/kpdDvig/1.2/kPoterDay;
+            sum2 += Math.pow(numTmpNight,3) * numMot/kpdPCH/kpdDvig/1.2/kPoterNight;
+          }
+
+          sum1 /= 8.0;
+          sum2 = (sum2 * numMot ) / 8.0;
         }
-
-        
-
 
         let e = 0.0, epch = 0.0, econ = 0.0, econev = 0.0, econpr = 0.0, invest = 0.0, cpchPrice = 0.0;
         e = srDvig * sum1;
@@ -483,12 +523,26 @@ export class CalculatePage {
         
         if (this.lang === "en") {
           //econev = priceV/100 * econ;
-          econev = C * econ;
+          if (this.form === "www")
+          {
+            econev = C * econ;
+          }
+          else if (this.form === "air")
+          {
+            econev = priceV/100 * econ;
+          }
+
           econpr = (1-epch/e)*100;
         }
         else {
-          //econev = priceV * econ;
-          econev = (C * econ) * euroPr;
+          if (this.form === "www")
+          {
+            econev = (C * econ) * euroPr;
+          }
+          else if (this.form === "air")
+          {
+            econev = priceV * econ;
+          }
           econpr = (1-epch/e)*100 * euroPr;
         }
 

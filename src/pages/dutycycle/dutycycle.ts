@@ -15,8 +15,8 @@ export class DutycyclePage {
   initHide = true;
   time = "";
   perfomance = 10;
-  day = 10;
-  night = 10;
+  day = 5;
+  night = 5;
   season = 0;
   seasons: any[] = [];
   isDutyAdding = false;
@@ -27,11 +27,11 @@ export class DutycyclePage {
      this.form = this.navParams.get("form");
 
     if (this.form === "air" && this.seasons.length == 0)
-    {
-      this.seasons.push({"id" : 0, "text": this.lang === "en" ? "Winter" : "Зима"});
-      this.seasons.push({"id" : 1, "text": this.lang === "en" ? "Spring" : "Весна"});
-      this.seasons.push({"id" : 2, "text": this.lang === "en" ? "Summer" : "Лето"});
-      this.seasons.push({"id" : 3, "text": this.lang === "en" ? "Autumn" : "Осень"});
+   {
+      this.seasons.push(this.lang === "en" ? "Winter" : "Зима");
+      this.seasons.push(this.lang === "en" ? "Spring" : "Весна");
+      this.seasons.push(this.lang === "en" ? "Summer" : "Лето");
+      this.seasons.push(this.lang === "en" ? "Autumn" : "Осень");
     } 
 
      this.reloadDuty();
@@ -190,8 +190,8 @@ export class DutycyclePage {
                   else 
                     this.time = "";
                   this.perfomance = 10;
-                  this.day = 10;
-                  this.night = 10;
+                  this.day = 5;
+                  this.night = 5;
               });
           })
     }
@@ -205,11 +205,7 @@ export class DutycyclePage {
   }
 
   getSeason(duty){
-    return this.seasons[duty.perfomance].text;
+    return this.seasons[duty.perfomance];
   }
 
-/*  getSeasSelected(seas){
-    debugger
-    return seas.id == 0;
-  }*/
 }

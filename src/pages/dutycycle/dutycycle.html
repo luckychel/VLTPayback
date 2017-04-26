@@ -73,15 +73,15 @@
       </ion-item>
       <ion-item *ngIf="this.form==='air'"> 
         <ion-label style="margin:0;">{{settings.Day}}</ion-label>
-        <ion-range min="10" max="100" step="10" pin="true" snaps="true" color="danger" [(ngModel)]="day" style="padding:0;">
-         <ion-label range-left>10</ion-label>
+        <ion-range min="5" max="100" step="5" pin="true" snaps="true" color="danger" [(ngModel)]="day" style="padding:0;">
+         <ion-label range-left>5</ion-label>
          <ion-label range-right>100</ion-label>
         </ion-range>
       </ion-item>
       <ion-item *ngIf="this.form ==='air'">
         <ion-label style="margin:0;">{{settings.Night}}</ion-label>
-        <ion-range min="10" max="100" step="10" pin="true" snaps="true" color="danger" [(ngModel)]="night" style="padding:0;">
-         <ion-label range-left>10</ion-label>
+        <ion-range min="5" max="100" step="5" pin="true" snaps="true" color="danger" [(ngModel)]="night" style="padding:0;">
+         <ion-label range-left>5</ion-label>
          <ion-label range-right>100</ion-label>
         </ion-range>
       </ion-item>

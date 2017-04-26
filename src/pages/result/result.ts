@@ -17,13 +17,18 @@ export class ResultPage {
   lang = "";
   form = "";
   results: any = {};
+  seasons: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public emailComposer: EmailComposer) {
 
-     this.lang = this.navParams.get("lang");
-     this.form = this.navParams.get("form");
-     this.results = this.navParams.get("results");
+    this.lang = this.navParams.get("lang");
+    this.form = this.navParams.get("form");
+    this.results = this.navParams.get("results");
 
+    this.seasons.push(this.lang === "en" ? "Winter" : "Зима");
+    this.seasons.push(this.lang === "en" ? "Spring" : "Весна");
+    this.seasons.push(this.lang === "en" ? "Summer" : "Лето");
+    this.seasons.push(this.lang === "en" ? "Autumn" : "Осень");
   }
   
   sendEmail(){
@@ -46,5 +51,9 @@ export class ResultPage {
 
   close() {
    this.viewCtrl.dismiss();
+  }
+
+  getSeason(id){
+    return this.seasons[id];
   }
 }

@@ -236,7 +236,7 @@ export class SettingsService {
 
             /*www*/
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PumpEff', 'КПД насоса, %','', '', 'ru', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PumpEff', 'Pump efficiency', '', '', 'en', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PumpEff', 'Pump efficiency, %', '', '', 'en', 'www']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NeedPress', 'Требуемый напор, м','', '', 'ru', 'www']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NeedPress', 'Needed pressure, m', '', '', 'en', 'www']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PressBefore', 'Напор на всасе насоса, м','', '', 'ru', 'www']);
@@ -267,6 +267,28 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NumOfMotorsSpringAutumnDay', 'Total of work. mot. day spring/autumn', '', '', 'en', 'air']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NumOfMotorsSpringAutumnNight', 'Кол-во раб. двиг. весна/осень ночью','', '', 'ru', 'air']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NumOfMotorsSpringAutumnNight', 'Total of work. mot. night spring/autumn', '', '', 'en', 'air']);
+
+            /*tech*/
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PumpEff', 'КПД насоса, %','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PumpEff', 'Pump efficiency, %', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NeedPress', 'Требуемый напор, м','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NeedPress', 'Needed pressure, m', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PressBefore', 'Напор на всасе насоса, м','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['PressBefore', 'Pressure before pump, m', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NominalFlow', 'Номинальное значение подачи, м3/ч','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['NominalFlow', 'Nominal water flow, m3/h', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxPress', 'Макс. давление, м','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxPress', 'Max. pressure, m', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinFlow', 'Мин. подача, м3/ч','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinFlow', 'Min. flow, m3/h', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinPress', 'Мин. давление, м','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MinPress', 'Min. pressure, m', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxFlow', 'Макс. подача, м3/ч','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['MaxFlow', 'Max. flow, m3/h', '', '', 'en', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['DensinyPump', 'Плотность перекачиваемой жидк., кг/м3','', '', 'ru', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['DensinyPump', 'Density Po of pump over liquid, kg/m3', '', '', 'en', 'tech']);
+
+
 
             return Promise.all([]);
         }
@@ -331,6 +353,15 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'tech']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'tech']);
             
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PumpEff', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NeedPress', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PressBefore', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NominalFlow', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxPress', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinFlow', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinPress', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxFlow', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.DensinyPump', '', 'tech']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.icon', 'ios-arrow-down-outline', 'tech']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.showDetails', '0', 'tech']);
 
@@ -448,10 +479,11 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, day, night, form) VALUES (?, ?, ?, ?, ?, ?)", ['4', '25', '3', '70', '65', 'air']); //осень
 
             //tech
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'tech']); 
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'tech']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'tech']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'tech']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '20', '50', 'tech']); 
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '20', '60', 'tech']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '20', '80', 'tech']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '20', '100', 'tech']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '20', '100', 'tech']);
             
             //force
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'force']); 

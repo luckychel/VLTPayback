@@ -57,15 +57,39 @@
 <ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
    При расчетах был использован следующий профиль нагрузки:
    <table border=1 cellpadding=3 style="width:100%">
-    <tr style="text-align:center;"><th style="background-color:#d4d4d4;">Время, %</th><th style="background-color:#d4d4d4;">Нагрузка, %</th><tr>
-    <tr style="text-align:center;" *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
+    <tr style="text-align:center;">
+      <th style="background-color:#d4d4d4;">Время, %</th>
+      <th *ngIf="form!=='air'" style="background-color:#d4d4d4;">Нагрузка, %</th>
+      <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Сезон</th>
+      <th *ngIf="form==='air'" style="background-color:#d4d4d4;">День</th>
+      <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Ночь</th>
+    <tr>
+    <tr style="text-align:center;" *ngFor="let duty of results.dutycycle">
+      <td>{{duty.time}}</td>
+      <td *ngIf="form!=='air'">{{duty.perfomance}}</td>
+      <td *ngIf="form==='air'">{{getSeason(duty.perfomance)}}</td>
+      <td *ngIf="form==='air'">{{duty.day}}</td>
+      <td *ngIf="form==='air'">{{duty.night}}</td>
+    </tr>
   </table>
   </ion-card-content>
   <ion-card-content *ngIf="lang=='en'" style="padding-top:0px;">
     In calculations was used following duty cycle:
     <table border=1 cellpadding=3 style="width:100%">
-    <tr style="text-align:center;"><th style="background-color:#d4d4d4;">Time, %</th><th style="background-color:#d4d4d4;">Perfomance, %</th><tr>
-    <tr style="text-align:center;" *ngFor="let duty of results.dutycycle"><td>{{duty.time}}</td><td>{{duty.perfomance}}</td></tr>
+    <tr style="text-align:center;">
+      <th style="background-color:#d4d4d4;">Time, %</th>
+      <th *ngIf="form!=='air'" style="background-color:#d4d4d4;">Perfomance, %</th>
+      <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Season</th>
+      <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Day</th>
+      <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Night</th>
+    <tr>
+    <tr style="text-align:center;" *ngFor="let duty of results.dutycycle">
+      <td>{{duty.time}}</td>
+      <td *ngIf="form!=='air'">{{duty.perfomance}}</td>
+      <td *ngIf="form==='air'">{{getSeason(duty.perfomance)}}</td>
+      <td *ngIf="form==='air'">{{duty.day}}</td>
+      <td *ngIf="form==='air'">{{duty.night}}</td>
+    </tr>
   </table>
   </ion-card-content>
 

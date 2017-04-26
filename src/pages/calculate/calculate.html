@@ -47,36 +47,36 @@
         <ion-icon color="primary" item-right [name]="Operation.icon"></ion-icon>
       </ion-item>
 
-      <!--www-->
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <!--www--> <!--tech-->
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('PumpEff', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.PumpEff"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('NeedPress', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.NeedPress"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('PressBefore', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.PressBefore"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('NominalFlow', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.NominalFlow"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MaxPress', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MaxPress"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MinFlow', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MinFlow"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MinPress', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MinPress"></ion-input>
       </ion-item>
-      <ion-item *ngIf="Operation.showDetails=='1' && form=='www'" style="background-color: #e4e4e4;">
+      <ion-item *ngIf="Operation.showDetails=='1' && (form=='www' || form=='tech')" style="background-color: #e4e4e4;">
         <ion-label floating>{{getSettingParamValue('MaxFlow', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.MaxFlow"></ion-input>
       </ion-item>
@@ -111,6 +111,11 @@
         <ion-input type="number" [(ngModel)]="Operation.NumOfMotorsSpringAutumnNight"></ion-input>
       </ion-item>
 
+      <!--tech-->
+      <ion-item *ngIf="Operation.showDetails=='1' && form=='tech'" style="background-color: #e4e4e4;">
+        <ion-label floating>{{getSettingParamValue('DensinyPump', 'txt')}}</ion-label>
+        <ion-input type="number" [(ngModel)]="Operation.MaxFlow"></ion-input>
+      </ion-item>
 
 
       <ion-item (click)="toggleDetails(Commertial, 'Commertial')" style="padding-left: 0px;">
