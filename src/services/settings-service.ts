@@ -306,20 +306,20 @@ export class SettingsService {
       if(res.rows.length == 0) {
 
             /*www*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '84', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '11', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '8760', 'www']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'www']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'www']);
 
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PumpEff', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NeedPress', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PressBefore', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NominalFlow', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxPress', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinFlow', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinPress', '', 'www']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxFlow', '', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PumpEff', '60', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NeedPress', '71', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PressBefore', '37', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NominalFlow', '45', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxPress', '48', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinFlow', '30', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinPress', '45', 'www']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxFlow', '45', 'www']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.icon', 'ios-arrow-down-outline', 'www']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.showDetails', '0', 'www']);
 
@@ -327,19 +327,19 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', 'www']);
 
             /*air*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '84', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '11', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '7800', 'air']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'air']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'air']);
 
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotors', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsWinterDay', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsWinterNight', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSummerDay', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSummerNight', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSpringAutumnDay', '', 'air']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSpringAutumnNight', '', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotors', '3', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsWinterDay', '2', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsWinterNight', '1', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSummerDay', '3', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSummerNight', '2', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSpringAutumnDay', '2', 'air']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NumOfMotorsSpringAutumnNight', '2', 'air']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.icon', 'ios-arrow-down-outline', 'air']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.showDetails', '0', 'air']);
 
@@ -347,21 +347,21 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', 'air'])
 
             /*tech*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '84', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '11', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '7800', 'tech']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'tech']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'tech']);
             
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PumpEff', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NeedPress', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PressBefore', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NominalFlow', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxPress', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinFlow', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinPress', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxFlow', '', 'tech']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.DensinyPump', '', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PumpEff', '60', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NeedPress', '71', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.PressBefore', '37', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.NominalFlow', '45', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxPress', '48', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinFlow', '30', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MinPress', '45', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.MaxFlow', '45', 'tech']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.DensinyPump', '1000', 'tech']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.icon', 'ios-arrow-down-outline', 'tech']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.showDetails', '0', 'tech']);
 
@@ -369,22 +369,22 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', 'tech'])
 
             /*force*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'force']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'force']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'force']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '84', 'force']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '11', 'force']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '7800', 'force']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'force']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'force']);
             
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.icon', 'ios-arrow-down-outline', 'force']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.showDetails', '0', 'force']);
+/*            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.icon', 'ios-arrow-down-outline', 'force']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Operation.showDetails', '0', 'force']);*/
 
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.icon', 'ios-arrow-down-outline', 'force']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', 'force'])
 
             /*vav*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'vav']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'vav']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'vav']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '84', 'vav']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '11', 'vav']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '7800', 'vav']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'vav']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'vav']);
             
@@ -395,9 +395,9 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', 'vav'])
 
             /*park*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'park']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'park']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'park']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '84', 'park']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '11', 'park']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '7800', 'park']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'park']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'park']);
             
@@ -408,9 +408,9 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', 'park'])
           
             /*screw*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '', 'screw']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '', 'screw']);
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '', 'screw']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Eff', '84', 'screw']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Pow', '11', 'screw']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.Aver', '7800', 'screw']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.icon', 'ios-arrow-down-outline', 'screw']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Motor.showDetails', '0', 'screw']);
             
@@ -421,7 +421,7 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.showDetails', '0', 'screw'])
 
             /*common for all*/
-            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.EnergPrice', '', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.EnergPrice', '10', '']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.CoursePrice', '60', '']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.AccessEquipPrice', '', '']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.InstallPrice', '', '']);
@@ -448,6 +448,8 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Time', 'Time (%)', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Perf', 'Нагрузка (%)', 'ru']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Perf', 'Perf (%)', 'en']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Exp', 'Расход (%)', 'ru']);
+            this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Exp', 'Expense (%)', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Day', 'День (%)', 'ru']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Day', 'Day (%)', 'en']);
             this.db.executeSql("INSERT INTO VLTDutyCycleSettings (key, value, lang) VALUES (?, ?, ?)", ['Night', 'Ночь (%)', 'ru']);
@@ -483,31 +485,41 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '20', '60', 'tech']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '20', '80', 'tech']);
             this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '20', '100', 'tech']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '20', '100', 'tech']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['5', '20', '100', 'tech']);
             
             //force
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'force']); 
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'force']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'force']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'force']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '10', '100', 'force']); 
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '70', '70', 'force']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '20', '40', 'force']);
             
             //vav
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'vav']); 
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'vav']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'vav']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'vav']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '10', '30', 'vav']); 
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '10', '40', 'vav']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '15', '50', 'vav']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '20', '60', 'vav']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['5', '20', '70', 'vav']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['6', '10', '80', 'vav']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['7', '10', '90', 'vav']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['8', '5', '100', 'vav']);
             
             //park
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'park']); 
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'park']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'park']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'park']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '30', 'park']); 
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '15', '40', 'park']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '15', '50', 'park']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '10', '60', 'park']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['5', '10', '70', 'park']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['6', '10', '80', 'park']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['7', '10', '90', 'park']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['8', '5', '100', 'park']);
             
             //screw
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '25', '50', 'screw']); 
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '13', '60', 'screw']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '46', '80', 'screw']);
-            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '16', '100', 'screw']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['1', '1', '40', 'screw']); 
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['2', '5', '50', 'screw']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['3', '6', '60', 'screw']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '24', '70', 'screw']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '27', '80', 'screw']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '30', '90', 'screw']);
+            this.db.executeSql("INSERT INTO VLTDutyCycle (num, time, perfomance, form) VALUES (?, ?, ?, ?)", ['4', '7', '100', 'screw']);
             return Promise.all([]);
         }
   })

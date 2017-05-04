@@ -448,8 +448,8 @@ export class CalculatePage {
             pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i];
             kpnNasos[i] = kpdN / 100.0 * 0.1 * (perf / 100) + 0.9 * kpdN / 100.0;
             pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i] / kpdPCH;
-            sum1 += time / 100 * pZadv[i];
-            sum2 += time / 100 * pPCh[i];
+            sum1 += (time / 100) * pZadv[i];
+            sum2 += (time / 100) * pPCh[i];
           }
         }
 
@@ -476,8 +476,8 @@ export class CalculatePage {
               nNight = numMotSumNig;
             }
 
-            sum1 += numMot * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * day / 100.0 + 0.3725) / kpdDvig*100 * nDay;
-            sum1 += numMot * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * night / 100.0 + 0.3725) / kpdDvig*100 * nNight;
+            sum1 += moshDvig * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * day / 100.0 + 0.3725) / kpdDvig*100 * nDay;
+            sum1 += moshDvig * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * night / 100.0 + 0.3725) / kpdDvig*100 * nNight;
 
             let kPoterDay = 0.0, kPoterNight = 0.0;
             let numTmpDay = day / 100.0;
@@ -492,8 +492,8 @@ export class CalculatePage {
             else
               kPoterNight = 1;
 
-            sum2 += Math.pow(numTmpDay, 3) * numMot / kpdPCH / kpdDvig*100 / 1.2 / kPoterDay;
-            sum2 += Math.pow(numTmpNight, 3) * numMot / kpdPCH / kpdDvig *100 / 1.2 / kPoterNight;
+            sum2 += Math.pow(numTmpDay, 3) * moshDvig / kpdPCH / kpdDvig*100 / 1.2 / kPoterDay;
+            sum2 += Math.pow(numTmpNight, 3) * moshDvig / kpdPCH / kpdDvig *100 / 1.2 / kPoterNight;
           }
 
           sum1 /= 8.0;
@@ -510,11 +510,35 @@ export class CalculatePage {
             kpnNasos[i] = kpdN / 100.0 * (1.0 - Math.pow(1 - (perf / 100), 2.3));
             pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i] * denPump / 1000;
             kpnNasos[i] = kpdN / 100.0 * 0.1 * (perf / 100) + 0.9 * kpdN / 100.0;  
-            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i] / kpdPCH * denPump/1000;
-            sum1 += time / 100 * pZadv[i];
-            sum2 += time / 100 * pPCh[i];
+            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i] / kpdPCH;
+            sum1 += (time / 100) * pZadv[i];
+            sum2 += (time / 100) * pPCh[i];
+           
           }
         }
+
+        //force
+        if (this.form == "force") {
+          let a1 = 0.9;
+          sum1 = moshDvig * (0.1739 * Math.pow(a1, 3) - 0.7773 * Math.pow(a1, 2) + 1.2306*a1 +0.3725)/kpdDvig*100;
+
+          let kPoter = 0.0;
+          for (var i = 0; i < this.dutyCycleData.length; i++) {
+            let time = parseFloat(this.dutyCycleData[i].time);
+            let perf = parseFloat(this.dutyCycleData[i].perfomance);
+            
+            let numTmp = perf / 100;
+            if (numTmp < 0.85)
+              kPoter = 0.95 * (1 - Math.pow((1-numTmp),2.3));
+            else
+              kPoter = 1;
+
+            pPCh[i] =Math.pow(numTmp,3)/kpdPCH/1.2/kPoter*moshDvig;
+            sum2 += pPCh[i] * (time / 100);
+          }
+        }
+
+        //
 
         let e = 0.0, epch = 0.0, econ = 0.0, econev = 0.0, econpr = 0.0, invest = 0.0, cpchPrice = 0.0;
         e = srDvig * sum1;
@@ -522,23 +546,11 @@ export class CalculatePage {
         econ = e - epch;
 
         if (this.lang === "en") {
-          //econev = priceV/100 * econ;
-          if (this.form === "www") {
-            econev = C * econ;
-          }
-          else if (this.form === "air") {
-            econev = priceV / 100 * econ;
-          }
-
+          econev = priceV * econ;
           econpr = (1 - epch / e) * 100;
         }
         else {
-          if (this.form === "www") {
-            econev = (C * econ) * euroPr;
-          }
-          else if (this.form === "air") {
-            econev = priceV * econ;
-          }
+          econev = priceV * econ * euroPr
           econpr = (1 - epch / e) * 100 * euroPr;
         }
 

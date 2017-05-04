@@ -42,7 +42,8 @@
           <ion-icon name="ios-cog" style="font-size:28px;"></ion-icon>
         </button>
       </ion-item>
-      <ion-item (click)="toggleDetails(Operation, 'Operation')" style="padding-left: 0px;">
+
+      <ion-item *ngIf="form!='force'" (click)="toggleDetails(Operation, 'Operation')" style="padding-left: 0px;">
         <ion-label style="padding-left: 16px;">{{getSettingParamValue('OperationTitle', 'txt')}}</ion-label>
         <ion-icon color="primary" item-right [name]="Operation.icon"></ion-icon>
       </ion-item>
@@ -116,6 +117,7 @@
         <ion-label floating>{{getSettingParamValue('DensinyPump', 'txt')}}</ion-label>
         <ion-input type="number" [(ngModel)]="Operation.DensinyPump"></ion-input>
       </ion-item>
+
 
 
       <ion-item (click)="toggleDetails(Commertial, 'Commertial')" style="padding-left: 0px;">

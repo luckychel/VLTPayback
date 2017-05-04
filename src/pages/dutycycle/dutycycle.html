@@ -19,7 +19,8 @@
     <ion-col *ngIf="form!=='air'" col-2>{{settings.Num}}</ion-col>
     <ion-col *ngIf="form==='air'" col-3>{{settings.Time}}</ion-col>
     <ion-col *ngIf="form!=='air'" col-4>{{settings.Time}}</ion-col>
-    <ion-col col-4 *ngIf="form!=='air'">{{settings.Perf}}</ion-col>
+    <ion-col col-4 *ngIf="form!=='air' && form!=='force' && form!=='vav'">{{settings.Perf}}</ion-col>
+    <ion-col col-4 *ngIf="form==='force' || form==='vav'">{{settings.Exp}}</ion-col>
     <ion-col col-2 *ngIf="form==='air'">
       <span *ngIf="lang==='en'">Season</span>
       <span *ngIf="lang==='ru'">Сезон</span>
@@ -65,7 +66,8 @@
     </ion-col>
     <ion-col col-6>
       <ion-item *ngIf="this.form!=='air'">
-        <ion-label style="margin:0;">{{settings.Perf}}</ion-label>
+        <ion-label *ngIf="this.form!=='force' && this.form!=='vav'" style="margin:0;">{{settings.Perf}}</ion-label>
+        <ion-label *ngIf="this.form==='force' || this.form==='vav'" style="margin:0;">{{settings.Exp}}</ion-label>
         <ion-range min="10" max="100" step="10" pin="true" snaps="true" color="danger" [(ngModel)]="perfomance" style="padding:0;">
          <ion-label range-left>10</ion-label>
          <ion-label range-right>100</ion-label>
