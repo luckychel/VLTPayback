@@ -58,7 +58,8 @@ export class ResultPage {
   getBodyHtml(){
     let html = "";//this.element.nativeElement.innerHTML;
     //title
-    this.ResTitle.nativeElement.innerHTML);
+    html = this.ResTitle.nativeElement.innerHTML;
+    
     return html;
   }
 
