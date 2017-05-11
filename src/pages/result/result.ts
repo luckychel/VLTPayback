@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { EmailComposer } from '@ionic-native/email-composer';
-
 /*
   Generated class for the Result page.
 
@@ -14,15 +13,18 @@ import { EmailComposer } from '@ionic-native/email-composer';
 })
 export class ResultPage {
   
-  lang = "";
-  form = "";
+  lang = "";  form = ""; formName = "";
   results: any = {};
   seasons: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public emailComposer: EmailComposer) {
+  @ViewChild("ResTitle", {read: ElementRef }) ResTitle;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public emailComposer: EmailComposer,
+    public element: ElementRef) {
 
     this.lang = this.navParams.get("lang");
     this.form = this.navParams.get("form");
+    this.formName = this.navParams.get("formName");
     this.results = this.navParams.get("results");
 
     this.seasons.push(this.lang === "en" ? "Winter" : "Зима");
@@ -31,6 +33,10 @@ export class ResultPage {
     this.seasons.push(this.lang === "en" ? "Autumn" : "Осень");
   }
   
+  ngAfterViewInit(){
+
+  }
+
   sendEmail(){
     let email = {
       to: 'mc@danfoss.ru',
@@ -43,10 +49,17 @@ export class ResultPage {
         'file://README.pdf'
       ],*/
       subject: 'ТЭО калькулятор',
-      body: '',
+      body: this.getBodyHtml(),
       isHtml: true
     };
     this.emailComposer.open(email);
+  }
+
+  getBodyHtml(){
+    let html = "";//this.element.nativeElement.innerHTML;
+    //title
+    this.ResTitle.nativeElement.innerHTML);
+    return html;
   }
 
   close() {

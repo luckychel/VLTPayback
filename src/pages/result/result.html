@@ -1,8 +1,8 @@
 <ion-header>
 <ion-navbar class="headerToolbar">
     <ion-title>
-      <span style="text-align: center;color:#ffffff">
-        {{lang == 'en' ? 'Results': 'Результаты'}}
+      <span style="text-align: center;color:#ffffff" #ResTitle>
+        {{lang == 'en' ? 'Results': 'Результаты'}} {{formName}}
       </span> 
     </ion-title>
     <ion-buttons end>
@@ -59,8 +59,8 @@
    <table border=1 cellpadding=3 style="width:100%">
     <tr style="text-align:center;">
       <th style="background-color:#d4d4d4;">Время, %</th>
-      <th *ngIf="form!=='air' && form!=='force' && form!=='vav'" style="background-color:#d4d4d4;">Нагрузка, %</th>
-      <th *ngIf="form==='force' || form==='vav'" style="background-color:#d4d4d4;">Расход, %</th>
+      <th *ngIf="form!=='air' && form!=='force' && form!=='vav' && form!=='park'" style="background-color:#d4d4d4;">Нагрузка, %</th>
+      <th *ngIf="form==='force' || form==='vav' || form==='park'" style="background-color:#d4d4d4;">Расход, %</th>
       <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Сезон</th>
       <th *ngIf="form==='air'" style="background-color:#d4d4d4;">День</th>
       <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Ночь</th>
@@ -79,8 +79,8 @@
     <table border=1 cellpadding=3 style="width:100%">
     <tr style="text-align:center;">
       <th style="background-color:#d4d4d4;">Time, %</th>
-      <th *ngIf="form!=='air' && form!=='force' && form!=='vav'" style="background-color:#d4d4d4;">Perfomance, %</th>
-      <th *ngIf="form==='force' || form==='vav'" style="background-color:#d4d4d4;">Expense, %</th>
+      <th *ngIf="form!=='air' && form!=='force' && form!=='vav' && form!=='park'" style="background-color:#d4d4d4;">Perfomance, %</th>
+      <th *ngIf="form==='force' || form==='vav' || form==='park'" style="background-color:#d4d4d4;">Expense, %</th>
       <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Season</th>
       <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Day</th>
       <th *ngIf="form==='air'" style="background-color:#d4d4d4;">Night</th>

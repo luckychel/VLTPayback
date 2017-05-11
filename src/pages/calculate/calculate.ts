@@ -363,12 +363,25 @@ export class CalculatePage {
     let txt = "", isErr = false;
     if (this.check()) {
       try {
-        //данные из VLTPayback
+        //данные из датской VLTPayback iOs7
         //let Cpch = [549.299, 566.5, 607.6, 663.6084, 760.8404, 917.627, 1020.936, 1087.783, 1254.293, 1405.002, 1795.146, 2050.38, 2577.863, 3017.838, 3541.676, 4335.332, 5302.79, 6352.896, 7215.83, 8488.354, 9780.324, 11750.49, 14459.61, 17177.25, 21769.03, 25638.76, 30251.1, 34214.54, 42917.01, 54914.45, 61645.5, 70148.15, 81485.36, 92999.73, 115634.0];
         //let CpchPower = [0.37, 0.55, 0.75, 1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250, 315, 355, 400, 450, 500, 560, 630, 710, 800, 1000];
 
         let CpchPower = [1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18, 22, 30, 37, 45, 55, 75, 90, 110, 132, 160, 200, 250];
         let Cpch = [519, 608, 754, 849, 912, 1065, 1204, 1566, 1802, 2291, 2699, 3153, 3881, 4768, 5832.74, 6521.86, 7688.88, 8006.3, 9667.74, 11802.36, 14091, 18062];
+
+        let screwData = [
+            {perf: 10, value: {kstand: 0.5, kspch :0.27}},
+            {perf: 20, value: {kstand: 0.55, kspch :0.32}},
+            {perf: 30, value: {kstand: 0.6, kspch :0.4}},
+            {perf: 40, value: {kstand: 0.65, kspch :0.47}},
+            {perf: 50, value: {kstand: 0.73, kspch :0.55}},
+            {perf: 60, value: {kstand: 0.8, kspch :0.62}},
+            {perf: 70, value: {kstand: 0.85, kspch :0.72}},
+            {perf: 80, value: {kstand: 0.92, kspch :0.82}},
+            {perf: 90, value: {kstand: 0.97, kspch :0.92}},
+            {perf: 100, value: {kstand: 1, kspch :1.02}},
+        ];
 
         //********************Константы//*********************************
         let kpdPCH = 0.0, nalog = 0.0, discount = 0.0, stoim = 0.0, lifetime = 0.0;
@@ -476,8 +489,8 @@ export class CalculatePage {
               nNight = numMotSumNig;
             }
 
-            sum1 += moshDvig * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * day / 100.0 + 0.3725) / kpdDvig*100 * nDay;
-            sum1 += moshDvig * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * night / 100.0 + 0.3725) / kpdDvig*100 * nNight;
+            sum1 += moshDvig * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * day / 100.0 + 0.3725) / kpdDvig * nDay;
+            sum1 += moshDvig * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * night / 100.0 + 0.3725) / kpdDvig * nNight;
 
             let kPoterDay = 0.0, kPoterNight = 0.0;
             let numTmpDay = day / 100.0;
@@ -492,8 +505,8 @@ export class CalculatePage {
             else
               kPoterNight = 1;
 
-            sum2 += Math.pow(numTmpDay, 3) * moshDvig / kpdPCH / kpdDvig*100 / 1.2 / kPoterDay;
-            sum2 += Math.pow(numTmpNight, 3) * moshDvig / kpdPCH / kpdDvig *100 / 1.2 / kPoterNight;
+            sum2 += Math.pow(numTmpDay, 3) * moshDvig / kpdPCH / kpdDvig / 1.2 / kPoterDay;
+            sum2 += Math.pow(numTmpNight, 3) * moshDvig / kpdPCH / kpdDvig / 1.2 / kPoterNight;
           }
 
           sum1 /= 8.0;
@@ -520,7 +533,7 @@ export class CalculatePage {
         //force
         if (this.form == "force") {
           let a1 = 0.9;
-          sum1 = moshDvig * (0.1739 * Math.pow(a1, 3) - 0.7773 * Math.pow(a1, 2) + 1.2306*a1 +0.3725)/kpdDvig*100;
+          sum1 = (moshDvig * (0.1739 * Math.pow(a1, 3) - 0.7773 * Math.pow(a1, 2) + 1.2306*a1 +0.3725))/kpdDvig;
 
           let kPoter = 0.0;
           for (var i = 0; i < this.dutyCycleData.length; i++) {
@@ -533,12 +546,52 @@ export class CalculatePage {
             else
               kPoter = 1;
 
-            pPCh[i] =Math.pow(numTmp,3)/kpdPCH/1.2/kPoter*moshDvig;
+            pPCh[i] =Math.pow(numTmp,3)*sum1/kpdPCH/1.2/kPoter;
             sum2 += pPCh[i] * (time / 100);
           }
         }
 
-        //
+        //vav
+        if (this.form == "vav") {
+          sum1 = moshDvig/kpdDvig;
+          for (var i = 0; i < this.dutyCycleData.length; i++) {
+            let time = parseFloat(this.dutyCycleData[i].time);
+            let perf = parseFloat(this.dutyCycleData[i].perfomance);
+            
+            let numTmp = perf / 100;
+  
+            pPCh[i] = Math.pow(numTmp,3)*sum1/kpdPCH;
+            sum2 += pPCh[i] * (time / 100);
+          }
+        }
+
+        //park
+        if (this.form == "park") {
+          sum1 = moshDvig/kpdDvig;
+          for (var i = 0; i < this.dutyCycleData.length; i++) {
+            let time = parseFloat(this.dutyCycleData[i].time);
+            let perf = parseFloat(this.dutyCycleData[i].perfomance);
+            
+            let numTmp = perf / 100;
+  
+            pPCh[i] = Math.pow(numTmp,3)*sum1/kpdPCH;
+            sum2 += pPCh[i] * (time / 100);
+          }
+        }
+
+        //screw
+        if (this.form == "screw") {
+         
+          for (var i = 0; i < this.dutyCycleData.length; i++) {
+            let time = parseFloat(this.dutyCycleData[i].time);
+            let perf = parseFloat(this.dutyCycleData[i].perfomance);
+         
+            pPCh[i] = screwData[((perf-10)/10)].value.kstand * moshDvig;
+            sum1 +=  pPCh[i] * (time / 100);
+            pPCh[i] = screwData[((perf-10)/10)].value.kspch * moshDvig;
+            sum2 += pPCh[i] * (time / 100);
+          }
+        }
 
         let e = 0.0, epch = 0.0, econ = 0.0, econev = 0.0, econpr = 0.0, invest = 0.0, cpchPrice = 0.0;
         e = srDvig * sum1;
@@ -578,8 +631,6 @@ export class CalculatePage {
 
         let kd = [(1.0 + discount), Math.pow(1 + discount, 2), Math.pow(1 + discount, 3), Math.pow(1 + discount, 4), Math.pow(1 + discount, 5), Math.pow(1 + discount, 6), Math.pow(1 + discount, 7), Math.pow(1 + discount, 8), Math.pow(1 + discount, 9), Math.pow(1 + discount, 10)];
         let sd = [1, (1.0 + stoim), Math.pow(1 + stoim, 2), Math.pow(1 + stoim, 3), Math.pow(1 + stoim, 4), Math.pow(1 + stoim, 5), Math.pow(1 + stoim, 6), Math.pow(1 + stoim, 7), Math.pow(1 + stoim, 8), Math.pow(1 + stoim, 9)];
-        let kstand = [0.5, 0.55, 0.6, 0.65, 0.73, 0.8, 0.85, 0.92, 0.97, 1];
-        let kspch = [0.27, 0.32, 0.4, 0.47, 0.55, 0.62, 0.72, 0.82, 0.92, 1.02];
 
         let econEffect = 0.0, amort = 0.0, dopPrib1 = 0.0, dopPribNalog1 = 0.0, moneyStream = 0.0, diskontMoneyStream = 0.0;
         let srok = -1.0, srokOkup = 0;
@@ -637,6 +688,7 @@ export class CalculatePage {
             {
               lang: this.lang,
               form: this.form,
+              formName: this.getSettingParamValue('titleCalculate', 'txt'),
               results: {
                 econom: econpr,
                 npv: NPV[lifetime],

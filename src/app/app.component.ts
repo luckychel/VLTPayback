@@ -25,12 +25,16 @@ export class MyApp {
       } else {
           statusBar.backgroundColorByName("red");
       }
-      splashScreen.hide();
 
       settingsService.openDatabase()
         .then(()=>{
           this.rootPage = TabsPage;
         })
+        .then(() => {
+          splashScreen.hide();
+        })
+
+      
     });
   }
 }

@@ -26,6 +26,10 @@ export class HomePage {
       public settingService: SettingsService) {
    
   }
+  
+  ngAfterViewInit(){
+  
+  }
 
    ionViewWillEnter() { 
      this.initHide = true;
