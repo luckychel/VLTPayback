@@ -15,46 +15,50 @@
 
 <ion-content padding class="content">
 <ion-card style="margin: 0 0 10px 0; width: 100%;">
-  <ion-card-content *ngIf="lang=='ru'">
-   При внедрении частотно-регулируемого привода «Данфосс» будут достигнуты следующие результаты в вашем применении:
-  </ion-card-content>
-  <ion-card-content *ngIf="lang=='en'">
-    When applying variable frequency drive Danfoss you’ll achieve following results in your application:
-  </ion-card-content>
 
-  <ion-item class="myItem">
-    <ul style="margin-top:0px;">
-      <li *ngIf="lang=='ru'">Экономия электроэнергии в год {{results.econom.toFixed(2).replace(".", ",")}} %</li>
-      <li *ngIf="lang=='en'">Energy saving per year {{results.econom.toFixed(2).replace(".", ",")}} %</li>
-      
-      <li *ngIf="lang=='ru'">Чистая приведенная стоимость {{results.npv.toFixed(2).replace(".", ",")}} руб.</li>
-      <li *ngIf="lang=='en'">Net present value, NPV {{results.npv.toFixed(2).replace(".", ",")}} euro</li>  
+  <div #Res1>
+    <ion-card-content *ngIf="lang=='ru'" >
+      При внедрении частотно-регулируемого привода «Данфосс» будут достигнуты следующие результаты в вашем применении:
+    </ion-card-content>
+    <ion-card-content *ngIf="lang=='en'">
+      When applying variable frequency drive Danfoss you’ll achieve following results in your application:
+    </ion-card-content>
+  </div>
 
-      <li *ngIf="lang=='ru'">Окупаемость {{results.roi.toFixed(2).replace(".", ",")}} %</li>
-      <li *ngIf="lang=='en'">Return of investments, ROI {{results.roi.toFixed(2).replace(".", ",")}} %</li>
+  <div #Res2>
+    <ion-item class="myItem">
+      <ul style="margin-top:0px;">
+        <li *ngIf="lang=='ru'">Экономия электроэнергии в год {{results.econom.toFixed(2).replace(".", ",")}} %</li>
+        <li *ngIf="lang=='en'">Energy saving per year {{results.econom.toFixed(2).replace(".", ",")}} %</li>
+        <li *ngIf="lang=='ru'">Чистая приведенная стоимость {{results.npv.toFixed(2).replace(".", ",")}} руб.</li>
+        <li *ngIf="lang=='en'">Net present value, NPV {{results.npv.toFixed(2).replace(".", ",")}} euro</li>  
+        <li *ngIf="lang=='ru'">Окупаемость {{results.roi.toFixed(2).replace(".", ",")}} %</li>
+        <li *ngIf="lang=='en'">Return of investments, ROI {{results.roi.toFixed(2).replace(".", ",")}} %</li>
+        <li *ngIf="lang=='ru'">Дисконтированный срок окупаемости {{results.paybackPeriod.toFixed(2).replace(".", ",")}} лет</li>
+        <li *ngIf="lang=='en'">Discount payback period {{results.paybackPeriod.toFixed(2).replace(".", ",")}} years</li>  
+      </ul>
+    </ion-item>
+  </div>
 
-      <li *ngIf="lang=='ru'">Дисконтированный срок окупаемости {{results.paybackPeriod.toFixed(2).replace(".", ",")}} лет</li>
-      <li *ngIf="lang=='en'">Discount payback period {{results.paybackPeriod.toFixed(2).replace(".", ",")}} years</li>  
-    </ul>
-  </ion-item>
-
-  <ion-card-content *ngIf="lang=='ru'">
-    Расчет был сделан при следующих допущениях:
-    <span *ngIf="form=='www' || form=='tech'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является дросселирование.</span>
-    <span *ngIf="form=='force'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является выходные шиберы.</span>
-    <span *ngIf="form=='air' || form=='vav' || form=='park'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является включение/выключение электродвигателей.</span>
-    <span *ngIf="form=='screw'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является золотник.</span>
-  </ion-card-content>
-
-  <ion-card-content *ngIf="lang=='en'">
-    Calculation was done under following assumptions:
+  <div #Res3>
+    <ion-card-content *ngIf="lang=='ru'">
+      Расчет был сделан при следующих допущениях:
+      <span *ngIf="form=='www' || form=='tech'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является дросселирование.</span>
+      <span *ngIf="form=='force'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является выходные шиберы.</span>
+      <span *ngIf="form=='air' || form=='vav' || form=='park'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является включение/выключение электродвигателей.</span>
+      <span *ngIf="form=='screw'">сравнение энергопотребления производился с предположением, что текущим способом регулирования является золотник.</span>
+    </ion-card-content>
+    <ion-card-content *ngIf="lang=='en'">
+      Calculation was done under following assumptions:
     <span *ngIf="form=='www' || form=='tech'">energy consumption comparison is carried out with assumption that current motor control is throttling.</span>
     <span *ngIf="form=='force'">energy consumption comparison is carried out with assumption that current motor control is gate.</span>
     <span *ngIf="form=='air' || form=='vav' || form=='park'">energy consumption comparison is carried out with assumption that current motor control is motor switch on/switch of.</span>
     <span *ngIf="form=='screw'">energy consumption comparison is carried out with assumption that current motor control is valve.</span>
   </ion-card-content>
+  </div>
 
-<ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
+ <div #Res4>
+  <ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
    При расчетах был использован следующий профиль нагрузки:
    <table border=1 cellpadding=3 style="width:100%">
     <tr style="text-align:center;">
@@ -94,14 +98,18 @@
     </tr>
   </table>
   </ion-card-content>
+ </div>
 
-<ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
-   Общие инвестиции в оборудование «Данфосс» составили: {{results.invest.toFixed(2).replace(".", ",")}} руб.
-</ion-card-content>
-<ion-card-content *ngIf="lang=='en'" style="padding-top:0px;">
-  Total investments in Danfoss equipment are equal to: {{results.invest.toFixed(2).replace(".", ",")}} euro
-</ion-card-content>
+<div #Res5>
+  <ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
+    Общие инвестиции в оборудование «Данфосс» составили: {{results.invest.toFixed(2).replace(".", ",")}} руб.
+  </ion-card-content>
+  <ion-card-content *ngIf="lang=='en'" style="padding-top:0px;">
+    Total investments in Danfoss equipment are equal to: {{results.invest.toFixed(2).replace(".", ",")}} euro
+  </ion-card-content>
+</div>
 
+<div #Res6>
  <ion-item class="myItem">
     <ul style="margin-top:0px;">
       <li *ngIf="lang=='ru'">Цена ПЧ = {{results.pchPrice.toFixed(2).replace(".", ",")}} руб.</li>
@@ -114,36 +122,41 @@
       <li *ngIf="lang=='en'">Installation price = 10% of VFD price</li>  
     </ul>
   </ion-item>
+</div>
 
+<div #Res7>
 <ion-card-content *ngIf="lang=='ru'">
    Расчет сделан, необходимы более уточненные данные по режиму работы и оборудования. Обратитесь в компанию «Данфосс» для более подробного расчета.
-  <br />
-  <div style="width:100%">
-    <a ion-button icon-left item-right href="tel:+7(495)792-57-57" target="_blank" style="width:46%">
-       <ion-icon name="call"></ion-icon>
-       Позвонить
-    </a>
-    <button ion-button icon-left item-left style="width:46%" (click)="sendEmail()">
-      <ion-icon name="mail"></ion-icon>
-      Отправить
-    </button>
-  </div>
 </ion-card-content>
-
 <ion-card-content *ngIf="lang=='en'">
   Calculation is done. For detailed calculation please contact Danfoss engineers.
-  <br />
-  <div style="width:100%">
-    <a ion-button icon-left item-right href="tel:+7(495)792-57-57" target="_blank" style="width:46%">
+</ion-card-content>
+</div>
+
+</ion-card>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-navbar class="footerToolbar">
+    <div *ngIf="lang=='ru'">
+      <a ion-button icon-left item-right href="tel:+7(495)792-57-57" target="_blank" style="width:48%">
+        <ion-icon name="call"></ion-icon>
+        Позвонить
+      </a>
+      <button ion-button icon-left item-left style="width:48%" (click)="sendEmail()">
+        <ion-icon name="mail"></ion-icon>
+        Отправить
+      </button>
+    </div>
+    <div *ngIf="lang=='en'">
+    <a ion-button icon-left item-right href="tel:+7(495)792-57-57" target="_blank" style="width:48%">
        <ion-icon name="call"></ion-icon>
       Phone
     </a>
-    <button ion-button icon-left item-left style="width:46%" (click)="sendEmail()">
+    <button ion-button icon-left item-left style="width:48%" (click)="sendEmail()">
      <ion-icon name="mail"></ion-icon>
       Email
     </button>
   </div>
-</ion-card-content>
-
-</ion-card>
-</ion-content>
+ </ion-navbar>
+</ion-footer>

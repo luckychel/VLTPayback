@@ -1,12 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { EmailComposer } from '@ionic-native/email-composer';
-/*
-  Generated class for the Result page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-result',
   templateUrl: 'result.html'
@@ -18,6 +13,13 @@ export class ResultPage {
   seasons: any = [];
 
   @ViewChild("ResTitle", {read: ElementRef }) ResTitle;
+  @ViewChild("Res1", {read: ElementRef }) Res1;
+  @ViewChild("Res2", {read: ElementRef }) Res2;
+  @ViewChild("Res3", {read: ElementRef }) Res3;
+  @ViewChild("Res4", {read: ElementRef }) Res4;
+  @ViewChild("Res5", {read: ElementRef }) Res5;
+  @ViewChild("Res6", {read: ElementRef }) Res6;
+  @ViewChild("Res7", {read: ElementRef }) Res7;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public emailComposer: EmailComposer,
     public element: ElementRef) {
@@ -41,13 +43,6 @@ export class ResultPage {
     let email = {
       to: 'mc@danfoss.ru',
       cc: 'fedotov@danfoss.com',
-   /*   bcc: ['john@doe.com', 'jane@doe.com'],*/
-    /*  attachments: [
-        'file://img/logo.png',
-        'res://icon.png',
-        'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-        'file://README.pdf'
-      ],*/
       subject: 'ТЭО калькулятор',
       body: this.getBodyHtml(),
       isHtml: true
@@ -57,9 +52,14 @@ export class ResultPage {
 
   getBodyHtml(){
     let html = "";//this.element.nativeElement.innerHTML;
-    //title
-    html = this.ResTitle.nativeElement.innerHTML;
-    
+    html = "<div>" + this.ResTitle.nativeElement.innerHTML + "</div>";
+    html += "<div>" + this.Res1.nativeElement.innerText + "</div>";
+    html += "<div>" + this.Res2.nativeElement.innerText + "</div>";
+    html += "<div>" + this.Res3.nativeElement.innerText + "</div>";
+    html += "<div>" + this.Res4.nativeElement.innerText + "</div>";
+    html += "<div>" + this.Res5.nativeElement.innerText + "</div>";
+    html += "<div>" + this.Res6.nativeElement.innerText + "</div>";
+    html += "<div>" + this.Res7.nativeElement.innerText + "</div>";
     return html;
   }
 

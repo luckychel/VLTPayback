@@ -5,6 +5,20 @@ page-result {
     .headerToolbar .toolbar-background {
         background-color:  #D0050B  !important;
     }
+    
+    .footerToolbar { 
+        div {
+            width:100%;
+            background: transparent;
+        }
+        .toolbar-background {
+            background: transparent;
+        }
+    }
+
+    .footerToolbar .toolbar-content{
+        display: inline-flex;
+    }
     .myItem {
         padding-left:0px;
         font-size: 12px;

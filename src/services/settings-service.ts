@@ -43,7 +43,7 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['lang', 'ru', '']);
 
             this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['titleHome', 'Экономия с ЧРП', 'ru']);
-            this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['titleHome', 'Danfoss Savings', 'en']);
+            this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['titleHome', 'VLT Payback', 'en']);
 
             this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['titleSetting', 'Настройки', 'ru']);
             this.db.executeSql("INSERT INTO VLTSettings (key, value, lang) VALUES (?, ?, ?)", ['titleSetting', 'Settings', 'en']);

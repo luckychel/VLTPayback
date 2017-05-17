@@ -182,7 +182,7 @@ export class CalculatePage {
       ev
     });*/
 
-    let profileModal = this.modalCtrl.create(DutycyclePage, { lang: this.lang, form: this.form });
+    let profileModal = this.modalCtrl.create(DutycyclePage, { lang: this.lang, form: this.form, formName: this.getSettingParamValue('titleCalculate', 'txt') });
     profileModal.onDidDismiss(data => {
       this.settingService.getDutyCycleData(this.form).then(data => {
         this.dutyCycleData = data;

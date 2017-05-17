@@ -8,8 +8,7 @@ import { SettingsService } from '../../services/settings-service';
 })
 export class DutycyclePage {
   
-  lang = "";
-  form = "";
+  lang = "";  form = ""; formName = "";
   settings: any = {};
   dutyCycleData: any[] = [];
   initHide = true;
@@ -21,13 +20,15 @@ export class DutycyclePage {
   seasons: any[] = [];
   isDutyAdding = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public settingService: SettingsService, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public settingService: SettingsService,
+    public alertCtrl: AlertController) {
      
-     this.lang = this.navParams.get("lang");
-     this.form = this.navParams.get("form");
-
+    this.lang = this.navParams.get("lang");
+    this.form = this.navParams.get("form");
+    this.formName = this.navParams.get("formName");
+    
     if (this.form === "air" && this.seasons.length == 0)
-   {
+    {
       this.seasons.push(this.lang === "en" ? "Winter" : "Зима");
       this.seasons.push(this.lang === "en" ? "Spring" : "Весна");
       this.seasons.push(this.lang === "en" ? "Summer" : "Лето");
