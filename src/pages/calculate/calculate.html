@@ -140,7 +140,10 @@
           <ion-label floating>{{getSettingParamValue('CoursePrice', 'txt')}}</ion-label>
           <ion-input type="number" [(ngModel)]="Commertial.CoursePrice"></ion-input>
        </ion-item>
-       
+       <ion-item *ngIf="Commertial.showDetails=='1' && lang=='ru'" style="background-color: #e4e4e4;">
+          <ion-label floating>{{getSettingParamValue('Discount', 'txt')}}</ion-label>
+          <ion-input type="number" [(ngModel)]="Commertial.Discount"></ion-input>
+       </ion-item>
     </ion-item-group>
     
   </ion-content>

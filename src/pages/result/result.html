@@ -30,7 +30,7 @@
       <ul style="margin-top:0px;">
         <li *ngIf="lang=='ru'">Экономия электроэнергии в год {{results.econom.toFixed(2).replace(".", ",")}} %</li>
         <li *ngIf="lang=='en'">Energy saving per year {{results.econom.toFixed(2).replace(".", ",")}} %</li>
-        <li *ngIf="lang=='ru'">Чистая приведенная стоимость {{results.npv.toFixed(2).replace(".", ",")}} руб.</li>
+        <li *ngIf="lang=='ru'">Чистая приведенная стоимость {{results.npv.toFixed(2).replace(".", ",")}} руб. c НДС</li>
         <li *ngIf="lang=='en'">Net present value, NPV {{results.npv.toFixed(2).replace(".", ",")}} euro</li>  
         <li *ngIf="lang=='ru'">Окупаемость {{results.roi.toFixed(2).replace(".", ",")}} %</li>
         <li *ngIf="lang=='en'">Return of investments, ROI {{results.roi.toFixed(2).replace(".", ",")}} %</li>
@@ -102,7 +102,7 @@
 
 <div #Res5>
   <ion-card-content *ngIf="lang=='ru'" style="padding-top:0px;">
-    Общие инвестиции в оборудование «Данфосс» составили: {{results.invest.toFixed(2).replace(".", ",")}} руб.
+    Общие инвестиции в оборудование «Данфосс» составили: {{results.invest.toFixed(2).replace(".", ",")}} руб. c НДС
   </ion-card-content>
   <ion-card-content *ngIf="lang=='en'" style="padding-top:0px;">
     Total investments in Danfoss equipment are equal to: {{results.invest.toFixed(2).replace(".", ",")}} euro
@@ -112,7 +112,7 @@
 <div #Res6>
  <ion-item class="myItem">
     <ul style="margin-top:0px;">
-      <li *ngIf="lang=='ru'">Цена ПЧ = {{results.pchPrice.toFixed(2).replace(".", ",")}} руб.</li>
+      <li *ngIf="lang=='ru'">Цена ПЧ = {{results.pchPrice.toFixed(2).replace(".", ",")}} руб. c НДС</li>
       <li *ngIf="lang=='en'">VFD price = {{results.pchPrice.toFixed(2).replace(".", ",")}} euro</li>
 
       <li *ngIf="lang=='ru'">Доп. оборудование = 10% от цены ПЧ</li>

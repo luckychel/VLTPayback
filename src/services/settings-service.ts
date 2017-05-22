@@ -158,10 +158,10 @@ export class SettingsService {
       if(res.rows.length == 0) {
             this.db.executeSql("INSERT INTO VLTConstant (key, txt, value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['tax', 'Налог на прибыль', '20', '%', 'ru']);
             this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['tax', 'Income tax', '20', '%', 'en']);
-            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['discount', 'Ставка дисконтирования', '10', '%', 'ru']);
-            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['discount', 'Discount rate', '10', '%', 'en']);
-            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['electricity', 'Темпы роста цен на электроэнергию', '15', '%', 'ru']);
-            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['electricity','The rate of growth in electricity prices', '15', '%', 'en']);
+/*            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['discount', 'Ставка дисконтирования', '10', '%', 'ru']);
+            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['discount', 'Discount rate', '10', '%', 'en']);*/
+            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['electricity', 'Темпы роста цен на электроэнергию', '10', '%', 'ru']);
+            this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['electricity','The rate of growth in electricity prices', '10', '%', 'en']);
             this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['lifetime', 'Срок службы преобразователя частоты', '10', 'лет', 'ru']);
             this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['lifetime', 'The service life of the frequency Converter', '10', 'years', 'en']);
             this.db.executeSql("INSERT INTO VLTConstant (key, txt,  value, unit, lang) VALUES (?, ?, ?, ?, ?)", ['kpd', 'КПД частотного преобразователя Данфосс', '0.96', '', 'ru']);
@@ -204,7 +204,7 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Винтовой компрессор','', '', 'ru', 'screw']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['titleCalculate', 'Screw compressor', '', '', 'en', 'screw']);
 
-            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateInput', 'Параметры настройки','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateInput', 'Исходные данные','', '', 'ru', '']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateInput', 'Parameter settings', '', '', 'en', '']);
 
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['headerCalculateResult', 'Результаты','', '', 'ru', '']);
@@ -227,6 +227,9 @@ export class SettingsService {
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['EnergPrice', 'Energy price with VAT', '', '', 'en', '']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['CoursePrice', 'Курс евро, руб.','', '', 'ru', '']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['CoursePrice', 'Rate from 1 euro', '', '', 'en', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['Discount', 'Ставка дисконта, %','', '', 'ru', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['Discount', 'Discount rate, %', '', '', 'en', '']);
+
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Стоимость оборудования/аксессуаров','', '', 'ru', '']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt,  value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['AccessEquipPrice', 'Accessories/Equipment price', '', '', 'en', '']);
             this.db.executeSql("INSERT INTO VLTCalculateSettings (key, txt, value, unit, lang, form) VALUES (?, ?, ?, ?, ?, ?)", ['InstallPrice', 'Цена наладки и монтажа','', '', 'ru', '']);
@@ -424,6 +427,10 @@ export class SettingsService {
             /*common for all*/
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.EnergPrice', '10', '']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.CoursePrice', '60', '']);
+            this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.Discount', '10', '']);
+            
+
+
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.AccessEquipPrice', '', '']);
             this.db.executeSql("INSERT INTO VLTCalculateData (key, value, form) VALUES (?, ?, ?)", ['Commertial.InstallPrice', '', '']);
             

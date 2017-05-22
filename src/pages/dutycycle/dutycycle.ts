@@ -29,14 +29,13 @@ export class DutycyclePage {
     
     if (this.form === "air" && this.seasons.length == 0)
     {
-      this.seasons.push(this.lang === "en" ? "Winter" : "Зима");
-      this.seasons.push(this.lang === "en" ? "Spring" : "Весна");
-      this.seasons.push(this.lang === "en" ? "Summer" : "Лето");
-      this.seasons.push(this.lang === "en" ? "Autumn" : "Осень");
+      this.seasons.push({id: 0, text: this.lang === "en" ? "Winter" : "Зима"});
+      this.seasons.push({id: 1, text: this.lang === "en" ? "Spring" : "Весна"});
+      this.seasons.push({id: 2, text: this.lang === "en" ? "Summer" : "Лето"});
+      this.seasons.push({id: 3, text: this.lang === "en" ? "Autumn" : "Осень"});
     } 
 
      this.reloadDuty();
-
   }
 
   reloadDuty(){
@@ -111,7 +110,7 @@ export class DutycyclePage {
   saveRow(){
 
     let tmpTime = 0, titleText = "", subtitleText = "", okText = "", isErr = false;//, cancelText = "";
-    
+
     if (this.time != "") 
       tmpTime += parseFloat(this.time.toString());
     else
@@ -206,7 +205,7 @@ export class DutycyclePage {
   }
 
   getSeason(duty){
-    return this.seasons[duty.perfomance];
+    return this.seasons[duty.perfomance].text;
   }
 
 }

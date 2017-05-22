@@ -288,6 +288,9 @@ export class CalculatePage {
     else if (this.lang === "ru" && (this.Commertial["CoursePrice"] == "" || (this.Commertial["CoursePrice"] != "" && parseFloat(this.Commertial["CoursePrice"]) == 0))) {
       field = "\"" + this.getSettingParamValue('CoursePrice', 'txt') + "\"";
     }
+    else if (this.lang === "ru" && (this.Commertial["Discount"] == "" || (this.Commertial["Discount"] != "" && parseFloat(this.Commertial["Discount"]) == 0))) {
+      field = "\"" + this.getSettingParamValue('Discount', 'txt') + "\"";
+    }
     /*else if (this.Commertial["AccessEquipPrice"] == "" || (this.Commertial["AccessEquipPrice"] != "" &&  parseFloat(this.Commertial["AccessEquipPrice"]) == 0)) {
         field = "\"" + this.getSettingParamValue('AccessEquipPrice', 'txt') + "\"";
     }
@@ -352,7 +355,8 @@ export class CalculatePage {
     this.form == "tech" ? this.settingService.updateCalculateData({ 'key': 'Operation.DensinyPump', 'value': this.Operation["DensinyPump"], form: this.form }) : [],
 
     this.settingService.updateCalculateData({ 'key': 'Commertial.EnergPrice', 'value': this.Commertial["EnergPrice"], form: "" }),
-    this.settingService.updateCalculateData({ 'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"], form: "" })
+    this.settingService.updateCalculateData({ 'key': 'Commertial.CoursePrice', 'value': this.Commertial["CoursePrice"], form: "" }),
+    this.settingService.updateCalculateData({ 'key': 'Commertial.Discount', 'value': this.Commertial["Discount"], form: "" })
               /*this.settingService.updateCalculateData({'key': 'Commertial.AccessEquipPrice', 'value': this.Commertial["AccessEquipPrice"], form: this.form}),
                 this.settingService.updateCalculateData({'key': 'Commertial.InstallPrice', 'value': this.Commertial["InstallPrice"], form: this.form})*/ ]);
 
@@ -384,10 +388,10 @@ export class CalculatePage {
         ];
 
         //********************Константы//*********************************
-        let kpdPCH = 0.0, nalog = 0.0, discount = 0.0, stoim = 0.0, lifetime = 0.0;
+        let kpdPCH = 0.0, nalog = 0.0,/*, discount = 0.0*/ stoim = 0.0, lifetime = 0.0;
         kpdPCH = parseFloat(this.getConstantParamValue("kpd", "value"));
         nalog = parseFloat(this.getConstantParamValue("tax", "value")) / 100.0;
-        discount = parseFloat(this.getConstantParamValue("discount", "value")) / 100.0;
+        //discount = parseFloat(this.getConstantParamValue("discount", "value")) / 100.0;
         stoim = parseFloat(this.getConstantParamValue("electricity", "value")) / 100.0;
         lifetime = parseFloat(this.getConstantParamValue("lifetime", "value"));
 
@@ -439,12 +443,12 @@ export class CalculatePage {
         }
         
         //*********************Коммерческие данные***********************
-        let /*priceEquip = 0.0, priceInstall = 0.0,*/ priceV = 0.0, euroPr = 0.0;
+        let /*priceEquip = 0.0, priceInstall = 0.0,*/ priceV = 0.0, euroPr = 0.0, discount = 0.0;
         /*priceEquip = parseFloat(this.Commertial["AccessEquipPrice"]);//Стоимость оборудования
         priceInstall = parseFloat(this.Commertial["InstallPrice"]);//Стоимость монтажа*/
         priceV = parseFloat(this.Commertial["EnergPrice"]);//Цена э/э
         euroPr = parseFloat(this.Commertial["CoursePrice"]);//Стоимость 1 евро в рублях
-
+        discount = parseFloat(this.Commertial["Discount"]) / 100;//Ставка дисконта
 
         //**************************Расчёт********************************
         let sum1 = 0.0, sum2 = 0.0;
