@@ -386,14 +386,14 @@ export class CalculatePage {
             {perf: 90, value: {kstand: 0.97, kspch :0.92}},
             {perf: 100, value: {kstand: 1, kspch :1.02}},
         ];
-
+debugger
         //********************Константы//*********************************
         let kpdPCH = 0.0, nalog = 0.0,/*, discount = 0.0*/ stoim = 0.0, lifetime = 0.0;
-        kpdPCH = parseFloat(this.getConstantParamValue("kpd", "value"));
-        nalog = parseFloat(this.getConstantParamValue("tax", "value")) / 100.0;
+        kpdPCH = parseFloat(this.getConstantParamValue("kpd", "value")); //КПД частотного преобразователя
+        nalog = parseFloat(this.getConstantParamValue("tax", "value")) / 100.0; //Налог на прибыль
         //discount = parseFloat(this.getConstantParamValue("discount", "value")) / 100.0;
-        stoim = parseFloat(this.getConstantParamValue("electricity", "value")) / 100.0;
-        lifetime = parseFloat(this.getConstantParamValue("lifetime", "value"));
+        stoim = parseFloat(this.getConstantParamValue("electricity", "value")) / 100.0; //Темпы роста цена на электроэнергию
+        lifetime = parseFloat(this.getConstantParamValue("lifetime", "value")); //Срок службы преобразователя, лет
 
         //********************Двигатель/Характеристики********************
         let kpdDvig = 0.0, moshDvig = 0.0, srDvig = 0.0;
@@ -407,10 +407,10 @@ export class CalculatePage {
         let sf = 0.0, nf = 0.0, A = 0.0, B = 0.0, C = 0.0, H = 0.0;
         let kpdN = 0.0, needP = 0.0, pBefore = 0.0, Qnom = 0.0;
         if (this.form == "www" || this.form == "tech") {
-          H1 = parseFloat(this.Operation["MaxPress"]);
-          Q1 = parseFloat(this.Operation["MinFlow"]);
-          H2 = parseFloat(this.Operation["MinPress"]);
-          Q2 = parseFloat(this.Operation["MaxFlow"]);
+          H1 = parseFloat(this.Operation["MaxPress"]); //Макс. давление, м
+          Q1 = parseFloat(this.Operation["MinFlow"]); //Мин. подача, м
+          H2 = parseFloat(this.Operation["MinPress"]); //Мин. давление, м
+          Q2 = parseFloat(this.Operation["MaxFlow"]); //Макс. подача, м3/ч
 
           sf = (H1 - H2) / (Math.pow(Q2, 2) - Math.pow(Q1, 2));
           nf = H1 + sf * Math.pow(Q1, 2);
@@ -420,7 +420,7 @@ export class CalculatePage {
 
           kpdN = parseFloat(this.Operation["PumpEff"]);//КПД насоса
           needP = parseFloat(this.Operation["NeedPress"]);//Требуемый напор
-          pBefore = parseFloat(this.Operation["PressBefore"]);//Напор на всасе
+          pBefore = parseFloat(this.Operation["PressBefore"]);//Напор перед насосом
           Qnom = parseFloat(this.Operation["NominalFlow"]);//Номинальное значение подачи
         }
 
@@ -446,9 +446,9 @@ export class CalculatePage {
         let /*priceEquip = 0.0, priceInstall = 0.0,*/ priceV = 0.0, euroPr = 0.0, discount = 0.0;
         /*priceEquip = parseFloat(this.Commertial["AccessEquipPrice"]);//Стоимость оборудования
         priceInstall = parseFloat(this.Commertial["InstallPrice"]);//Стоимость монтажа*/
-        priceV = parseFloat(this.Commertial["EnergPrice"]);//Цена э/э
-        euroPr = parseFloat(this.Commertial["CoursePrice"]);//Стоимость 1 евро в рублях
-        discount = parseFloat(this.Commertial["Discount"]) / 100;//Ставка дисконта
+        priceV = parseFloat(this.Commertial["EnergPrice"]);//Цена э/э за кВтч с НДС, руб.
+        euroPr = parseFloat(this.Commertial["CoursePrice"]);//Курс евро, руб (Стоимость 1 евро в рублях)
+        discount = parseFloat(this.Commertial["Discount"]) / 100;//Ставка дисконта, %
 
         //**************************Расчёт********************************
         let sum1 = 0.0, sum2 = 0.0;
@@ -602,14 +602,8 @@ export class CalculatePage {
         epch = srDvig * sum2;
         econ = e - epch;
 
-        if (this.lang === "en") {
-          econev = priceV * econ;
-          econpr = (1 - epch / e) * 100;
-        }
-        else {
-          econev = priceV * econ * euroPr
-          econpr = (1 - epch / e) * 100 * euroPr;
-        }
+        econev = priceV * econ;
+        econpr = (1 - epch / e) * 100;
 
         let cpch = 0;
         for (var i = 0; i < CpchPower.length; i++) {
@@ -640,11 +634,12 @@ export class CalculatePage {
         let srok = -1.0, srokOkup = 0;
         let prev = 0, next = -invest;
 
+        amort = invest / 10;
+        
         for (var i = 0; i < lifetime; i++) {
           prev = next;
           econEffect = sd[i] * econev;
 
-          amort = invest / 10;
           dopPrib1 = econEffect - amort;
           dopPribNalog1 = dopPrib1 * nalog;
           moneyStream = dopPribNalog1 + amort;
