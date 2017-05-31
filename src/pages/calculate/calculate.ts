@@ -386,7 +386,7 @@ export class CalculatePage {
             {perf: 90, value: {kstand: 0.97, kspch :0.92}},
             {perf: 100, value: {kstand: 1, kspch :1.02}},
         ];
-debugger
+
         //********************Константы//*********************************
         let kpdPCH = 0.0, nalog = 0.0,/*, discount = 0.0*/ stoim = 0.0, lifetime = 0.0;
         kpdPCH = parseFloat(this.getConstantParamValue("kpd", "value")); //КПД частотного преобразователя
@@ -635,13 +635,13 @@ debugger
         let prev = 0, next = -invest;
 
         amort = invest / 10;
-        
+
         for (var i = 0; i < lifetime; i++) {
           prev = next;
           econEffect = sd[i] * econev;
 
           dopPrib1 = econEffect - amort;
-          dopPribNalog1 = dopPrib1 * nalog;
+          dopPribNalog1 = dopPrib1 * (1 - nalog);
           moneyStream = dopPribNalog1 + amort;
 
           diskontMoneyStream = moneyStream / kd[i];
