@@ -427,19 +427,19 @@ export class CalculatePage {
         //air
         let numMot = 0.0, numMotWinDay = 0.0, numMotWinNig = 0.0, numMotSumDay = 0.0, numMotSumNig = 0.0, numMotSprAutDay = 0.0, numMotSprAutNig = 0.0;
         if (this.form == "air") {
-          numMot = parseFloat(this.Operation["NumOfMotors"]);
-          numMotWinDay = parseFloat(this.Operation["NumOfMotorsWinterDay"]);
-          numMotWinNig = parseFloat(this.Operation["NumOfMotorsWinterNight"]);
-          numMotSumDay = parseFloat(this.Operation["NumOfMotorsSummerDay"]);
-          numMotSumNig = parseFloat(this.Operation["NumOfMotorsSummerNight"]);
-          numMotSprAutDay = parseFloat(this.Operation["NumOfMotorsSpringAutumnDay"]);
-          numMotSprAutNig = parseFloat(this.Operation["NumOfMotorsSpringAutumnNight"]);
+          numMot = parseFloat(this.Operation["NumOfMotors"]); //Кол-во работающих двигателей в секции
+          numMotWinDay = parseFloat(this.Operation["NumOfMotorsWinterDay"]); //Кол-во раб. двигателей зимой днем
+          numMotWinNig = parseFloat(this.Operation["NumOfMotorsWinterNight"]); //Кол-во раб. двигателей зимой ночью
+          numMotSumDay = parseFloat(this.Operation["NumOfMotorsSummerDay"]); //Кол-во раб. двигателей летом днем
+          numMotSumNig = parseFloat(this.Operation["NumOfMotorsSummerNight"]); //Кол-во раб. двигателей летом ночью
+          numMotSprAutDay = parseFloat(this.Operation["NumOfMotorsSpringAutumnDay"]); //Кол-во раб. двиг. весна/осень днем
+          numMotSprAutNig = parseFloat(this.Operation["NumOfMotorsSpringAutumnNight"]); //Кол-во раб. двиг. весна/осень ночью
         }
 
         //tech
         let denPump = 0.0;
         if (this.form == "tech") {
-          denPump = parseFloat(this.Operation["DensinyPump"]);
+          denPump = parseFloat(this.Operation["DensinyPump"]); //Плотность жидкости, кг/м3
         }
         
         //*********************Коммерческие данные***********************
@@ -493,8 +493,8 @@ export class CalculatePage {
               nNight = numMotSumNig;
             }
 
-            sum1 += moshDvig * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * day / 100.0 + 0.3725) / kpdDvig * nDay;
-            sum1 += moshDvig * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * night / 100.0 + 0.3725) / kpdDvig * nNight;
+            sum1 += moshDvig * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * (day / 100.0) + 0.3725) / kpdDvig * nDay;
+            sum1 += moshDvig * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * (night / 100.0) + 0.3725) / kpdDvig * nNight;
 
             let kPoterDay = 0.0, kPoterNight = 0.0;
             let numTmpDay = day / 100.0;
