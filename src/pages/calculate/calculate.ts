@@ -493,8 +493,8 @@ export class CalculatePage {
               nNight = numMotSumNig;
             }
 
-            sum1 += moshDvig * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * (day / 100.0) + 0.3725) / kpdDvig * nDay;
-            sum1 += moshDvig * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * (night / 100.0) + 0.3725) / kpdDvig * nNight;
+            sum1 += moshDvig * (0.1739 * Math.pow(day / 100.0, 3) - 0.7773 * Math.pow(day / 100.0, 2) + 1.2306 * (day / 100.0) + 0.3725) / (kpdDvig/100) * nDay;
+            sum1 += moshDvig * (0.1739 * Math.pow(night / 100.0, 3) - 0.7773 * Math.pow(night / 100.0, 2) + 1.2306 * (night / 100.0) + 0.3725) / (kpdDvig/100) * nNight;
 
             let kPoterDay = 0.0, kPoterNight = 0.0;
             let numTmpDay = day / 100.0;
@@ -509,8 +509,8 @@ export class CalculatePage {
             else
               kPoterNight = 1;
 
-            sum2 += Math.pow(numTmpDay, 3) * moshDvig / kpdPCH / kpdDvig / 1.2 / kPoterDay;
-            sum2 += Math.pow(numTmpNight, 3) * moshDvig / kpdPCH / kpdDvig / 1.2 / kPoterNight;
+            sum2 += Math.pow(numTmpDay, 3) * moshDvig / kpdPCH / (kpdDvig/100) / 1.2 / kPoterDay;
+            sum2 += Math.pow(numTmpNight, 3) * moshDvig / kpdPCH / (kpdDvig/100) / 1.2 / kPoterNight;
           }
 
           sum1 /= 8.0;
@@ -525,9 +525,9 @@ export class CalculatePage {
 
             H = A * Math.pow(Qnom * (perf / 100), 2) + B * Math.pow(Qnom * (perf / 100), 2) + C;
             kpnNasos[i] = kpdN / 100.0 * (1.0 - Math.pow(1 - (perf / 100), 2.3));
-            pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i] * denPump / 1000;
+            pZadv[i] = 9.81 / 3600 * perf * Qnom * H / (kpdDvig/100) / kpnNasos[i] * denPump / 1000;
             kpnNasos[i] = kpdN / 100.0 * 0.1 * (perf / 100) + 0.9 * kpdN / 100.0;  
-            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i] / kpdPCH;
+            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / (kpdDvig/100) / kpnNasos[i] / kpdPCH;
             sum1 += (time / 100) * pZadv[i];
             sum2 += (time / 100) * pPCh[i];
            
@@ -537,7 +537,7 @@ export class CalculatePage {
         //force
         if (this.form == "force") {
           let a1 = 0.9;
-          sum1 = (moshDvig * (0.1739 * Math.pow(a1, 3) - 0.7773 * Math.pow(a1, 2) + 1.2306*a1 +0.3725))/kpdDvig;
+          sum1 = (moshDvig * (0.1739 * Math.pow(a1, 3) - 0.7773 * Math.pow(a1, 2) + 1.2306*a1 +0.3725))/(kpdDvig/100);
 
           let kPoter = 0.0;
           for (var i = 0; i < this.dutyCycleData.length; i++) {
@@ -557,7 +557,7 @@ export class CalculatePage {
 
         //vav
         if (this.form == "vav") {
-          sum1 = moshDvig/kpdDvig;
+          sum1 = moshDvig/(kpdDvig/100);
           for (var i = 0; i < this.dutyCycleData.length; i++) {
             let time = parseFloat(this.dutyCycleData[i].time);
             let perf = parseFloat(this.dutyCycleData[i].perfomance);
@@ -571,7 +571,7 @@ export class CalculatePage {
 
         //park
         if (this.form == "park") {
-          sum1 = moshDvig/kpdDvig;
+          sum1 = moshDvig/(kpdDvig/100);
           for (var i = 0; i < this.dutyCycleData.length; i++) {
             let time = parseFloat(this.dutyCycleData[i].time);
             let perf = parseFloat(this.dutyCycleData[i].perfomance);
