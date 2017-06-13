@@ -525,9 +525,9 @@ export class CalculatePage {
 
             H = A * Math.pow(Qnom * (perf / 100), 2) + B * Math.pow(Qnom * (perf / 100), 2) + C;
             kpnNasos[i] = kpdN / 100.0 * (1.0 - Math.pow(1 - (perf / 100), 2.3));
-            pZadv[i] = 9.81 / 3600 * perf * Qnom * H / (kpdDvig/100) / kpnNasos[i] * denPump / 1000;
+            pZadv[i] = 9.81 / 3600 * perf * Qnom * H / kpdDvig / kpnNasos[i] * denPump / 1000;
             kpnNasos[i] = kpdN / 100.0 * 0.1 * (perf / 100) + 0.9 * kpdN / 100.0;  
-            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / (kpdDvig/100) / kpnNasos[i] / kpdPCH;
+            pPCh[i] = 9.81 / 3600 * perf * Qnom * (needP - pBefore) / kpdDvig / kpnNasos[i] / kpdPCH;
             sum1 += (time / 100) * pZadv[i];
             sum2 += (time / 100) * pPCh[i];
            
